@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="56.0" />
+      <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="47.0" />
+      <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="80.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="40.0" />
+      <RowConstraints minHeight="10.0" prefHeight="40.0" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints minWidth="10.0" prefWidth="500.0" />
+   </columnConstraints>
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+         <children>
+            <Label text="Username:" />
+            <Label text="ykim102" />
+         </children>
+      </HBox>
+      <Label text="1. Shipping address" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label GridPane.rowIndex="2" />
+      <Label text="2. Payment method" GridPane.rowIndex="3">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ComboBox prefHeight="23.0" prefWidth="400.0" GridPane.rowIndex="4" />
+      <Label text="3. Review Items" GridPane.rowIndex="5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
+      <Label text="4. Delivery option" GridPane.rowIndex="7">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.rowIndex="8">
+         <children>
+            <CheckBox mnemonicParsing="false" text="Two - Day shipping" />
+            <CheckBox mnemonicParsing="false" text="No - Rush shipping" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.rowIndex="9">
+         <children>
+            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="Place Order">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="Go back Home">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="Go back to Shopping Cart">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</GridPane>

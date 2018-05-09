@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+
+<GridPane fx:id="Wishlist" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <rowConstraints>
+      <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="359.0" />
+      <RowConstraints maxHeight="144.0" minHeight="10.0" prefHeight="61.0" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints maxWidth="471.0" minWidth="10.0" prefWidth="470.0" />
+   </columnConstraints>
+   <children>
+      <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+         <children>
+            <Label text="Username:" />
+            <Label text="ykim102" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="2">
+         <children>
+            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="Delete">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="Save in Shopping Cart">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="To Shopping Cart">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="Buy Now">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</GridPane>
