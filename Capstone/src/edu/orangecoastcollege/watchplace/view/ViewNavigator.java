@@ -10,9 +10,7 @@ public class ViewNavigator {
     //TODO add file name constants
 	public static final String SIGN_UP_SCENE = "SignUpScene.fxml";
 	public static final String SIGN_IN_SCENE = "SignInScene.fxml";
-	public static final String VIDEO_GAME_LIST_SCENE = "VideoGamesListScene.fxml";
-	public static final String VIEW_INVENTORY_SCENE = "ViewInventoryScene.fxml";
-
+	public static final String HOME_SCENE = "HomeScene.fxml";
 
 	public static Stage mainStage;
 
