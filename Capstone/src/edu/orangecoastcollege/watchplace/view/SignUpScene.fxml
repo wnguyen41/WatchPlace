@@ -3,13 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.watchplace.view.SignUpScene">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
@@ -29,22 +30,22 @@
       <Label text="Email" GridPane.rowIndex="1" />
       <Label text="Password" GridPane.rowIndex="2" />
       <Label text="Confirm Password" GridPane.rowIndex="3" />
-      <Label text="Field required." textFill="RED" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-      <Label text="Field required." textFill="RED" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label text="Field required." textFill="RED" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Label text="Field required." textFill="RED" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-      <TextField promptText="Full Name" GridPane.columnIndex="1" />
-      <TextField promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField promptText="Confirm Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button mnemonicParsing="false" prefWidth="200.0" text="Create New Account" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Label fx:id="nameErrorLabel" text="Field required." textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+      <Label fx:id="emailErrorLabel" text="Field required." textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label fx:id="passwordErrorLabel" text="Field required." textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Label fx:id="confirmPasswordErrorLabel" text="Field required." textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <TextField fx:id="nameTF" promptText="Full Name" GridPane.columnIndex="1" />
+      <TextField fx:id="emailTF" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button fx:id="createNewAcctButton" mnemonicParsing="false" onAction="#createAccount" prefWidth="200.0" text="Create New Account" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
       <Label text="By creating an account, you agree to our Terms of Sevice &amp; Privacy Policy" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <children>
             <Label text="Already have an account?" />
-            <Label text="Sign in" textFill="BLUE" />
+            <Label onMouseClicked="#signInScene" text="Sign in" textFill="BLUE" />
          </children>
       </HBox>
+      <PasswordField fx:id="confirmPassPF" promptText="Confirm Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <PasswordField fx:id="passwordPF" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

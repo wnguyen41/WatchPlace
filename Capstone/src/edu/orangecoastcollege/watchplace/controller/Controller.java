@@ -38,7 +38,7 @@ public class Controller {
 	private DBModel mUserGamesDB;
 
 	private ObservableList<User> mAllUsersList;
-	private ObservableList<Watch> mAllWatchesList;
+//	private ObservableList<Watch> mAllWatchesList;
 
 	private Controller() {
 	}
@@ -47,44 +47,44 @@ public class Controller {
 		if (theOne == null) {
 			theOne = new Controller();
 			theOne.mAllUsersList = FXCollections.observableArrayList();
-			theOne.mAllGamesList = FXCollections.observableArrayList();
+//			theOne.mAllGamesList = FXCollections.observableArrayList();
 
-			try {
+//			try {
 				// Create the user table in the database
-				theOne.mUserDB = new DBModel(DB_NAME, USER_TABLE_NAME, USER_FIELD_NAMES, USER_FIELD_TYPES);
-				ArrayList<ArrayList<String>> resultsList = theOne.mUserDB.getAllRecords();
-				for (ArrayList<String> values : resultsList)
-				{
-					int id = Integer.parseInt(values.get(0));
-					String name = values.get(1);
-					String email = values.get(2);
-					String role = values.get(3);
-					theOne.mAllUsersList.add(new User(id, name, email, role));
-				}
+//				theOne.mUserDB = new DBModel(DB_NAME, USER_TABLE_NAME, USER_FIELD_NAMES, USER_FIELD_TYPES);
+//				ArrayList<ArrayList<String>> resultsList = theOne.mUserDB.getAllRecords();
+//				for (ArrayList<String> values : resultsList)
+//				{
+//					int id = Integer.parseInt(values.get(0));
+//					String name = values.get(1);
+//					String email = values.get(2);
+//					String role = values.get(3);
+//					theOne.mAllUsersList.add(new User(id, name, email, role));
+//				}
 
-				// Create the video game table in the database, loading games from the CSV file
-				theOne.mVideoGameDB = new DBModel(DB_NAME, VIDEO_GAME_TABLE_NAME, VIDEO_GAME_FIELD_NAMES, VIDEO_GAME_FIELD_TYPES);
-				theOne.initializeVideoGameDBFromFile();
-				resultsList = theOne.mVideoGameDB.getAllRecords();
-				for (ArrayList<String> values : resultsList)
-				{
-					int id = Integer.parseInt(values.get(0));
-					String name = values.get(1);
-					String platform = values.get(2);
-					int year = Integer.parseInt(values.get(3));
-					String genre = values.get(4);
-					String publisher = values.get(5);
-					theOne.mAllGamesList.add(new VideoGame(id, name, platform, year, genre, publisher));
-				}
+//				// Create the video game table in the database, loading games from the CSV file
+//				theOne.mVideoGameDB = new DBModel(DB_NAME, VIDEO_GAME_TABLE_NAME, VIDEO_GAME_FIELD_NAMES, VIDEO_GAME_FIELD_TYPES);
+//				theOne.initializeVideoGameDBFromFile();
+//				resultsList = theOne.mVideoGameDB.getAllRecords();
+//				for (ArrayList<String> values : resultsList)
+//				{
+//					int id = Integer.parseInt(values.get(0));
+//					String name = values.get(1);
+//					String platform = values.get(2);
+//					int year = Integer.parseInt(values.get(3));
+//					String genre = values.get(4);
+//					String publisher = values.get(5);
+//					theOne.mAllGamesList.add(new VideoGame(id, name, platform, year, genre, publisher));
+//				}
 
 
 				// Create the relationship table between users and the video games they own
-				theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME, USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
+//				theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME, USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
 
 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
 		}
 		return theOne;
 	}
@@ -173,51 +173,51 @@ public class Controller {
 	    return "Incorrect email and/or password. Please try again.";
 	}
 
-	public ObservableList<VideoGame> getGamesForCurrentUser()
-	{
-		ObservableList<VideoGame> userGamesList = FXCollections.observableArrayList();
-		try
-        {
-            ArrayList<ArrayList<String>> resultsList = mUserGamesDB.getRecord(String.valueOf(theOne.mCurrentUser.getId()));
-            // loop through the results
-            int gameId;
-            for( ArrayList<String> values : resultsList)
-            {
-                gameId = Integer.parseInt(values.get(1));
-                // Loop through all the games, try to find a match
-                for(VideoGame vg: theOne.mAllGamesList)
-                {
-                    if(gameId == vg.getId())
-                    {
-                        userGamesList.add(vg);
-                        break;
-                    }
-                }
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-		return userGamesList;
-	}
+//	public ObservableList<VideoGame> getGamesForCurrentUser()
+//	{
+//		ObservableList<VideoGame> userGamesList = FXCollections.observableArrayList();
+//		try
+//        {
+//            ArrayList<ArrayList<String>> resultsList = mUserGamesDB.getRecord(String.valueOf(theOne.mCurrentUser.getId()));
+//            // loop through the results
+//            int gameId;
+//            for( ArrayList<String> values : resultsList)
+//            {
+//                gameId = Integer.parseInt(values.get(1));
+//                // Loop through all the games, try to find a match
+//                for(VideoGame vg: theOne.mAllGamesList)
+//                {
+//                    if(gameId == vg.getId())
+//                    {
+//                        userGamesList.add(vg);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        catch (SQLException e)
+//        {
+//            e.printStackTrace();
+//        }
+//		return userGamesList;
+//	}
 
-	public boolean addGameToUsersInventory(VideoGame selectedGame)  {
-	    ObservableList<VideoGame> gamesOwnedByCurrentUser = getGamesForCurrentUser();
-	    if(gamesOwnedByCurrentUser.contains(selectedGame))
-	        return false;
-	    String[] values = {String.valueOf(theOne.mCurrentUser.getId()), String.valueOf(selectedGame.getId())};
-	    try
-        {
-            mUserGamesDB.createRecord(USER_GAMES_FIELD_NAMES, values);
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-		return true;
-	}
+//	public boolean addGameToUsersInventory(VideoGame selectedGame)  {
+//	    ObservableList<VideoGame> gamesOwnedByCurrentUser = getGamesForCurrentUser();
+//	    if(gamesOwnedByCurrentUser.contains(selectedGame))
+//	        return false;
+//	    String[] values = {String.valueOf(theOne.mCurrentUser.getId()), String.valueOf(selectedGame.getId())};
+//	    try
+//        {
+//            mUserGamesDB.createRecord(USER_GAMES_FIELD_NAMES, values);
+//        }
+//        catch (SQLException e)
+//        {
+//            e.printStackTrace();
+//            return false;
+//        }
+//		return true;
+//	}
 
 	public User getCurrentUser()
 	{
@@ -228,65 +228,65 @@ public class Controller {
 		return theOne.mAllUsersList;
 	}
 
-	public ObservableList<VideoGame> getAllVideoGames() {
-		return theOne.mAllGamesList;
-	}
+//	public ObservableList<VideoGame> getAllVideoGames() {
+//		return theOne.mAllGamesList;
+//	}
 
-	public ObservableList<String> getDistinctPlatforms() {
-		ObservableList<String> platforms = FXCollections.observableArrayList();
-		for (VideoGame vg : theOne.mAllGamesList)
-			if (!platforms.contains(vg.getPlatform()))
-				platforms.add(vg.getPlatform());
-		FXCollections.sort(platforms);
-		return platforms;
-	}
+//	public ObservableList<String> getDistinctPlatforms() {
+//		ObservableList<String> platforms = FXCollections.observableArrayList();
+//		for (VideoGame vg : theOne.mAllGamesList)
+//			if (!platforms.contains(vg.getPlatform()))
+//				platforms.add(vg.getPlatform());
+//		FXCollections.sort(platforms);
+//		return platforms;
+//	}
 
-	public ObservableList<String> getDistinctPublishers() {
-		ObservableList<String> publishers = FXCollections.observableArrayList();
-		for (VideoGame vg : theOne.mAllGamesList)
-			if (!publishers.contains(vg.getPublisher()))
-				publishers.add(vg.getPublisher());
-		FXCollections.sort(publishers);
-		return publishers;
-	}
+//	public ObservableList<String> getDistinctPublishers() {
+//		ObservableList<String> publishers = FXCollections.observableArrayList();
+//		for (VideoGame vg : theOne.mAllGamesList)
+//			if (!publishers.contains(vg.getPublisher()))
+//				publishers.add(vg.getPublisher());
+//		FXCollections.sort(publishers);
+//		return publishers;
+//	}
 
 
 
-	private int initializeVideoGameDBFromFile() throws SQLException {
-		int recordsCreated = 0;
-
-		// If the result set contains results, database table already has
-		// records, no need to populate from file (so return false)
-		if (theOne.mUserDB.getRecordCount() > 0)
-			return 0;
-
-		try {
-			// Otherwise, open the file (CSV file) and insert user data
-			// into database
-			Scanner fileScanner = new Scanner(new File(VIDEO_GAME_DATA_FILE));
-			// First read is for headings:
-			fileScanner.nextLine();
-			// All subsequent reads are for user data
-			while (fileScanner.hasNextLine()) {
-				String[] data = fileScanner.nextLine().split(",");
-				// Length of values is one less than field names because values
-				// does not have id (DB will assign one)
-				String[] values = new String[VIDEO_GAME_FIELD_NAMES.length - 1];
-				values[0] = data[1].replaceAll("'", "''");
-				values[1] = data[2];
-				values[2] = data[3];
-				values[3] = data[4];
-				values[4] = data[5];
-				theOne.mVideoGameDB.createRecord(Arrays.copyOfRange(VIDEO_GAME_FIELD_NAMES, 1, VIDEO_GAME_FIELD_NAMES.length), values);
-				recordsCreated++;
-			}
-
-			// All done with the CSV file, close the connection
-			fileScanner.close();
-		} catch (FileNotFoundException e) {
-			return 0;
-		}
-		return recordsCreated;
-	}
+//	private int initializeVideoGameDBFromFile() throws SQLException {
+//		int recordsCreated = 0;
+//
+//		// If the result set contains results, database table already has
+//		// records, no need to populate from file (so return false)
+//		if (theOne.mUserDB.getRecordCount() > 0)
+//			return 0;
+//
+//		try {
+//			// Otherwise, open the file (CSV file) and insert user data
+//			// into database
+//			Scanner fileScanner = new Scanner(new File(VIDEO_GAME_DATA_FILE));
+//			// First read is for headings:
+//			fileScanner.nextLine();
+//			// All subsequent reads are for user data
+//			while (fileScanner.hasNextLine()) {
+//				String[] data = fileScanner.nextLine().split(",");
+//				// Length of values is one less than field names because values
+//				// does not have id (DB will assign one)
+//				String[] values = new String[VIDEO_GAME_FIELD_NAMES.length - 1];
+//				values[0] = data[1].replaceAll("'", "''");
+//				values[1] = data[2];
+//				values[2] = data[3];
+//				values[3] = data[4];
+//				values[4] = data[5];
+//				theOne.mVideoGameDB.createRecord(Arrays.copyOfRange(VIDEO_GAME_FIELD_NAMES, 1, VIDEO_GAME_FIELD_NAMES.length), values);
+//				recordsCreated++;
+//			}
+//
+//			// All done with the CSV file, close the connection
+//			fileScanner.close();
+//		} catch (FileNotFoundException e) {
+//			return 0;
+//		}
+//		return recordsCreated;
+//	}
 
 }
