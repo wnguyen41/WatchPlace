@@ -29,10 +29,10 @@
                   <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="dialColorCB" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="brandCB" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="caseShapeCB" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="caseMaterialCB" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label alignment="CENTER" text="Brand" />
                   <Label prefHeight="17.0" prefWidth="83.0" text="Case Shape" GridPane.rowIndex="1" />
                   <Label text="Case Material" GridPane.rowIndex="2" />
@@ -45,7 +45,7 @@
             <HBox alignment="CENTER" prefHeight="37.0" prefWidth="237.0" spacing="10.0">
                <children>
                   <Label text="Min Price" />
-                  <Slider showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                  <Slider fx:id="minPriceSlider" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -54,7 +54,7 @@
             <HBox alignment="CENTER" prefHeight="37.0" prefWidth="237.0" spacing="10.0">
                <children>
                   <Label text="Max Price" />
-                  <Slider showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100.0" />
+                  <Slider fx:id="maxPriceSlider" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100.0" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -65,8 +65,8 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" text="Clear FIlter" />
-                  <Button mnemonicParsing="false" text="Apply Filter" />
+                  <Button mnemonicParsing="false" onAction="#clearFilters" text="Clear FIlter" />
+                  <Button mnemonicParsing="false" onAction="#applyFilters" text="Apply Filter" />
                </children>
             </HBox>
          </children>
@@ -84,10 +84,10 @@
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="(Insert Full Name)" wrapText="true" GridPane.halignment="CENTER" />
-            <Label text="Profile" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label text="Settings" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" text="Logout" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Label fx:id="fullNameLabel" text="(Insert Full Name)" wrapText="true" GridPane.halignment="CENTER" />
+            <Label onMouseClicked="#profileScene" text="Profile" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label onMouseClicked="#settingsScene" text="Settings" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="logout" mnemonicParsing="false" text="Logout" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -107,9 +107,9 @@
             <ListView prefHeight="200.0" prefWidth="200.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="941.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <children>
-                  <Button mnemonicParsing="false" text="View Details" />
-                  <Button mnemonicParsing="false" text="Add to Shopping Cart" />
-                  <Button mnemonicParsing="false" text="Add to WishList" />
+                  <Button mnemonicParsing="false" onAction="#viewDetails" text="View Details" />
+                  <Button mnemonicParsing="false" onAction="#addToShoppingCart" text="Add to Shopping Cart" />
+                  <Button mnemonicParsing="false" onAction="#addToWishlist" text="Add to WishList" />
                </children>
             </HBox>
          </children>
