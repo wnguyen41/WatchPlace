@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Label prefHeight="50.0" prefWidth="145.0" text="Create Listing" BorderPane.alignment="CENTER">
@@ -78,7 +77,7 @@
             <Label text="Height" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <TextField GridPane.columnIndex="2" GridPane.rowIndex="9" />
             <Label text="Custom Input:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Water Resistence" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label text="Water Resistance" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <Label text="Dial Color" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <Label text="Dial Index Type" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             <Label text="Dial Hands" GridPane.columnIndex="3" GridPane.rowIndex="5" />
