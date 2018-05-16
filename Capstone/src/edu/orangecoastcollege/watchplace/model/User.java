@@ -4,14 +4,40 @@ public class User {
 	private int mId;
 	private String mName;
 	private String mEmail;
-	private String mRole;
+	private String mPassword;
+
+	private String mBillingAddress;
+	private String mShippingAddress;
 	
-	public User(int id, String name, String email, String role) {
+	public String getBillingAddress() {
+		return mBillingAddress;
+	}
+
+	public void setBillingAddress(String billingAddress) {
+		mBillingAddress = billingAddress;
+	}
+
+	public String getShippingAddress() {
+		return mShippingAddress;
+	}
+
+	public void setShippingAddress(String shippingAddress) {
+		mShippingAddress = shippingAddress;
+	}
+
+	public String getPassword() {
+		return mPassword;
+	}
+
+	
+	public User(int id, String name, String email, String password, String billing, String shipping) {
 		super();
 		mId = id;
 		mName = name;
 		mEmail = email;
-		mRole = role;
+		mPassword = password;
+		mBillingAddress = billing;
+		mShippingAddress = shipping;
 	}
 
 	public String getName() {
@@ -30,14 +56,6 @@ public class User {
 		mEmail = email;
 	}
 
-	public String getRole() {
-		return mRole;
-	}
-
-	public void setRole(String role) {
-		mRole = role;
-	}
-
 	public int getId() {
 		return mId;
 	}
@@ -49,7 +67,7 @@ public class User {
 		result = prime * result + ((mEmail == null) ? 0 : mEmail.hashCode());
 		result = prime * result + mId;
 		result = prime * result + ((mName == null) ? 0 : mName.hashCode());
-		result = prime * result + ((mRole == null) ? 0 : mRole.hashCode());
+
 		return result;
 	}
 
@@ -74,17 +92,13 @@ public class User {
 				return false;
 		} else if (!mName.equals(other.mName))
 			return false;
-		if (mRole == null) {
-			if (other.mRole != null)
-				return false;
-		} else if (!mRole.equals(other.mRole))
-			return false;
+
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [Id=" + mId + ", Name=" + mName + ", Email=" + mEmail + ", Role=" + mRole + "]";
+		return "User [Id=" + mId + ", Name=" + mName + ", Email=" + mEmail + "]";
 	}
 	
 

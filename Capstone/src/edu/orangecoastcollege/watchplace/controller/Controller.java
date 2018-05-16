@@ -65,19 +65,19 @@ public class Controller {
 			theOne.mAllUsersList = FXCollections.observableArrayList();
 			// theOne.mAllGamesList = FXCollections.observableArrayList();
 
-			// try {
+			 try {
 			// Create the user table in the database
-			// theOne.mUserDB = new DBModel(DB_NAME, USER_TABLE_NAME, USER_FIELD_NAMES,
-			// USER_FIELD_TYPES);
-			// ArrayList<ArrayList<String>> resultsList = theOne.mUserDB.getAllRecords();
-			// for (ArrayList<String> values : resultsList)
-			// {
-			// int id = Integer.parseInt(values.get(0));
-			// String name = values.get(1);
-			// String email = values.get(2);
-			// String role = values.get(3);
-			// theOne.mAllUsersList.add(new User(id, name, email, role));
-			// }
+			 theOne.mUserDB = new DBModel(DB_NAME, USER_TABLE_NAME, USER_FIELD_NAMES,
+			 USER_FIELD_TYPES);
+			 ArrayList<ArrayList<String>> resultsList = theOne.mUserDB.getAllRecords();
+			 for (ArrayList<String> values : resultsList)
+			 {
+			 int id = Integer.parseInt(values.get(0));
+			 String name = values.get(1);
+			 String email = values.get(2);
+			 String password = values.get(3);
+			 theOne.mAllUsersList.add(new User(id, name, email, password, "N/A", "N/A"));
+			 }
 
 			// // Create the video game table in the database, loading games from the CSV
 			// file
@@ -101,9 +101,9 @@ public class Controller {
 			// theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME,
 			// USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
 
-			// } catch (SQLException e) {
-			// e.printStackTrace();
-			// }
+			 } catch (SQLException e) {
+			 e.printStackTrace();
+			 }
 		}
 		return theOne;
 	}
@@ -143,12 +143,11 @@ public class Controller {
 		String[] values = { name, email, password, "N/A","N/A" };
 		// Insert the new user database
 		try {
-			System.out.println(values);
+			System.out.println(name+email+password);
 			// Store the new id
-			int id = theOne.mUserDB.createRecord(Arrays.copyOfRange(USER_FIELD_NAMES, 1, USER_FIELD_NAMES.length),
-					values);
+			int id = theOne.mUserDB.createRecord(Arrays.copyOfRange(USER_FIELD_NAMES, 1, USER_FIELD_NAMES.length), values);
 			// Save the new user as the current user
-			theOne.mCurrentUser = new User(id, name, email, "user");
+			theOne.mCurrentUser = new User(id, name, email, password,"N/A","N/A");
 			// Add the new user to the observable list
 			theOne.mAllUsersList.add(theOne.mCurrentUser);
 		} catch (SQLException e) {
@@ -166,7 +165,7 @@ public class Controller {
 				// Go into database to retrieve password:
 				try {
 					ArrayList<ArrayList<String>> userResults = theOne.mUserDB.getRecord(String.valueOf(u.getId()));
-					String storedPassword = userResults.get(0).get(4);
+					String storedPassword = userResults.get(0).get(3);
 					// Check the passwords
 					if (password.equals(storedPassword)) {
 						mCurrentUser = u;
