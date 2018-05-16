@@ -12,6 +12,7 @@ public class ViewNavigator {
 	public static final String SIGN_IN_SCENE = "SignInScene.fxml";
 	public static final String HOME_SCENE = "HomeScene.fxml";
 	public static final String ACCOUNT_OVERVIEW_SCENE = "AccountOverview.fxml";
+	public static final String VIEW_ITEM_DETAILS_SCENE = "ViewItemDetailsScene.fxml";
 
 	public static Stage mainStage;
 

@@ -63,19 +63,21 @@
    <right>
       <GridPane vgap="10.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label fx:id="fullNameLabel" text="(Insert Full Name)" wrapText="true" GridPane.halignment="CENTER" />
             <Label onMouseClicked="#profileScene" text="Profile" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label onMouseClicked="#settingsScene" text="Settings" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Button fx:id="logout" mnemonicParsing="false" text="Logout" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Label onMouseClicked="#goToShoppingCart" text="Go to Shopping Cart" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="logout" mnemonicParsing="false" text="Logout" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Label onMouseClicked="#goToWishList" text="Go to Wish List" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -94,7 +96,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="0.0" prefHeight="43.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ListView prefHeight="349.0" prefWidth="539.0" GridPane.rowIndex="1" />
+            <ListView fx:id="listView" prefHeight="349.0" prefWidth="539.0" GridPane.rowIndex="1" />
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="941.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <children>
                   <Button mnemonicParsing="false" onAction="#viewDetails" text="View Details" />
