@@ -303,7 +303,5 @@ public class DBModel {
 		// Establish a connection to the database and return that connection
 		Connection connection = DriverManager.getConnection("jdbc:sqlite:" + mDBName);
 		return connection;
-
 	}
-
 }
