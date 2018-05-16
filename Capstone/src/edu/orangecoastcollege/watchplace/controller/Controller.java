@@ -143,6 +143,7 @@ public class Controller {
 		String[] values = { name, email, password, "N/A","N/A" };
 		// Insert the new user database
 		try {
+			System.out.println(values);
 			// Store the new id
 			int id = theOne.mUserDB.createRecord(Arrays.copyOfRange(USER_FIELD_NAMES, 1, USER_FIELD_NAMES.length),
 					values);
