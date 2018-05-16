@@ -29,6 +29,12 @@ public class Controller {
 			"case_height", "case_water_resistence", "dial_color", "dial_indexes", "movement_type", "price" };
 	private static final String[] WATCH_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT", "TEXT",
 			"TEXT", "TEXT", "TEXT", "TEXT", "REAL", "REAL", "REAL", "TEXT", "TEXT", "TEXT", "REAL" };
+	
+	private static final String COMPARE_TABLE_NAME = "compare";
+	private static final String[] COMPARE_FIELD_NAME = { "user_id", "watch_id" };
+	private static final String[] COMPARE_FIELD_TYPES = { "INTEGER", "INTEGER" };
+	
+	
 
 	private static final String VIDEO_GAME_TABLE_NAME = "video_game";
 	private static final String[] VIDEO_GAME_FIELD_NAMES = { "_id", "name", "platform", "year", "genre", "publisher" };
@@ -244,14 +250,14 @@ public class Controller {
 	// return platforms;
 	// }
 
-	// public ObservableList<String> getDistinctPublishers() {
-	// ObservableList<String> publishers = FXCollections.observableArrayList();
-	// for (VideoGame vg : theOne.mAllGamesList)
-	// if (!publishers.contains(vg.getPublisher()))
-	// publishers.add(vg.getPublisher());
-	// FXCollections.sort(publishers);
-	// return publishers;
-	// }
+	 public ObservableList<String> getDistinctPublishers() {
+		 ObservableList<String> publishers = FXCollections.observableArrayList();
+		 for (VideoGame vg : theOne.mAllGamesList)
+		 if (!publishers.contains(vg.getPublisher()))
+		 publishers.add(vg.getPublisher());
+		 FXCollections.sort(publishers);
+		 return publishers;
+	 }
 
 	// private int initializeVideoGameDBFromFile() throws SQLException {
 	// int recordsCreated = 0;
