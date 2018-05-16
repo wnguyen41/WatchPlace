@@ -1,5 +1,8 @@
 package edu.orangecoastcollege.watchplace.view;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import edu.orangecoastcollege.watchplace.controller.Controller;
 import edu.orangecoastcollege.watchplace.model.Watch;
 import javafx.event.ActionEvent;
@@ -11,7 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class HomeScene {
+public class HomeScene { // implements Initializable
 	private static Controller controller = Controller.getInstance();
 	@FXML
 	private ComboBox<String> dialColorCB;
@@ -37,6 +40,27 @@ public class HomeScene {
 	private TextField referenceTF;
 	@FXML
 	private ListView<Watch> listView;
+	
+//	@Override
+//	public void initialize(URL location, ResourceBundle resources) {
+//		allVideoGamesLV.setItems(controller.getAllVideoGames());
+//		publishersCB.setItems(controller.getDistinctPublishers());
+//		platformsCB.setItems(controller.getDistinctPlatforms());
+//		
+//		publishersCB.setOnAction(e -> filter());
+//		platformsCB.setOnAction(e -> filter());
+//		yearSlider.setOnMouseDragged(e -> filter());
+//		yearSlider.setOnMouseClicked(e -> filter());
+//	}
+//	
+//	private void filter() {
+//		String publisher = publishersCB.getSelectionModel().getSelectedItem();
+//		String platform = platformsCB.getSelectionModel().getSelectedItem();
+//		double minYear = yearSlider.getValue();
+//		
+//		allVideoGamesLV.setItems(controller.filter(vg -> (publisher == null || vg.getPublisher().equalsIgnoreCase(publisher))
+//				&& (platform == null || vg.getPlatform().equalsIgnoreCase(platform)) && vg.getYear() >= minYear));
+//	}
 
 	// Event Listener on Button.onAction
 	@FXML

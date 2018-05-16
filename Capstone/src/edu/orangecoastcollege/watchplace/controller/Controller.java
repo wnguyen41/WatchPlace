@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
+import edu.orangecoastcollege.cs272.ic13.model.VideoGame;
 import edu.orangecoastcollege.watchplace.model.DBModel;
 import edu.orangecoastcollege.watchplace.model.User;
 import javafx.collections.FXCollections;
@@ -298,4 +300,13 @@ public class Controller {
 	// return recordsCreated;
 	// }
 
+//	public ObservableList<VideoGame> filter(Predicate<VideoGame> criteria)
+//	{
+//		mFilteredVideoGamesList.clear();
+//		for (VideoGame vg : mAllGamesList)
+//			if (criteria.test(vg))
+//				mFilteredVideoGamesList.add(vg);
+//		
+//		return mFilteredVideoGamesList;
+//	}
 }
