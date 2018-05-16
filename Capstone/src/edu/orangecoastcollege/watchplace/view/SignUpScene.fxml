@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.watchplace.view.SignUpScene">
+<GridPane alignment="CENTER_RIGHT" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.watchplace.view.SignUpScene">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -36,6 +36,8 @@
       <Label fx:id="confirmPasswordErrorLabel" prefHeight="17.0" prefWidth="107.0" text="Field required." textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <TextField fx:id="nameTF" promptText="Full Name" GridPane.columnIndex="1" />
       <TextField fx:id="emailTF" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <PasswordField fx:id="passwordPF" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <PasswordField fx:id="confirmPassPF" promptText="Confirm Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Button fx:id="createNewAcctButton" mnemonicParsing="false" onAction="#createAccount" prefWidth="200.0" text="Create New Account" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
       <Label text="By creating an account, you agree to our Terms of Sevice &amp; Privacy Policy" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -44,8 +46,6 @@
             <Label onMouseClicked="#signInScene" text="Sign in" textFill="BLUE" />
          </children>
       </HBox>
-      <PasswordField fx:id="confirmPassPF" promptText="Confirm Password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <PasswordField fx:id="passwordPF" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

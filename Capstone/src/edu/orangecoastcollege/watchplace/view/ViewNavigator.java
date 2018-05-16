@@ -15,6 +15,7 @@ public class ViewNavigator {
 	public static final String VIEW_ITEM_DETAILS_SCENE = "ViewItemDetailsScene.fxml";
 	public static final String ADD_LISTING_SCENE = "AddListing.fxml";
 	public static final String WISH_LIST_SCENE = "Wishlist.fxml";
+	public static final String SHOPPING_CART_SCENE = "ShoppingCart.fxml";
 
 	public static Stage mainStage;
 

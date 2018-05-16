@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 import edu.orangecoastcollege.watchplace.model.DBModel;
 import edu.orangecoastcollege.watchplace.model.User;
 import edu.orangecoastcollege.watchplace.model.Watch;
+import edu.orangecoastcollege.watchplace.view.ViewNavigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -336,5 +337,10 @@ public class Controller {
 				mFilteredWatchesList.add(vg);
 		
 		return mFilteredWatchesList;
+	}
+
+	public void logoutUser() {
+		mCurrentUser = null;
+		ViewNavigator.loadScene("WatchPlace", ViewNavigator.SIGN_IN_SCENE);
 	}
 }

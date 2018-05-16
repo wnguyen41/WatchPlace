@@ -76,7 +76,7 @@
             <Label fx:id="fullNameLabel" text="(Insert Full Name)" wrapText="true" GridPane.halignment="CENTER" />
             <Label onMouseClicked="#profileScene" text="Profile" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <Label onMouseClicked="#goToShoppingCart" text="Go to Shopping Cart" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Button fx:id="logout" mnemonicParsing="false" text="Logout" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" onAction="#logout" text="Logout" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Label onMouseClicked="#goToWishList" text="Go to Wish List" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
          </children>
          <padding>
@@ -96,14 +96,14 @@
             <RowConstraints maxHeight="-Infinity" minHeight="0.0" prefHeight="43.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ListView fx:id="listView" prefHeight="349.0" prefWidth="539.0" GridPane.rowIndex="1" />
+            <ListView fx:id="listView" onMouseClicked="#checkSelected" prefHeight="349.0" prefWidth="539.0" GridPane.rowIndex="1" />
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="941.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <children>
-                  <Button mnemonicParsing="false" onAction="#viewDetails" text="View Details" />
-                  <Button mnemonicParsing="false" onAction="#addToShoppingCart" text="Add to Shopping Cart" />
-                  <Button mnemonicParsing="false" onAction="#addToWishlist" text="Add to WishList" />
+                  <Button fx:id="viewDetailsButton" disable="true" mnemonicParsing="false" onAction="#viewDetails" text="View Details" />
+                  <Button fx:id="addToShoppingCartButton" disable="true" mnemonicParsing="false" onAction="#addToShoppingCart" text="Add to Shopping Cart" />
+                  <Button fx:id="addToWishListButton" disable="true" mnemonicParsing="false" onAction="#addToWishlist" text="Add to WishList" />
                   <Button mnemonicParsing="false" onAction="#addListing" text="Add Listing" />
-                  <Button fx:id="deleteListingButton" mnemonicParsing="false" onAction="#deleteListing" text="Delete Listing" />
+                  <Button fx:id="deleteListingButton" disable="true" mnemonicParsing="false" onAction="#deleteListing" text="Delete Listing" />
                </children>
             </HBox>
             <Label fx:id="listingCount" text="Number of Listings: " GridPane.rowIndex="2">
