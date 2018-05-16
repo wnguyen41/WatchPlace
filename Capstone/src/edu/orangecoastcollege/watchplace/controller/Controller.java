@@ -249,6 +249,7 @@ public class Controller {
 	// FXCollections.sort(platforms);
 	// return platforms;
 	// }
+	//Brands case shape, case Material, Color
 
 	 public ObservableList<String> getDistinctPublishers() {
 		 ObservableList<String> publishers = FXCollections.observableArrayList();
