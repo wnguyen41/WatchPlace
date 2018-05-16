@@ -26,9 +26,15 @@ public class Controller {
 	private static final String WATCH_TABLE_NAME = "watch";
 	private static final String[] WATCH_FIELD_NAME = { "id_", "reference", "brand", "name", "case_material",
 			"case_glass", "case_back_type", "case_shape", "case_diameter", "case_diameter", "case_diameter",
-			"case_height", "case_water_resistence", "dial_color", "dial_indexes", "movement_type", "price" };
+			"case_height", "case_water_resistance", "dial_color", "dial_index", "movement", "price" };
 	private static final String[] WATCH_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT", "TEXT",
 			"TEXT", "TEXT", "TEXT", "TEXT", "REAL", "REAL", "REAL", "TEXT", "TEXT", "TEXT", "REAL" };
+	
+	private static final String COMPARE_TABLE_NAME = "compare";
+	private static final String[] COMPARE_FIELD_NAME = { "user_id", "watch_id" };
+	private static final String[] COMPARE_FIELD_TYPES = { "INTEGER", "INTEGER" };
+	
+	
 
 	private static final String VIDEO_GAME_TABLE_NAME = "video_game";
 	private static final String[] VIDEO_GAME_FIELD_NAMES = { "_id", "name", "platform", "year", "genre", "publisher" };
@@ -243,15 +249,16 @@ public class Controller {
 	// FXCollections.sort(platforms);
 	// return platforms;
 	// }
+	//Brands case shape, case Material, Color
 
-	// public ObservableList<String> getDistinctPublishers() {
-	// ObservableList<String> publishers = FXCollections.observableArrayList();
-	// for (VideoGame vg : theOne.mAllGamesList)
-	// if (!publishers.contains(vg.getPublisher()))
-	// publishers.add(vg.getPublisher());
-	// FXCollections.sort(publishers);
-	// return publishers;
-	// }
+//	 public ObservableList<String> getDistinctPublishers() {
+//		 ObservableList<String> publishers = FXCollections.observableArrayList();
+//		 for (VideoGame vg : theOne.mAllGamesList)
+//		 if (!publishers.contains(vg.getPublisher()))
+//		 publishers.add(vg.getPublisher());
+//		 FXCollections.sort(publishers);
+//		 return publishers;
+//	 }
 
 	// private int initializeVideoGameDBFromFile() throws SQLException {
 	// int recordsCreated = 0;
