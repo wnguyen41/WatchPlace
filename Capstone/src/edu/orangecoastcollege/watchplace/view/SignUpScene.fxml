@@ -30,10 +30,10 @@
       <Label text="Email" GridPane.rowIndex="1" />
       <Label text="Password" GridPane.rowIndex="2" />
       <Label text="Confirm Password" GridPane.rowIndex="3" />
-      <Label fx:id="nameErrorLabel" text="Field required." textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-      <Label fx:id="emailErrorLabel" text="Field required." textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Label fx:id="passwordErrorLabel" text="Field required." textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Label fx:id="confirmPasswordErrorLabel" text="Field required." textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Label fx:id="nameErrorLabel" prefHeight="17.0" prefWidth="233.0" text="Field required." textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+      <Label fx:id="emailErrorLabel" prefHeight="17.0" prefWidth="247.0" text="Field required." textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label fx:id="passwordErrorLabel" prefHeight="17.0" prefWidth="188.0" text="Field required." textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Label fx:id="confirmPasswordErrorLabel" prefHeight="17.0" prefWidth="107.0" text="Field required." textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <TextField fx:id="nameTF" promptText="Full Name" GridPane.columnIndex="1" />
       <TextField fx:id="emailTF" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="createNewAcctButton" mnemonicParsing="false" onAction="#createAccount" prefWidth="200.0" text="Create New Account" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />

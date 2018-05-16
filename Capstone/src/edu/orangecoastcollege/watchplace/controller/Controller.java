@@ -134,7 +134,7 @@ public class Controller {
 			return "Password must be at least 8 characters, including 1 upper case letter, 1 number, and 1 symbol.";
 
 		// Made it through all the checks, create the new user in the database
-		String[] values = { name, email, "user", password };
+		String[] values = { name, email, password, "N/A","N/A" };
 		// Insert the new user database
 		try {
 			// Store the new id

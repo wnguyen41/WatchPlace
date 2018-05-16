@@ -47,8 +47,8 @@ public class SignUpScene {
 		
 		if(!password.equals(confirmPass)) 
 		{
-			passwordErrorLabel.setVisible(false);
-			confirmPasswordErrorLabel.setVisible(false);
+			passwordErrorLabel.setVisible(true);
+			confirmPasswordErrorLabel.setVisible(true);
 			passwordErrorLabel.setText("Passwords don't match");
 			confirmPasswordErrorLabel.setText("Passwords don't match");
 		}
@@ -56,11 +56,13 @@ public class SignUpScene {
 		if(emailErrorLabel.isVisible() || passwordErrorLabel.isVisible()||nameErrorLabel.isVisible()|| confirmPasswordErrorLabel.isVisible()) return false;
 		
 		String result = controller.signUpUser(fullName, email, password);
+		System.out.println(result);
         if(result.equalsIgnoreCase("SUCCESS"))
         {
             signInScene();
             return true;
         }
+        System.out.println("SIgn up failed");
         return false;
 
 	}
