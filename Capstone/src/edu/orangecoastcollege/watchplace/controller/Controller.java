@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
-import edu.orangecoastcollege.cs272.ic13.model.VideoGame;
 import edu.orangecoastcollege.watchplace.model.DBModel;
 import edu.orangecoastcollege.watchplace.model.User;
+import edu.orangecoastcollege.watchplace.model.Watch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -50,11 +50,12 @@ public class Controller {
 
 	private User mCurrentUser;
 	private DBModel mUserDB;
-	private DBModel mVideoGameDB;
-	private DBModel mUserGamesDB;
+	//private DBModel mVideoGameDB;
+	//private DBModel mUserGamesDB;
 
 	private ObservableList<User> mAllUsersList;
-	// private ObservableList<Watch> mAllWatchesList;
+	private ObservableList<Watch> mAllWatchesList;
+	private ObservableList<Watch> mFilteredWatchesList;
 
 	private Controller() {
 	}
@@ -63,6 +64,8 @@ public class Controller {
 		if (theOne == null) {
 			theOne = new Controller();
 			theOne.mAllUsersList = FXCollections.observableArrayList();
+			theOne.mAllWatchesList = FXCollections.observableArrayList();
+			theOne.mFilteredWatchesList = FXCollections.observableArrayList();
 			// theOne.mAllGamesList = FXCollections.observableArrayList();
 
 			 try {
@@ -239,6 +242,31 @@ public class Controller {
 		return theOne.mAllUsersList;
 	}
 
+	public ObservableList<Watch> getAllWatches() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ObservableList<String> getDistinctDialColors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ObservableList<String> getDistinctBrands() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ObservableList<String> getDistinctCaseShape() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ObservableList<String> getDistinctCaseMaterial() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// public ObservableList<VideoGame> getAllVideoGames() {
 	// return theOne.mAllGamesList;
 	// }
@@ -300,13 +328,13 @@ public class Controller {
 	// return recordsCreated;
 	// }
 
-//	public ObservableList<VideoGame> filter(Predicate<VideoGame> criteria)
-//	{
-//		mFilteredVideoGamesList.clear();
-//		for (VideoGame vg : mAllGamesList)
-//			if (criteria.test(vg))
-//				mFilteredVideoGamesList.add(vg);
-//		
-//		return mFilteredVideoGamesList;
-//	}
+	public ObservableList<Watch> filter(Predicate<Watch> criteria)
+	{
+		mFilteredWatchesList.clear();
+		for (Watch vg : mAllWatchesList)
+			if (criteria.test(vg))
+				mFilteredWatchesList.add(vg);
+		
+		return mFilteredWatchesList;
+	}
 }

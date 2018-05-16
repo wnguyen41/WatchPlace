@@ -46,7 +46,7 @@ public class SignInScene {
         if(result.equalsIgnoreCase("SUCCESS"))
         {
             signInErrorLabel.setVisible(false);
-            ViewNavigator.loadScene("Video Game List", ViewNavigator.HOME_SCENE);
+            ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
             return true;
         }
         signInErrorLabel.setText(result);
