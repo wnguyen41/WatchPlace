@@ -1,55 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
-  <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="226.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="74.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <Label text="Username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="First Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Label text="Last Name" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Label text="Email Address" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Label text="Shipping Address" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Label text="Billing Address" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Label text="Account Overview" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Label text="N/A" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Label text="N/A" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <Label text="N/A" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <Label text="N/A" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <Label text="N/A" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <Label text="N/A" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Edit Account" />
-            <Button mnemonicParsing="false" text="Delete Account" />
-            <Button mnemonicParsing="false" text="Back" />
+            <Label text="Email" GridPane.columnIndex="1" />
+            <Label text="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Shipping Address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Billing Address" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="JohnDoe@gmail.com" GridPane.columnIndex="2" GridPane.columnSpan="2" />
+            <Label text="John Doe" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <Label text="123 Main St. Costa Mesa, California. United States" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Label text="123 Main St, Costa Mesa, California. United States" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" />
          </children>
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
+      </GridPane>
+   </center>
+   <top>
+      <Label prefHeight="51.0" prefWidth="192.0" text="Account Overview" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="50.0" spacing="50.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goToEditAccountScene" text="Edit Account" />
+            <Button mnemonicParsing="false" onAction="#goToDeleteAccountScene" text="Delete Account" />
+            <Button mnemonicParsing="false" onAction="#goToHomeScene" text="Back" />
+         </children>
       </HBox>
-   </children>
-</GridPane>
+   </bottom>
+</BorderPane>

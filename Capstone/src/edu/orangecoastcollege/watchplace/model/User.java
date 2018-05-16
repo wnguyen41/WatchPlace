@@ -8,7 +8,15 @@ public class User {
 
 	private String mBillingAddress;
 	private String mShippingAddress;
-	
+	public User(int id, String name, String email, String password, String billing, String shipping) {
+		super();
+		mId = id;
+		mName = name;
+		mEmail = email;
+		mPassword = password;
+		mBillingAddress = billing;
+		mShippingAddress = shipping;
+	}
 	public String getBillingAddress() {
 		return mBillingAddress;
 	}
@@ -30,15 +38,7 @@ public class User {
 	}
 
 	
-	public User(int id, String name, String email, String password, String billing, String shipping) {
-		super();
-		mId = id;
-		mName = name;
-		mEmail = email;
-		mPassword = password;
-		mBillingAddress = billing;
-		mShippingAddress = shipping;
-	}
+
 
 	public String getName() {
 		return mName;

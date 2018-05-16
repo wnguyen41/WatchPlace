@@ -33,8 +33,6 @@ public class Controller {
 	private static final String COMPARE_TABLE_NAME = "compare";
 	private static final String[] COMPARE_FIELD_NAME = { "user_id", "watch_id" };
 	private static final String[] COMPARE_FIELD_TYPES = { "INTEGER", "INTEGER" };
-	
-	
 
 	private static final String VIDEO_GAME_TABLE_NAME = "video_game";
 	private static final String[] VIDEO_GAME_FIELD_NAMES = { "_id", "name", "platform", "year", "genre", "publisher" };
@@ -140,10 +138,12 @@ public class Controller {
 			return "Password must be at least 8 characters, including 1 upper case letter, 1 number, and 1 symbol.";
 
 		// Made it through all the checks, create the new user in the database
-		String[] values = { name, email, password, "N/A","N/A" };
+		String[] values = { name, email, "user", password };
 		// Insert the new user database
 		try {
+
 			System.out.println(name+email+password);
+
 			// Store the new id
 			int id = theOne.mUserDB.createRecord(Arrays.copyOfRange(USER_FIELD_NAMES, 1, USER_FIELD_NAMES.length), values);
 			// Save the new user as the current user
