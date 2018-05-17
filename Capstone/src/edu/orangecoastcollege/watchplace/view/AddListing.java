@@ -12,7 +12,7 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.control.ComboBox;
 
-public class AddListingController implements Initializable {
+public class AddListing implements Initializable {
 	
 	Controller controller = Controller.getInstance();
 	
@@ -73,12 +73,12 @@ public class AddListingController implements Initializable {
 		args[12] = mMovementCB.getSelectionModel().getSelectedItem();
 		
 		controller.createListing(args);
-		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.SIGN_IN_SCENE);
+		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void goToHomeScene(ActionEvent event) {
-		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.SIGN_IN_SCENE);
+		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
 	// Event Listener on Button.onAction
 	@FXML
