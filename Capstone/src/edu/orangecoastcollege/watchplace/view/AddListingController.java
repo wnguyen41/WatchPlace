@@ -73,6 +73,7 @@ public class AddListingController implements Initializable {
 		args[12] = mMovementCB.getSelectionModel().getSelectedItem();
 		
 		controller.createListing(args);
+		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.SIGN_IN_SCENE);
 	}
 	// Event Listener on Button.onAction
 	@FXML
