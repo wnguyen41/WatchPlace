@@ -21,18 +21,23 @@ public class Controller {
 	private static Controller theOne;
 
 	private static final String DB_NAME = "watchplace.db";
-
+	//Winston
 	private static final String USER_TABLE_NAME = "user";
 	private static final String[] USER_FIELD_NAMES = { "_id", "name", "email", "password", "shipping_address",
 			"billing_address" };
 	private static final String[] USER_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT", "TEXT" };
-
+	//Winston
 	private static final String WATCH_TABLE_NAME = "watch";
 	private static final String[] WATCH_FIELD_NAMES = { "id_", "reference", "brand", "name", "case_material",
 			"case_glass", "case_back_type", "case_shape", "case_diameter", "case_diameter", "case_diameter",
 			"case_height", "case_water_resistance", "dial_color", "dial_index", "movement", "price" };
 	private static final String[] WATCH_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT", "TEXT",
 			"TEXT", "TEXT", "TEXT", "TEXT", "REAL", "REAL", "REAL", "TEXT", "TEXT", "TEXT", "REAL" };
+	//Winston
+	private static final String LISTING_TABLE_NAME = "listings";
+	private static final String[] LISTING_FIELD_NAMES = {"id_","watch_id","user_id","quantity"};
+	private static final String[] LISTING_FIELD_TYPES = {"INTEGER PRIMARY KEY","INTEGER","INTEGER","INTEGER"};
+	
 	
 	private static final String COMPARE_TABLE_NAME = "compare";
 	private static final String[] COMPARE_FIELD_NAME = { "user_id", "watch_id" };
@@ -129,7 +134,13 @@ public class Controller {
 		return email.matches(
 				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 	}
-
+	/**
+	 * Winston
+	 * @param name
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public String signUpUser(String name, String email, String password) {
 		// Check email to see if its valid
 		if (!isValidEmail(email))
@@ -165,7 +176,12 @@ public class Controller {
 
 		return "SUCCESS";
 	}
-
+	/**
+	 * Winston
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public String signInUser(String email, String password) {
 		// Loop through the list of all users
 		for (User u : theOne.mAllUsersList) {
