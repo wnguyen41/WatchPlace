@@ -14,6 +14,7 @@ import edu.orangecoastcollege.watchplace.model.Watch;
 import edu.orangecoastcollege.watchplace.view.ViewNavigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 
 public class Controller {
 
@@ -267,6 +268,21 @@ public class Controller {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public ObservableList<String> getDistinctIndex() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ObservableList<String> getDistinctGlass() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ObservableList<String> getDistinctBackTypes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	// public ObservableList<VideoGame> getAllVideoGames() {
 	// return theOne.mAllGamesList;
@@ -342,5 +358,10 @@ public class Controller {
 	public void logoutUser() {
 		mCurrentUser = null;
 		ViewNavigator.loadScene("WatchPlace", ViewNavigator.SIGN_IN_SCENE);
+	}
+
+	public void createListing() {
+		// TODO Auto-generated method stub
+		
 	}
 }
