@@ -28,7 +28,7 @@ public class Controller {
 	private static final String[] USER_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT", "TEXT" };
 
 	private static final String WATCH_TABLE_NAME = "watch";
-	private static final String[] WATCH_FIELD_NAME = { "id_", "reference", "brand", "name", "case_material",
+	private static final String[] WATCH_FIELD_NAMES = { "id_", "reference", "brand", "name", "case_material",
 			"case_glass", "case_back_type", "case_shape", "case_diameter", "case_diameter", "case_diameter",
 			"case_height", "case_water_resistance", "dial_color", "dial_index", "movement", "price" };
 	private static final String[] WATCH_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT", "TEXT",
@@ -52,6 +52,7 @@ public class Controller {
 
 	private User mCurrentUser;
 	private DBModel mUserDB;
+	private DBModel mWatchDB;
 	//private DBModel mVideoGameDB;
 	//private DBModel mUserGamesDB;
 
@@ -248,6 +249,11 @@ public class Controller {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public ObservableList<String> getDistinctMovements() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public ObservableList<String> getDistinctDialColors() {
 		// TODO Auto-generated method stub
@@ -360,8 +366,11 @@ public class Controller {
 		ViewNavigator.loadScene("WatchPlace", ViewNavigator.SIGN_IN_SCENE);
 	}
 
-	public void createListing() {
-		// TODO Auto-generated method stub
-		
+	public void createListing(String[] args) {
+		try {
+			mWatchDB.createRecord(Arrays.copyOfRange(WATCH_FIELD_NAMES, 1, WATCH_FIELD_NAMES.length), args);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
