@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
@@ -21,24 +22,23 @@ public class Controller {
 	private static Controller theOne;
 
 	private static final String DB_NAME = "watchplace.db";
-	//Winston
+	// Winston
 	private static final String USER_TABLE_NAME = "user";
 	private static final String[] USER_FIELD_NAMES = { "_id", "name", "email", "password", "shipping_address",
 			"billing_address" };
 	private static final String[] USER_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT", "TEXT" };
-	//Winston
+	// Winston
 	private static final String WATCH_TABLE_NAME = "watch";
 	private static final String[] WATCH_FIELD_NAMES = { "id_", "reference", "brand", "name", "case_material",
-			"case_glass", "case_back_type", "case_shape", "case_diameter", "case_diameter", "case_diameter",
-			"case_height", "case_water_resistance", "dial_color", "dial_index", "movement", "price" };
+			"case_glass", "case_back_type", "case_shape", "case_diameter", "case_height", "case_water_resistance",
+			"dial_color", "dial_index", "movement", "price" };
 	private static final String[] WATCH_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT", "TEXT",
-			"TEXT", "TEXT", "TEXT", "TEXT", "REAL", "REAL", "REAL", "TEXT", "TEXT", "TEXT", "REAL" };
-	//Winston
+			"TEXT", "TEXT", "REAL", "REAL", "REAL", "TEXT", "TEXT", "TEXT", "REAL" };
+	// Winston
 	private static final String LISTING_TABLE_NAME = "listings";
-	private static final String[] LISTING_FIELD_NAMES = {"id_","watch_id","user_id","quantity"};
-	private static final String[] LISTING_FIELD_TYPES = {"INTEGER PRIMARY KEY","INTEGER","INTEGER","INTEGER"};
-	
-	
+	private static final String[] LISTING_FIELD_NAMES = { "id_", "watch_id", "user_id", "quantity" };
+	private static final String[] LISTING_FIELD_TYPES = { "INTEGER PRIMARY KEY", "INTEGER", "INTEGER", "INTEGER" };
+
 	private static final String COMPARE_TABLE_NAME = "compare";
 	private static final String[] COMPARE_FIELD_NAME = { "user_id", "watch_id" };
 	private static final String[] COMPARE_FIELD_TYPES = { "INTEGER", "INTEGER" };
@@ -58,12 +58,14 @@ public class Controller {
 	private User mCurrentUser;
 	private DBModel mUserDB;
 	private DBModel mWatchDB;
-	//private DBModel mVideoGameDB;
-	//private DBModel mUserGamesDB;
+	// private DBModel mVideoGameDB;
+	// private DBModel mUserGamesDB;
 
 	private ObservableList<User> mAllUsersList;
 	private ObservableList<Watch> mAllWatchesList;
 	private ObservableList<Watch> mFilteredWatchesList;
+	private ObservableList<Watch> mAllListingsList;
+	
 
 	private Controller() {
 	}
@@ -76,45 +78,64 @@ public class Controller {
 			theOne.mFilteredWatchesList = FXCollections.observableArrayList();
 			// theOne.mAllGamesList = FXCollections.observableArrayList();
 
-			 try {
-			// Create the user table in the database
-			 theOne.mUserDB = new DBModel(DB_NAME, USER_TABLE_NAME, USER_FIELD_NAMES,
-			 USER_FIELD_TYPES);
-			 ArrayList<ArrayList<String>> resultsList = theOne.mUserDB.getAllRecords();
-			 for (ArrayList<String> values : resultsList)
-			 {
-			 int id = Integer.parseInt(values.get(0));
-			 String name = values.get(1);
-			 String email = values.get(2);
-			 String password = values.get(3);
-			 theOne.mAllUsersList.add(new User(id, name, email, password, "N/A", "N/A"));
-			 }
+			try {
+				// Create the user table in the database
+				theOne.mUserDB = new DBModel(DB_NAME, USER_TABLE_NAME, USER_FIELD_NAMES, USER_FIELD_TYPES);
+				ArrayList<ArrayList<String>> resultsList = theOne.mUserDB.getAllRecords();
+				for (ArrayList<String> values : resultsList) {
+					int id = Integer.parseInt(values.get(0));
+					String name = values.get(1);
+					String email = values.get(2);
+					String password = values.get(3);
+					theOne.mAllUsersList.add(new User(id, name, email, password, "N/A", "N/A"));
+				}
+				
+				theOne.mWatchDB = new DBModel(DB_NAME, WATCH_TABLE_NAME, WATCH_FIELD_NAMES, WATCH_FIELD_TYPES);
+				resultsList = theOne.mWatchDB.getAllRecords();
+				for (ArrayList<String> values : resultsList) {
+					int id = Integer.parseInt(values.get(0));
+					String reference = values.get(1);
+					String brand = values.get(2);
+					String name = values.get(3);
+					String caseMaterial = values.get(4);
+					String caseGlass = values.get(5);
+					String caseBackType = values.get(6);
+					String caseShape = values.get(7);
+					double caseDiameter = Double.parseDouble(values.get(8));
+					double caseHeight = Double.parseDouble(values.get(9));
+					double caseWaterResistance = Double.parseDouble(values.get(10));
+					String dialColor =values.get(11);
+					String dialIndex = values.get(12);
+					String movement = values.get(13);
+					double price = Double.parseDouble(values.get(14));
+					theOne.mAllWatchesList.add(new Watch(id, reference, brand, name, caseMaterial, caseGlass, caseBackType, caseShape, caseDiameter, caseHeight, caseWaterResistance, dialColor, dialIndex, movement, price));
+				}
 
-			// // Create the video game table in the database, loading games from the CSV
-			// file
-			// theOne.mVideoGameDB = new DBModel(DB_NAME, VIDEO_GAME_TABLE_NAME,
-			// VIDEO_GAME_FIELD_NAMES, VIDEO_GAME_FIELD_TYPES);
-			// theOne.initializeVideoGameDBFromFile();
-			// resultsList = theOne.mVideoGameDB.getAllRecords();
-			// for (ArrayList<String> values : resultsList)
-			// {
-			// int id = Integer.parseInt(values.get(0));
-			// String name = values.get(1);
-			// String platform = values.get(2);
-			// int year = Integer.parseInt(values.get(3));
-			// String genre = values.get(4);
-			// String publisher = values.get(5);
-			// theOne.mAllGamesList.add(new VideoGame(id, name, platform, year, genre,
-			// publisher));
-			// }
+				// // Create the video game table in the database, loading games from the CSV
+				// file
+				// theOne.mVideoGameDB = new DBModel(DB_NAME, VIDEO_GAME_TABLE_NAME,
+				// VIDEO_GAME_FIELD_NAMES, VIDEO_GAME_FIELD_TYPES);
+				// theOne.initializeVideoGameDBFromFile();
+				// resultsList = theOne.mVideoGameDB.getAllRecords();
+				// for (ArrayList<String> values : resultsList)
+				// {
+				// int id = Integer.parseInt(values.get(0));
+				// String name = values.get(1);
+				// String platform = values.get(2);
+				// int year = Integer.parseInt(values.get(3));
+				// String genre = values.get(4);
+				// String publisher = values.get(5);
+				// theOne.mAllGamesList.add(new VideoGame(id, name, platform, year, genre,
+				// publisher));
+				// }
 
-			// Create the relationship table between users and the video games they own
-			// theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME,
-			// USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
+				// Create the relationship table between users and the video games they own
+				// theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME,
+				// USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
 
-			 } catch (SQLException e) {
-			 e.printStackTrace();
-			 }
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return theOne;
 	}
@@ -134,8 +155,10 @@ public class Controller {
 		return email.matches(
 				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 	}
+
 	/**
 	 * Winston
+	 * 
 	 * @param name
 	 * @param email
 	 * @param password
@@ -161,12 +184,13 @@ public class Controller {
 		// Insert the new user database
 		try {
 
-			System.out.println(name+email+password);
+			System.out.println(name + email + password);
 
 			// Store the new id
-			int id = theOne.mUserDB.createRecord(Arrays.copyOfRange(USER_FIELD_NAMES, 1, USER_FIELD_NAMES.length), values);
+			int id = theOne.mUserDB.createRecord(Arrays.copyOfRange(USER_FIELD_NAMES, 1, USER_FIELD_NAMES.length),
+					values);
 			// Save the new user as the current user
-			theOne.mCurrentUser = new User(id, name, email, password,"N/A","N/A");
+			theOne.mCurrentUser = new User(id, name, email, password, "N/A", "N/A");
 			// Add the new user to the observable list
 			theOne.mAllUsersList.add(theOne.mCurrentUser);
 		} catch (SQLException e) {
@@ -176,8 +200,10 @@ public class Controller {
 
 		return "SUCCESS";
 	}
+
 	/**
 	 * Winston
+	 * 
 	 * @param email
 	 * @param password
 	 * @return
@@ -192,7 +218,7 @@ public class Controller {
 					String storedPassword = userResults.get(0).get(3);
 					// Check the passwords
 					if (password.equals(storedPassword)) {
-						mCurrentUser = u;
+						theOne.mCurrentUser = u;
 						return "SUCCESS";
 					} else
 						break;
@@ -254,7 +280,7 @@ public class Controller {
 	// }
 
 	public User getCurrentUser() {
-		return mCurrentUser;
+		return theOne.mCurrentUser;
 	}
 
 	public ObservableList<User> getAllUsers() {
@@ -262,27 +288,55 @@ public class Controller {
 	}
 
 	public ObservableList<Watch> getAllWatches() {
-		// TODO Auto-generated method stub
-		return null;
+		return theOne.mAllWatchesList;
 	}
-	
+
+	/**
+	 * Winston
+	 * 
+	 * Gets the distinct types of movements for a watch.
+	 * 
+	 * @return
+	 */
 	public ObservableList<String> getDistinctMovements() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> movements = new ArrayList<>();
+		movements = Arrays.asList("Manual", "Automatic", "Quartz");
+		ObservableList<String> distinctMovements = FXCollections.observableArrayList();
+		for (String s : movements)
+			distinctMovements.add(s);
+		return distinctMovements;
 	}
 
 	public ObservableList<String> getDistinctDialColors() {
-		// TODO Auto-generated method stub
+		// TODO
 		return null;
+		// List<String> colors = new ArrayList<>();
+		// colors = Arrays.asList("White","Black","Gold", "Add more later");
+		// ObservableList<String> distinctColors = FXCollections.observableArrayList();
+		// for(String s : colors)
+		// distinctColors.add(s);
+		// return distinctColors;
 	}
 
 	public ObservableList<String> getDistinctBrands() {
-		// TODO Auto-generated method stub
+		// TODO
+		// List<String> brands = new ArrayList<>();
+		// brands = Arrays.asList("White","Black","Gold", "Add more later");
+		// ObservableList<String> distinctBrands = FXCollections.observableArrayList();
+		// for(String s : brands)
+		// distinctBrands.add(s);
+		// return distinctBrands;
 		return null;
 	}
 
 	public ObservableList<String> getDistinctCaseShape() {
-		// TODO Auto-generated method stub
+		// TODO
+		// List<String> shapes = new ArrayList<>();
+		// shapes = Arrays.asList("White","Black","Gold", "Add more later");
+		// ObservableList<String> distinctShapes = FXCollections.observableArrayList();
+		// for(String s : shapes)
+		// distinctShapes.add(s);
+		// return distinctShapes;
 		return null;
 	}
 
@@ -290,20 +344,47 @@ public class Controller {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	/**
+	 * Winston Gets the types of indexes on a watch.
+	 * 
+	 * @return
+	 */
 	public ObservableList<String> getDistinctIndex() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> indexes = new ArrayList<>();
+		indexes = Arrays.asList("Arabic & Stick", "Arabic", "Stick", "Roman & Stick", "Roman", "California");
+		ObservableList<String> distinctIndexes = FXCollections.observableArrayList();
+		for (String s : indexes)
+			distinctIndexes.add(s);
+		return distinctIndexes;
 	}
 
+	/**
+	 * Winston Gets the types of crystal/glass on a watch
+	 * 
+	 * @return
+	 */
 	public ObservableList<String> getDistinctGlass() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> glass = new ArrayList<>();
+		glass = Arrays.asList("Sapphire", "Mineral", "Acrylic");
+		ObservableList<String> distinctGlass = FXCollections.observableArrayList();
+		for (String s : glass)
+			distinctGlass.add(s);
+		return distinctGlass;
 	}
 
+	/**
+	 * Winston Gets the types of back types of a watch.
+	 * 
+	 * @return
+	 */
 	public ObservableList<String> getDistinctBackTypes() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> back = new ArrayList<>();
+		back = Arrays.asList("Opened", "Closed", "Skeleton");
+		ObservableList<String> distinctBack = FXCollections.observableArrayList();
+		for (String s : back)
+			distinctBack.add(s);
+		return distinctBack;
 	}
 
 	// public ObservableList<VideoGame> getAllVideoGames() {
@@ -318,16 +399,16 @@ public class Controller {
 	// FXCollections.sort(platforms);
 	// return platforms;
 	// }
-	//Brands case shape, case Material, Color
+	// Brands case shape, case Material, Color
 
-//	 public ObservableList<String> getDistinctPublishers() {
-//		 ObservableList<String> publishers = FXCollections.observableArrayList();
-//		 for (VideoGame vg : theOne.mAllGamesList)
-//		 if (!publishers.contains(vg.getPublisher()))
-//		 publishers.add(vg.getPublisher());
-//		 FXCollections.sort(publishers);
-//		 return publishers;
-//	 }
+	// public ObservableList<String> getDistinctPublishers() {
+	// ObservableList<String> publishers = FXCollections.observableArrayList();
+	// for (VideoGame vg : theOne.mAllGamesList)
+	// if (!publishers.contains(vg.getPublisher()))
+	// publishers.add(vg.getPublisher());
+	// FXCollections.sort(publishers);
+	// return publishers;
+	// }
 
 	// private int initializeVideoGameDBFromFile() throws SQLException {
 	// int recordsCreated = 0;
@@ -367,13 +448,12 @@ public class Controller {
 	// return recordsCreated;
 	// }
 
-	public ObservableList<Watch> filter(Predicate<Watch> criteria)
-	{
+	public ObservableList<Watch> filter(Predicate<Watch> criteria) {
 		mFilteredWatchesList.clear();
 		for (Watch vg : mAllWatchesList)
 			if (criteria.test(vg))
 				mFilteredWatchesList.add(vg);
-		
+
 		return mFilteredWatchesList;
 	}
 
@@ -384,7 +464,8 @@ public class Controller {
 
 	public void createListing(String[] args) {
 		try {
-			mWatchDB.createRecord(Arrays.copyOfRange(WATCH_FIELD_NAMES, 1, WATCH_FIELD_NAMES.length), args);
+			int id = theOne.mWatchDB.createRecord(Arrays.copyOfRange(WATCH_FIELD_NAMES, 1, WATCH_FIELD_NAMES.length),
+					args);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

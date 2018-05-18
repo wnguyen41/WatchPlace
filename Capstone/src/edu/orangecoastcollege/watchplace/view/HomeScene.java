@@ -65,6 +65,8 @@ public class HomeScene implements Initializable{
 		caseMaterialCB.setOnAction(e -> filter());
 		minPriceTF.setOnAction(e -> filter());
 		maxPriceTF.setOnAction(e -> filter());
+		
+		listView.setItems(controller.getAllWatches());
 	}
 	
 	private void filter() {

@@ -52,7 +52,7 @@ public class AddListing implements Initializable {
 		mMovementCB.setItems(controller.getDistinctMovements());
 		mDialIndexCB.setItems(controller.getDistinctIndex());
 		mGlassCB.setItems(controller.getDistinctGlass());
-		mBackTypeCB.setItems(controller.getDistinctBackTypes());
+		//mBackTypeCB.setItems(controller.getDistinctBackTypes());
 	}
 	// Event Listener on Button.onAction
 	@FXML
@@ -63,7 +63,7 @@ public class AddListing implements Initializable {
 		args[2] = mNameTF.getText();
 		args[3] = mMaterialTF.getText();
 		args[4] = mGlassCB.getSelectionModel().getSelectedItem();
-		args[5] = mBackTypeCB.getSelectionModel().getSelectedItem();
+		args[5] = "null";//mBackTypeCB.getSelectionModel().getSelectedItem();
 		args[6] = mShapeTF.getText();
 		args[7] = mDiameterTF.getText();
 		args[8] = mHeightTF.getText();
@@ -71,6 +71,7 @@ public class AddListing implements Initializable {
 		args[10] = mDialColorTF.getText();
 		args[11] = mDialIndexCB.getSelectionModel().getSelectedItem();
 		args[12] = mMovementCB.getSelectionModel().getSelectedItem();
+		args[13] = mPriceTF.getText();
 		
 		controller.createListing(args);
 		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
