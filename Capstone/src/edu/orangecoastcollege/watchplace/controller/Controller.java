@@ -1,21 +1,18 @@
 package edu.orangecoastcollege.watchplace.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Predicate;
 
 import edu.orangecoastcollege.watchplace.model.DBModel;
+import edu.orangecoastcollege.watchplace.model.Listing;
 import edu.orangecoastcollege.watchplace.model.User;
 import edu.orangecoastcollege.watchplace.model.Watch;
 import edu.orangecoastcollege.watchplace.view.ViewNavigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
 
 public class Controller {
 
@@ -58,13 +55,14 @@ public class Controller {
 	private User mCurrentUser;
 	private DBModel mUserDB;
 	private DBModel mWatchDB;
+	private DBModel mListingDB;
 	// private DBModel mVideoGameDB;
 	// private DBModel mUserGamesDB;
 
 	private ObservableList<User> mAllUsersList;
 	private ObservableList<Watch> mAllWatchesList;
-	private ObservableList<Watch> mFilteredWatchesList;
-	private ObservableList<Watch> mAllListingsList;
+	private ObservableList<Listing> mFilteredListingsList;
+	private ObservableList<Listing> mAllListingsList;
 	
 
 	private Controller() {
@@ -75,11 +73,13 @@ public class Controller {
 			theOne = new Controller();
 			theOne.mAllUsersList = FXCollections.observableArrayList();
 			theOne.mAllWatchesList = FXCollections.observableArrayList();
-			theOne.mFilteredWatchesList = FXCollections.observableArrayList();
+			theOne.mFilteredListingsList = FXCollections.observableArrayList();
+			theOne.mAllListingsList = FXCollections.observableArrayList();
 			// theOne.mAllGamesList = FXCollections.observableArrayList();
 
 			try {
 				// Create the user table in the database
+				//Winston
 				theOne.mUserDB = new DBModel(DB_NAME, USER_TABLE_NAME, USER_FIELD_NAMES, USER_FIELD_TYPES);
 				ArrayList<ArrayList<String>> resultsList = theOne.mUserDB.getAllRecords();
 				for (ArrayList<String> values : resultsList) {
@@ -89,7 +89,7 @@ public class Controller {
 					String password = values.get(3);
 					theOne.mAllUsersList.add(new User(id, name, email, password, "N/A", "N/A"));
 				}
-				
+				//Winston
 				theOne.mWatchDB = new DBModel(DB_NAME, WATCH_TABLE_NAME, WATCH_FIELD_NAMES, WATCH_FIELD_TYPES);
 				resultsList = theOne.mWatchDB.getAllRecords();
 				for (ArrayList<String> values : resultsList) {
@@ -110,7 +110,19 @@ public class Controller {
 					double price = Double.parseDouble(values.get(14));
 					theOne.mAllWatchesList.add(new Watch(id, reference, brand, name, caseMaterial, caseGlass, caseBackType, caseShape, caseDiameter, caseHeight, caseWaterResistance, dialColor, dialIndex, movement, price));
 				}
-
+				//Winston
+				theOne.mListingDB = new DBModel(DB_NAME, LISTING_TABLE_NAME, LISTING_FIELD_NAMES, LISTING_FIELD_TYPES);
+				resultsList = theOne.mListingDB.getAllRecords();
+				for(ArrayList<String> values : resultsList)
+				{
+					int id = Integer.parseInt(values.get(0));
+					int watchID = Integer.parseInt(values.get(1));
+					int userID = Integer.parseInt(values.get(2));
+					int quantity = Integer.parseInt(values.get(3));
+					Watch watch = getWatchFromList(watchID);
+					User user = getUserFromList(userID);
+					theOne.mAllListingsList.add(new Listing(id, watch, user, quantity));
+				}
 				// // Create the video game table in the database, loading games from the CSV
 				// file
 				// theOne.mVideoGameDB = new DBModel(DB_NAME, VIDEO_GAME_TABLE_NAME,
@@ -139,7 +151,21 @@ public class Controller {
 		}
 		return theOne;
 	}
+	private static User getUserFromList(int userID) {
+		for(User user : theOne.mAllUsersList)
+			if(user.getId()==userID)
+				return user;
+		return null;
+	}
 
+	private static Watch getWatchFromList(int watchID)
+	{
+		for(Watch watch : theOne.mAllWatchesList)
+			if(watch.getId()==watchID)
+				return watch;
+		return null;
+	}
+	
 	public boolean isValidPassword(String password) {
 		// Valid password must contain (see regex below):
 		// At least one lower case letter
@@ -306,43 +332,53 @@ public class Controller {
 			distinctMovements.add(s);
 		return distinctMovements;
 	}
-
+	/**
+	 * Winston
+	 * @return
+	 */
 	public ObservableList<String> getDistinctDialColors() {
-		// TODO
-		return null;
-		// List<String> colors = new ArrayList<>();
-		// colors = Arrays.asList("White","Black","Gold", "Add more later");
-		// ObservableList<String> distinctColors = FXCollections.observableArrayList();
-		// for(String s : colors)
-		// distinctColors.add(s);
-		// return distinctColors;
+		ObservableList<String> colors = FXCollections.observableArrayList();
+		for (Watch w : mAllWatchesList)
+			if (!colors.contains(w.getDialColor()))
+				colors.add(w.getDialColor());
+		FXCollections.sort(colors);
+		return colors;
 	}
-
+	/**
+	 * Winston
+	 * @return
+	 */
 	public ObservableList<String> getDistinctBrands() {
-		// TODO
-		// List<String> brands = new ArrayList<>();
-		// brands = Arrays.asList("White","Black","Gold", "Add more later");
-		// ObservableList<String> distinctBrands = FXCollections.observableArrayList();
-		// for(String s : brands)
-		// distinctBrands.add(s);
-		// return distinctBrands;
-		return null;
+		ObservableList<String> brands = FXCollections.observableArrayList();
+		for (Watch w : mAllWatchesList)
+			if (!brands.contains(w.getBrand()))
+				brands.add(w.getBrand());
+		FXCollections.sort(brands);
+		return brands;
 	}
-
+	/**
+	 * Winston
+	 * @return
+	 */
 	public ObservableList<String> getDistinctCaseShape() {
-		// TODO
-		// List<String> shapes = new ArrayList<>();
-		// shapes = Arrays.asList("White","Black","Gold", "Add more later");
-		// ObservableList<String> distinctShapes = FXCollections.observableArrayList();
-		// for(String s : shapes)
-		// distinctShapes.add(s);
-		// return distinctShapes;
-		return null;
+		ObservableList<String> shape = FXCollections.observableArrayList();
+		for (Watch w : mAllWatchesList)
+			if (!shape.contains(w.getCaseShape()))
+				shape.add(w.getCaseShape());
+		FXCollections.sort(shape);
+		return shape;
 	}
-
+	/**
+	 * Winston
+	 * @return
+	 */
 	public ObservableList<String> getDistinctCaseMaterial() {
-		// TODO Auto-generated method stub
-		return null;
+		ObservableList<String> material = FXCollections.observableArrayList();
+		for (Watch w : mAllWatchesList)
+			if (!material.contains(w.getCaseMaterial()))
+				material.add(w.getCaseMaterial());
+		FXCollections.sort(material);
+		return material;
 	}
 
 	/**
@@ -448,26 +484,38 @@ public class Controller {
 	// return recordsCreated;
 	// }
 
-	public ObservableList<Watch> filter(Predicate<Watch> criteria) {
-		mFilteredWatchesList.clear();
-		for (Watch vg : mAllWatchesList)
+	public ObservableList<Listing> filter(Predicate<Listing> criteria) {
+		mFilteredListingsList.clear();
+		for (Listing vg : mAllListingsList)
 			if (criteria.test(vg))
-				mFilteredWatchesList.add(vg);
+				mFilteredListingsList.add(vg);
 
-		return mFilteredWatchesList;
+		return mFilteredListingsList;
 	}
-
+	/**
+	 * Winston
+	 */
 	public void logoutUser() {
 		mCurrentUser = null;
 		ViewNavigator.loadScene("WatchPlace", ViewNavigator.SIGN_IN_SCENE);
 	}
-
-	public void createListing(String[] args) {
+	/**
+	 * Winston
+	 * @param args
+	 */
+	public void createListing(String[] args,int quantity) {
 		try {
-			int id = theOne.mWatchDB.createRecord(Arrays.copyOfRange(WATCH_FIELD_NAMES, 1, WATCH_FIELD_NAMES.length),
+			int watchId = theOne.mWatchDB.createRecord(Arrays.copyOfRange(WATCH_FIELD_NAMES, 1, WATCH_FIELD_NAMES.length),
 					args);
+			String[] values = {String.valueOf(watchId),String.valueOf(theOne.getCurrentUser().getId()),String.valueOf(quantity)};
+			int listingID = theOne.mListingDB.createRecord(Arrays.copyOfRange(LISTING_FIELD_NAMES, 1, LISTING_FIELD_NAMES.length),values);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+
+	public ObservableList<Listing> getAllListings() {
+		return theOne.mAllListingsList;
+	}
+
 }

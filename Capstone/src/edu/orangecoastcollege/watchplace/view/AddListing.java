@@ -57,6 +57,7 @@ public class AddListing implements Initializable {
 	// Event Listener on Button.onAction
 	@FXML
 	public void addListing(ActionEvent event) {
+		//TODO FIX BACKTYPE COMBOBOX
 		String[] args = new String[14];
 		args[0] = mReferenceTF.getText();
 		args[1] = mBrandTF.getText();
@@ -73,7 +74,9 @@ public class AddListing implements Initializable {
 		args[12] = mMovementCB.getSelectionModel().getSelectedItem();
 		args[13] = mPriceTF.getText();
 		
-		controller.createListing(args);
+		int quantity = 1;
+		
+		controller.createListing(args,quantity);
 		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
 	// Event Listener on Button.onAction

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.watchplace.controller.Controller;
+import edu.orangecoastcollege.watchplace.model.Listing;
 import edu.orangecoastcollege.watchplace.model.Watch;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 /**
  * 
  * @author Winston
@@ -48,12 +48,12 @@ public class HomeScene implements Initializable{
 	@FXML
 	private TextField referenceTF;
 	@FXML
-	private ListView<Watch> listView;
+	private ListView<Listing> listView;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		fullNameLabel.setText(controller.getCurrentUser().getName());
-		listView.setItems(controller.getAllWatches());
+
 		dialColorCB.setItems(controller.getDistinctDialColors());
 		brandCB.setItems(controller.getDistinctBrands());
 		caseShapeCB.setItems(controller.getDistinctCaseShape());
@@ -65,8 +65,7 @@ public class HomeScene implements Initializable{
 		caseMaterialCB.setOnAction(e -> filter());
 		minPriceTF.setOnAction(e -> filter());
 		maxPriceTF.setOnAction(e -> filter());
-		
-		listView.setItems(controller.getAllWatches());
+		listView.setItems(controller.getAllListings());
 	}
 	
 	private void filter() {
@@ -75,14 +74,14 @@ public class HomeScene implements Initializable{
 		String material = caseMaterialCB.getSelectionModel().getSelectedItem();
 		String color = dialColorCB.getSelectionModel().getSelectedItem();
 		double minPrice = Double.parseDouble(minPriceTF.getText());
-		double maxPrice = Double.parseDouble(minPriceTF.getText());
+		double maxPrice = Double.parseDouble(maxPriceTF.getText());
 		
-		listView.setItems(controller.filter(w -> (brand == null || w.getBrand().equalsIgnoreCase(brand))
-				&& (shape == null || w.getCaseShape().equalsIgnoreCase(shape)) 
-				&& (material == null || w.getCaseMaterial().equalsIgnoreCase(material))
-				&& (color == null || w.getDialColor().equalsIgnoreCase(color))
-				&& w.getPrice() >= minPrice
-				&& w.getPrice() <= maxPrice));
+		listView.setItems(controller.filter(l -> (brand == null || l.getWatch().getBrand().equalsIgnoreCase(brand))
+				&& (shape == null || l.getWatch().getCaseShape().equalsIgnoreCase(shape)) 
+				&& (material == null || l.getWatch().getCaseMaterial().equalsIgnoreCase(material))
+				&& (color == null || l.getWatch().getDialColor().equalsIgnoreCase(color))
+				&& l.getWatch().getPrice() >= minPrice
+				&& l.getWatch().getPrice() <= maxPrice));
 	}
 	@FXML
 	public void logout()
@@ -139,7 +138,7 @@ public class HomeScene implements Initializable{
 	// Event Listener on Button.onAction
 	@FXML
 	public void viewDetails() {
-		Watch itemName = listView.getSelectionModel().getSelectedItem();
+		Watch itemName = listView.getSelectionModel().getSelectedItem().getWatch();
 		ViewNavigator.loadScene(itemName.getName(), ViewNavigator.VIEW_ITEM_DETAILS_SCENE);
 	}
 
@@ -168,6 +167,7 @@ public class HomeScene implements Initializable{
 	}
 	@FXML
 	public void checkSelected() {
+		listView.setItems(controller.getAllListings());
 		if(!listView.getSelectionModel().isEmpty())
 		{
 			deleteListingButton.setDisable(false);
@@ -176,5 +176,4 @@ public class HomeScene implements Initializable{
 			addToWishListButton.setDisable(false);
 		}
 	}
-	
 }
