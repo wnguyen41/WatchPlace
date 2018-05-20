@@ -66,7 +66,7 @@ public class SignUpScene {
             signInScene();
             return true;
         }
-        System.out.println("SIgn up failed");
+        System.out.println("Sign up failed");
         return false;
 
 	}

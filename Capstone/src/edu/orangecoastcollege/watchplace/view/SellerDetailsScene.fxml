@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.watchplace.view.SellerDetailsScene">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -32,25 +32,33 @@
       </HBox>
    </top>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="52.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="52.0" prefWidth="372.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#loadHomeScene" text="Back to Home Page" />
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </HBox>
             <Button mnemonicParsing="false" onAction="#viewItemDetails" text="View Listing" />
-            <Button mnemonicParsing="false" onAction="#addReview" text="Add Review" />
+            <Button mnemonicParsing="false" onAction="#addReview" text="Add Seller Review" />
          </children>
       </HBox>
    </bottom>
    <left>
       <VBox alignment="TOP_CENTER" prefHeight="263.0" prefWidth="142.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#viewSellersListings" text="View Seller's Listings" />
-            <Button mnemonicParsing="false" onAction="#loadReviewScene" text="View Reviews" />
+            <Button fx:id="viewListingsButton" mnemonicParsing="false" onAction="#viewSellersListings" text="View Seller's Listings" />
+            <Button fx:id="viewReviewsButton" mnemonicParsing="false" onAction="#loadReviewScene" text="View Reviews" />
          </children>
       </VBox>
    </left>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane hgap="10.0" layoutY="6.0" prefHeight="242.0" prefWidth="458.0" vgap="10.0">
+            <GridPane fx:id="detailsGridpane" hgap="10.0" layoutY="6.0" prefHeight="242.0" prefWidth="458.0" vgap="10.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.0" minWidth="10.0" prefWidth="133.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="295.0" />
@@ -96,7 +104,7 @@
                   </Label>
                </children>
             </GridPane>
-            <ListView layoutX="-2.0" prefHeight="248.0" prefWidth="461.0" visible="false" />
+            <ListView fx:id="sellerListView" layoutX="-2.0" prefHeight="248.0" prefWidth="452.0" visible="false" AnchorPane.rightAnchor="8.0" />
          </children>
       </AnchorPane>
    </center>

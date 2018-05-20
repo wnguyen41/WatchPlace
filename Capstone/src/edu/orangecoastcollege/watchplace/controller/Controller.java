@@ -28,22 +28,28 @@ public class Controller {
 	private static final String WATCH_TABLE_NAME = "watch";
 	private static final String[] WATCH_FIELD_NAMES = { "id_", "reference", "brand", "name", "case_material",
 			"case_glass", "case_back_type", "case_shape", "case_diameter", "case_height", "case_water_resistance",
-			"dial_color", "dial_index", "movement", "price" };
+			"dial_color", "dial_index", "dial_hands", "movement", "price" };
 	private static final String[] WATCH_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "TEXT", "TEXT", "TEXT",
-			"TEXT", "TEXT", "REAL", "REAL", "REAL", "TEXT", "TEXT", "TEXT", "REAL" };
+			"TEXT", "TEXT", "REAL", "REAL", "REAL", "TEXT","TEXT", "TEXT", "TEXT", "REAL" };
 	// Winston
 	private static final String LISTING_TABLE_NAME = "listings";
 	private static final String[] LISTING_FIELD_NAMES = { "id_", "watch_id", "user_id", "quantity" };
 	private static final String[] LISTING_FIELD_TYPES = { "INTEGER PRIMARY KEY", "INTEGER", "INTEGER", "INTEGER" };
-
+	//TODO Implement following data tables
 	private static final String COMPARE_TABLE_NAME = "compare";
 	private static final String[] COMPARE_FIELD_NAME = { "user_id", "watch_id" };
 	private static final String[] COMPARE_FIELD_TYPES = { "INTEGER", "INTEGER" };
 
-	private static final String VIDEO_GAME_TABLE_NAME = "video_game";
-	private static final String[] VIDEO_GAME_FIELD_NAMES = { "_id", "name", "platform", "year", "genre", "publisher" };
-	private static final String[] VIDEO_GAME_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "TEXT", "INTEGER", "TEXT",
-			"TEXT" };
+	
+	private static final String WATCH_WISHLIST_TABLE_NAME = "watch_wishlist";
+	private static final String SHOPPING_CART_TABLE_NAME = "shopping_cart";
+	private static final String ORDER_HISTORY_TABELE_NAME = "order_history"; //Should it be changed to view history (accessed from profile)
+	private static final String USER_REVIEW_TABELE_NAME = "user_review";
+	private static final String WATCH_REVIEW_TABELE_NAME = "watch_review";
+	
+	
+	
+	
 	private static final String VIDEO_GAME_DATA_FILE = "videogames_lite.csv";
 
 	// Below is the relationship table "user_games" which associates users with the
@@ -63,7 +69,11 @@ public class Controller {
 	private ObservableList<Watch> mAllWatchesList;
 	private ObservableList<Listing> mFilteredListingsList;
 	private ObservableList<Listing> mAllListingsList;
-	
+	//Stores the selected listing
+	private Listing selectedListing;
+	//Stores the seller of the listing that was selected by the user
+	//Allows access of seller information from other scenes
+	private User selectedListingSeller;
 
 	private Controller() {
 	}
@@ -79,7 +89,7 @@ public class Controller {
 
 			try {
 				// Create the user table in the database
-				//Winston
+				// Winston
 				theOne.mUserDB = new DBModel(DB_NAME, USER_TABLE_NAME, USER_FIELD_NAMES, USER_FIELD_TYPES);
 				ArrayList<ArrayList<String>> resultsList = theOne.mUserDB.getAllRecords();
 				for (ArrayList<String> values : resultsList) {
@@ -89,7 +99,7 @@ public class Controller {
 					String password = values.get(3);
 					theOne.mAllUsersList.add(new User(id, name, email, password, "N/A", "N/A"));
 				}
-				//Winston
+				// Winston
 				theOne.mWatchDB = new DBModel(DB_NAME, WATCH_TABLE_NAME, WATCH_FIELD_NAMES, WATCH_FIELD_TYPES);
 				resultsList = theOne.mWatchDB.getAllRecords();
 				for (ArrayList<String> values : resultsList) {
@@ -104,17 +114,19 @@ public class Controller {
 					double caseDiameter = Double.parseDouble(values.get(8));
 					double caseHeight = Double.parseDouble(values.get(9));
 					double caseWaterResistance = Double.parseDouble(values.get(10));
-					String dialColor =values.get(11);
+					String dialColor = values.get(11);
 					String dialIndex = values.get(12);
-					String movement = values.get(13);
-					double price = Double.parseDouble(values.get(14));
-					theOne.mAllWatchesList.add(new Watch(id, reference, brand, name, caseMaterial, caseGlass, caseBackType, caseShape, caseDiameter, caseHeight, caseWaterResistance, dialColor, dialIndex, movement, price));
+					String dialHands = values.get(13);
+					String movement = values.get(14);
+					double price = Double.parseDouble(values.get(15));
+					theOne.mAllWatchesList.add(new Watch(id, reference, brand, name, caseMaterial, caseGlass,
+							caseBackType, caseShape, caseDiameter, caseHeight, caseWaterResistance, dialColor,
+							dialIndex,dialHands, movement, price));
 				}
-				//Winston
+				// Winston
 				theOne.mListingDB = new DBModel(DB_NAME, LISTING_TABLE_NAME, LISTING_FIELD_NAMES, LISTING_FIELD_TYPES);
 				resultsList = theOne.mListingDB.getAllRecords();
-				for(ArrayList<String> values : resultsList)
-				{
+				for (ArrayList<String> values : resultsList) {
 					int id = Integer.parseInt(values.get(0));
 					int watchID = Integer.parseInt(values.get(1));
 					int userID = Integer.parseInt(values.get(2));
@@ -123,24 +135,9 @@ public class Controller {
 					User user = getUserFromList(userID);
 					theOne.mAllListingsList.add(new Listing(id, watch, user, quantity));
 				}
-				// // Create the video game table in the database, loading games from the CSV
-				// file
-				// theOne.mVideoGameDB = new DBModel(DB_NAME, VIDEO_GAME_TABLE_NAME,
-				// VIDEO_GAME_FIELD_NAMES, VIDEO_GAME_FIELD_TYPES);
-				// theOne.initializeVideoGameDBFromFile();
-				// resultsList = theOne.mVideoGameDB.getAllRecords();
-				// for (ArrayList<String> values : resultsList)
-				// {
-				// int id = Integer.parseInt(values.get(0));
-				// String name = values.get(1);
-				// String platform = values.get(2);
-				// int year = Integer.parseInt(values.get(3));
-				// String genre = values.get(4);
-				// String publisher = values.get(5);
-				// theOne.mAllGamesList.add(new VideoGame(id, name, platform, year, genre,
-				// publisher));
-				// }
-
+				
+				for(Listing l : theOne.mAllListingsList)
+					theOne.mFilteredListingsList.add(l);
 				// Create the relationship table between users and the video games they own
 				// theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME,
 				// USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
@@ -151,21 +148,21 @@ public class Controller {
 		}
 		return theOne;
 	}
+
 	private static User getUserFromList(int userID) {
-		for(User user : theOne.mAllUsersList)
-			if(user.getId()==userID)
+		for (User user : theOne.mAllUsersList)
+			if (user.getId() == userID)
 				return user;
 		return null;
 	}
 
-	private static Watch getWatchFromList(int watchID)
-	{
-		for(Watch watch : theOne.mAllWatchesList)
-			if(watch.getId()==watchID)
+	private static Watch getWatchFromList(int watchID) {
+		for (Watch watch : theOne.mAllWatchesList)
+			if (watch.getId() == watchID)
 				return watch;
 		return null;
 	}
-	
+
 	public boolean isValidPassword(String password) {
 		// Valid password must contain (see regex below):
 		// At least one lower case letter
@@ -206,7 +203,7 @@ public class Controller {
 			return "Password must be at least 8 characters, including 1 upper case letter, 1 number, and 1 symbol.";
 
 		// Made it through all the checks, create the new user in the database
-		String[] values = { name, email, "user", password };
+		String[] values = { name, email, password, "N/A", "N/A" };
 		// Insert the new user database
 		try {
 
@@ -241,6 +238,7 @@ public class Controller {
 				// Go into database to retrieve password:
 				try {
 					ArrayList<ArrayList<String>> userResults = theOne.mUserDB.getRecord(String.valueOf(u.getId()));
+					System.out.println(userResults.get(0));
 					String storedPassword = userResults.get(0).get(3);
 					// Check the passwords
 					if (password.equals(storedPassword)) {
@@ -255,55 +253,6 @@ public class Controller {
 		}
 		return "Incorrect email and/or password. Please try again.";
 	}
-
-	// public ObservableList<VideoGame> getGamesForCurrentUser()
-	// {
-	// ObservableList<VideoGame> userGamesList =
-	// FXCollections.observableArrayList();
-	// try
-	// {
-	// ArrayList<ArrayList<String>> resultsList =
-	// mUserGamesDB.getRecord(String.valueOf(theOne.mCurrentUser.getId()));
-	// // loop through the results
-	// int gameId;
-	// for( ArrayList<String> values : resultsList)
-	// {
-	// gameId = Integer.parseInt(values.get(1));
-	// // Loop through all the games, try to find a match
-	// for(VideoGame vg: theOne.mAllGamesList)
-	// {
-	// if(gameId == vg.getId())
-	// {
-	// userGamesList.add(vg);
-	// break;
-	// }
-	// }
-	// }
-	// }
-	// catch (SQLException e)
-	// {
-	// e.printStackTrace();
-	// }
-	// return userGamesList;
-	// }
-
-	// public boolean addGameToUsersInventory(VideoGame selectedGame) {
-	// ObservableList<VideoGame> gamesOwnedByCurrentUser = getGamesForCurrentUser();
-	// if(gamesOwnedByCurrentUser.contains(selectedGame))
-	// return false;
-	// String[] values = {String.valueOf(theOne.mCurrentUser.getId()),
-	// String.valueOf(selectedGame.getId())};
-	// try
-	// {
-	// mUserGamesDB.createRecord(USER_GAMES_FIELD_NAMES, values);
-	// }
-	// catch (SQLException e)
-	// {
-	// e.printStackTrace();
-	// return false;
-	// }
-	// return true;
-	// }
 
 	public User getCurrentUser() {
 		return theOne.mCurrentUser;
@@ -332,8 +281,10 @@ public class Controller {
 			distinctMovements.add(s);
 		return distinctMovements;
 	}
+
 	/**
 	 * Winston
+	 * 
 	 * @return
 	 */
 	public ObservableList<String> getDistinctDialColors() {
@@ -344,8 +295,10 @@ public class Controller {
 		FXCollections.sort(colors);
 		return colors;
 	}
+
 	/**
 	 * Winston
+	 * 
 	 * @return
 	 */
 	public ObservableList<String> getDistinctBrands() {
@@ -356,8 +309,10 @@ public class Controller {
 		FXCollections.sort(brands);
 		return brands;
 	}
+
 	/**
 	 * Winston
+	 * 
 	 * @return
 	 */
 	public ObservableList<String> getDistinctCaseShape() {
@@ -368,8 +323,10 @@ public class Controller {
 		FXCollections.sort(shape);
 		return shape;
 	}
+
 	/**
 	 * Winston
+	 * 
 	 * @return
 	 */
 	public ObservableList<String> getDistinctCaseMaterial() {
@@ -423,92 +380,41 @@ public class Controller {
 		return distinctBack;
 	}
 
-	// public ObservableList<VideoGame> getAllVideoGames() {
-	// return theOne.mAllGamesList;
-	// }
-
-	// public ObservableList<String> getDistinctPlatforms() {
-	// ObservableList<String> platforms = FXCollections.observableArrayList();
-	// for (VideoGame vg : theOne.mAllGamesList)
-	// if (!platforms.contains(vg.getPlatform()))
-	// platforms.add(vg.getPlatform());
-	// FXCollections.sort(platforms);
-	// return platforms;
-	// }
-	// Brands case shape, case Material, Color
-
-	// public ObservableList<String> getDistinctPublishers() {
-	// ObservableList<String> publishers = FXCollections.observableArrayList();
-	// for (VideoGame vg : theOne.mAllGamesList)
-	// if (!publishers.contains(vg.getPublisher()))
-	// publishers.add(vg.getPublisher());
-	// FXCollections.sort(publishers);
-	// return publishers;
-	// }
-
-	// private int initializeVideoGameDBFromFile() throws SQLException {
-	// int recordsCreated = 0;
-	//
-	// // If the result set contains results, database table already has
-	// // records, no need to populate from file (so return false)
-	// if (theOne.mUserDB.getRecordCount() > 0)
-	// return 0;
-	//
-	// try {
-	// // Otherwise, open the file (CSV file) and insert user data
-	// // into database
-	// Scanner fileScanner = new Scanner(new File(VIDEO_GAME_DATA_FILE));
-	// // First read is for headings:
-	// fileScanner.nextLine();
-	// // All subsequent reads are for user data
-	// while (fileScanner.hasNextLine()) {
-	// String[] data = fileScanner.nextLine().split(",");
-	// // Length of values is one less than field names because values
-	// // does not have id (DB will assign one)
-	// String[] values = new String[VIDEO_GAME_FIELD_NAMES.length - 1];
-	// values[0] = data[1].replaceAll("'", "''");
-	// values[1] = data[2];
-	// values[2] = data[3];
-	// values[3] = data[4];
-	// values[4] = data[5];
-	// theOne.mVideoGameDB.createRecord(Arrays.copyOfRange(VIDEO_GAME_FIELD_NAMES,
-	// 1, VIDEO_GAME_FIELD_NAMES.length), values);
-	// recordsCreated++;
-	// }
-	//
-	// // All done with the CSV file, close the connection
-	// fileScanner.close();
-	// } catch (FileNotFoundException e) {
-	// return 0;
-	// }
-	// return recordsCreated;
-	// }
-
 	public ObservableList<Listing> filter(Predicate<Listing> criteria) {
-		mFilteredListingsList.clear();
+		theOne.mFilteredListingsList.clear();
 		for (Listing vg : mAllListingsList)
 			if (criteria.test(vg))
-				mFilteredListingsList.add(vg);
+				theOne.mFilteredListingsList.add(vg);
 
-		return mFilteredListingsList;
+		return theOne.mFilteredListingsList;
 	}
+
 	/**
 	 * Winston
 	 */
 	public void logoutUser() {
-		mCurrentUser = null;
+		theOne.mCurrentUser = null;
 		ViewNavigator.loadScene("WatchPlace", ViewNavigator.SIGN_IN_SCENE);
 	}
+
 	/**
 	 * Winston
+	 * 
 	 * @param args
 	 */
-	public void createListing(String[] args,int quantity) {
+	public void createListing(String[] args, int quantity) {
 		try {
-			int watchId = theOne.mWatchDB.createRecord(Arrays.copyOfRange(WATCH_FIELD_NAMES, 1, WATCH_FIELD_NAMES.length),
-					args);
-			String[] values = {String.valueOf(watchId),String.valueOf(theOne.getCurrentUser().getId()),String.valueOf(quantity)};
-			int listingID = theOne.mListingDB.createRecord(Arrays.copyOfRange(LISTING_FIELD_NAMES, 1, LISTING_FIELD_NAMES.length),values);
+			int watchId = theOne.mWatchDB
+					.createRecord(Arrays.copyOfRange(WATCH_FIELD_NAMES, 1, WATCH_FIELD_NAMES.length), args);
+			theOne.mAllWatchesList.add(new Watch(watchId, args[0], args[1], args[2], args[3], args[4], args[5], args[6],
+					Double.parseDouble(args[7]), Double.parseDouble(args[8]), Double.parseDouble(args[9]), args[10],
+					args[11],args[12], args[13], Double.parseDouble(args[14])));
+			String[] values = { String.valueOf(watchId), String.valueOf(theOne.getCurrentUser().getId()),
+					String.valueOf(quantity) };
+			int listingID = theOne.mListingDB
+					.createRecord(Arrays.copyOfRange(LISTING_FIELD_NAMES, 1, LISTING_FIELD_NAMES.length), values);
+			theOne.mAllListingsList
+					.add(new Listing(listingID, getWatchFromList(watchId), theOne.mCurrentUser, quantity));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -518,4 +424,98 @@ public class Controller {
 		return theOne.mAllListingsList;
 	}
 
+	// Winston
+	public ObservableList<Listing> searchByRef(String key) {
+		theOne.mFilteredListingsList.clear();
+
+		for (Listing l : theOne.mAllListingsList)
+			if (l.getWatch().getReference().substring(0, key.length()).equals(key))
+				theOne.mFilteredListingsList.add(l);
+		return theOne.mFilteredListingsList;
+
+	}
+
+	/**
+	 * Winston
+	 * 
+	 * @param selectedItem
+	 */
+	public void deleteListing(Listing selectedItem) {
+		if (selectedItem == null)
+			return;
+		for (Listing target : mAllListingsList) {
+			if (target == selectedItem) {
+				try {
+					mListingDB.deleteRecord(selectedItem.getId() + "");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				mAllListingsList.remove(target);
+				return;
+			}
+			return;
+		}
+	}
+
+	public ObservableList<Listing> getFilteredListings() {
+		return theOne.mFilteredListingsList;
+	}
+
+	/**
+	 * @return the selectedListing
+	 */
+	public Listing getSelectedListing() {
+		return selectedListing;
+	}
+
+	/**
+	 * @param selectedListing the selectedListing to set
+	 */
+	public void setSelectedListing(Listing selectedListing) {
+		this.selectedListing = selectedListing;
+	}
+
+	/**
+	 * @return the selectedListingSeller
+	 */
+	public User getSelectedListingSeller() {
+		return selectedListingSeller;
+	}
+
+	/**
+	 * @param selectedListingSeller the selectedListingSeller to set
+	 */
+	public void setSelectedListingSeller(User selectedListingSeller) {
+		this.selectedListingSeller = selectedListingSeller;
+	}
+
+	public void deleteWatch(Watch watch) {
+		if (watch == null)
+			return;
+		for (Watch target : mAllWatchesList) {
+			if (target == watch) {
+				try {
+					mWatchDB.deleteRecord(watch.getId() + "");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				mAllWatchesList.remove(target);
+				return;
+			}
+			return;
+		}
+	}
+
+	public ObservableList<Listing> getSellersListings() {
+		ObservableList<Listing> list = FXCollections.observableArrayList();
+		for(Listing l :theOne.getAllListings())
+			if(l.getUser().getEmail().equals(selectedListingSeller.getEmail()))
+				list.add(l);
+		return list;
+	}
+
+	public double getSellersRating() {
+		// TODO Return the average rating of this seller
+		return 0.0;
+	}
 }

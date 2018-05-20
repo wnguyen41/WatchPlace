@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.watchplace.controller.Controller;
+import edu.orangecoastcollege.watchplace.model.Listing;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.ComboBox;
@@ -58,7 +59,7 @@ public class AddListing implements Initializable {
 	@FXML
 	public void addListing(ActionEvent event) {
 		//TODO FIX BACKTYPE COMBOBOX
-		String[] args = new String[14];
+		String[] args = new String[15];
 		args[0] = mReferenceTF.getText();
 		args[1] = mBrandTF.getText();
 		args[2] = mNameTF.getText();
@@ -71,8 +72,9 @@ public class AddListing implements Initializable {
 		args[9] = mWaterResistanceTF.getText();
 		args[10] = mDialColorTF.getText();
 		args[11] = mDialIndexCB.getSelectionModel().getSelectedItem();
-		args[12] = mMovementCB.getSelectionModel().getSelectedItem();
-		args[13] = mPriceTF.getText();
+		args[12] = mDialHandsTF.getText();
+		args[13] = mMovementCB.getSelectionModel().getSelectedItem();
+		args[14] = mPriceTF.getText();
 		
 		int quantity = 1;
 		

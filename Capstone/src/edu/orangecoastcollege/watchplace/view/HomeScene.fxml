@@ -53,8 +53,8 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
+                  <Button mnemonicParsing="false" onAction="#filter" text="Apply Filter" />
                   <Button mnemonicParsing="false" onAction="#clearFilters" text="Clear FIlter" />
-                  <Button mnemonicParsing="false" onAction="#applyFilters" text="Apply Filter" />
                </children>
             </HBox>
          </children>
@@ -111,7 +111,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Label>
-            <TextField fx:id="referenceTF" maxWidth="-Infinity" prefWidth="600.0" promptText="Search by Reference ID">
+            <TextField fx:id="referenceTF" maxWidth="-Infinity" onKeyTyped="#searchByRef" prefWidth="600.0" promptText="Search by Reference ID">
                <GridPane.margin>
                   <Insets bottom="10.0" top="10.0" />
                </GridPane.margin>

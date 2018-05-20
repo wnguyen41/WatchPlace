@@ -14,6 +14,7 @@ public class Watch {
 	private double mCaseWaterResistance;
 	private String mDialColor;
 	private String mDialIndex;
+	private String mDialHands;
 	private String mMovement;
 	private double mPrice;
 	
@@ -36,7 +37,7 @@ public class Watch {
 	 */
 	public Watch(int id, String reference, String brand, String name, String caseMaterial, String caseGlass,
 			String caseBackType, String caseShape, double caseDiameter, double caseHeight, double caseWaterResistance,
-			String dialColor, String dialIndex, String movement, double price) {
+			String dialColor, String dialIndex, String dialHands, String movement, double price) {
 		super();
 		mId = id;
 		mReference = reference;
@@ -51,6 +52,7 @@ public class Watch {
 		mCaseWaterResistance = caseWaterResistance;
 		mDialColor = dialColor;
 		mDialIndex = dialIndex;
+		mDialHands = dialHands;
 		mMovement = movement;
 		mPrice = price;
 	}
@@ -285,6 +287,7 @@ public class Watch {
 		temp = Double.doubleToLongBits(mCaseWaterResistance);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((mDialColor == null) ? 0 : mDialColor.hashCode());
+		result = prime * result + ((mDialHands == null) ? 0 : mDialHands.hashCode());
 		result = prime * result + ((mDialIndex == null) ? 0 : mDialIndex.hashCode());
 		result = prime * result + mId;
 		result = prime * result + ((mMovement == null) ? 0 : mMovement.hashCode());
@@ -343,6 +346,11 @@ public class Watch {
 				return false;
 		} else if (!mDialColor.equals(other.mDialColor))
 			return false;
+		if (mDialHands == null) {
+			if (other.mDialHands != null)
+				return false;
+		} else if (!mDialHands.equals(other.mDialHands))
+			return false;
 		if (mDialIndex == null) {
 			if (other.mDialIndex != null)
 				return false;
@@ -379,6 +387,20 @@ public class Watch {
 				+ ", mCaseMaterial=" + mCaseMaterial + ", mCaseGlass=" + mCaseGlass + ", mCaseBackType=" + mCaseBackType
 				+ ", mCaseShape=" + mCaseShape + ", mCaseDiameter=" + mCaseDiameter + ", mCaseHeight=" + mCaseHeight
 				+ ", mCaseWaterResistance=" + mCaseWaterResistance + ", mDialColor=" + mDialColor + ", mDialIndex="
-				+ mDialIndex + ", mMovement=" + mMovement + ", mPrice=" + mPrice + "]";
+				+ mDialIndex + ", mDialHands=" + mDialHands + ", mMovement=" + mMovement + ", mPrice=" + mPrice + "]";
+	}
+
+	/**
+	 * @return the dialHands
+	 */
+	public String getDialHands() {
+		return mDialHands;
+	}
+
+	/**
+	 * @param dialHands the dialHands to set
+	 */
+	public void setDialHands(String dialHands) {
+		mDialHands = dialHands;
 	}
 }
