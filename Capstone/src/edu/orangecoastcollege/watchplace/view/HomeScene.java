@@ -16,8 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 /**
- * 
- * @author Winston
+ * The HomeScene is the primary scene in the WatchPlace application
+ * It displays the main lists of current watch listings, user information,
+ * and links to other related scenes.
+ * @author Winston Nguyen
  *
  */
 public class HomeScene implements Initializable{ 
@@ -51,6 +53,9 @@ public class HomeScene implements Initializable{
 	@FXML
 	private ListView<Listing> listView;
 	
+	/**
+	 * Initializes all nodes related to filtering and the ListView.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		fullNameLabel.setText(controller.getCurrentUser().getName());
@@ -69,6 +74,9 @@ public class HomeScene implements Initializable{
 		maxPriceTF.setOnAction(e -> filter());
 		listView.setItems(controller.getAllListings());
 	}
+	/**
+	 * Filters the list based on the information selected/inputed into filter nodes.
+	 */
 	@FXML
 	public void filter() {
 		String brand = brandCB.getSelectionModel().getSelectedItem();
@@ -86,16 +94,18 @@ public class HomeScene implements Initializable{
 				&& l.getWatch().getPrice() <= maxPrice));
 		updateCount();
 	}
+	/**
+	 * Logs out the user from the application.
+	 */
 	@FXML
 	public void logout()
 	{
 		controller.logoutUser();
 	}
-	// Event Listener on Button.onAction
-	@FXML
 	/**
-	 * Clears all filters.
+	 * Clears all filter nodes.
 	 */
+	@FXML
 	public void clearFilters() {
 		brandCB.getSelectionModel().clearSelection();
 		caseShapeCB.getSelectionModel().clearSelection();
@@ -105,7 +115,9 @@ public class HomeScene implements Initializable{
 		maxPriceTF.clear();
 	}
 
-	// Event Listener on Label.onMouseClicked
+	/**
+	 * Loads the user's profile scene.
+	 */
 	@FXML
 	public void profileScene() {
 		String email = controller.getCurrentUser().getEmail();
@@ -113,19 +125,25 @@ public class HomeScene implements Initializable{
 				ViewNavigator.ACCOUNT_OVERVIEW_SCENE);
 	}
 
-	// Event Listener on Label.onMouseClicked
+	/**
+	 * Loads the user's shopping cart scene.
+	 */
 	@FXML
 	public void goToShoppingCart() {
 		ViewNavigator.loadScene("Your Shopping Cart", ViewNavigator.SHOPPING_CART_SCENE);
 	}
 
-	// Event Listener on Label.onMouseClicked
+	/**
+	 * Loads the user's wish list scene.
+	 */
 	@FXML
 	public void goToWishList() {
 		ViewNavigator.loadScene("Your Wish List", ViewNavigator.WISH_LIST_SCENE);
 	}
 
-	// Event Listener on Button.onAction
+	/**
+	 * Loads the scene that displays information of the Listing that is selected.
+	 */
 	@FXML
 	public void viewDetails() {
 		Listing item = listView.getSelectionModel().getSelectedItem();
@@ -133,44 +151,51 @@ public class HomeScene implements Initializable{
 		ViewNavigator.loadScene(item.getWatch().getName(), ViewNavigator.VIEW_ITEM_DETAILS_SCENE);
 	}
 
-	// Event Listener on Button.onAction
+	/**
+	 * Adds the selected Watch to the user's shopping cart.
+	 * @return returns true if successfully able to add the item, otherwise false.
+	 */
 	@FXML
-	public boolean addToShoppingCart(ActionEvent event) {
+	public boolean addToShoppingCart() {
 		//TODO
 		Watch item = listView.getSelectionModel().getSelectedItem().getWatch();
 		return controller.addWatchToShoppingCart(item);
 	}
 
-	// Event Listener on Button.onAction
+	/**
+	 * Adds the selected Watch to the user's wish list cart.
+	 * @return returns true if successfully able to add the item, otherwise false.
+	 */
 	@FXML
 	public boolean addToWishlist(ActionEvent event) {
 		
 		Watch item = listView.getSelectionModel().getSelectedItem().getWatch();
 		return controller.addWatchToWishlist(item);
 	}
-
-	/*
-	 * public boolean addGameToInventory()
-	{
-	    VideoGame selectedGame = allVideoGamesLV.getSelectionModel().getSelectedItem();
-	    return controller.addGameToUsersInventory(selectedGame);
-	}*/
 	
-	// Event Listener on Button.onAction
+	/**
+	 * Loads the add listing scene.
+	 */
 	@FXML
 	public void addListing() {
 		ViewNavigator.loadScene("Add Listing", ViewNavigator.ADD_LISTING_SCENE);
 	}
 
-	// Event Listener on Button[#deleteListingButton].onAction
+	/**
+	 * Deletes the currently selected scene.
+	 */
 	@FXML
-	public void deleteListing(ActionEvent event) {
+	public void deleteListing() {
 		controller.deleteWatch(listView.getSelectionModel().getSelectedItem().getWatch());
 		controller.deleteListing(listView.getSelectionModel().getSelectedItem());
 		listView.getSelectionModel().select(-1);
 		checkSelected();
 		filter();
 	}
+	
+	/**
+	 * Checks if an item is selected in the ListView.
+	 */
 	@FXML
 	public void checkSelected() {
 		listView.setItems(controller.getFilteredListings());
@@ -190,11 +215,14 @@ public class HomeScene implements Initializable{
 			addToWishListButton.setDisable(true);
 		}
 	}
-	
+
 	private void updateCount() {
 		listingCount.setText("Number of Listings: "+String.valueOf(controller.getFilteredListings().size()));
 		
 	}
+	/**
+	 * Filters the list based on inputed text.
+	 */
 	@FXML
 	public void searchByRef() {
 		String key = referenceTF.getText();

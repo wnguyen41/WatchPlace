@@ -13,7 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
-
+/**
+ * The SellerDetailsScene displays information regarding the user who created a selected listing.
+ * @author Winston Nguyen
+ *
+ */
 public class SellerDetailsScene implements Initializable{
 	private static Controller controller = Controller.getInstance();
 	@FXML
@@ -35,38 +39,53 @@ public class SellerDetailsScene implements Initializable{
 	
 	private User seller;
 	// Event Listener on Button.onAction
+	/**
+	 * Loads the details of the selected item.
+	 */
 	@FXML
-	public void viewItemDetails(ActionEvent event) {
+	public void viewItemDetails() {
 		Listing selected = sellerListView.getSelectionModel().getSelectedItem();
 		controller.setSelectedListing(selected);
 		ViewNavigator.loadScene(selected.getWatch().getName(), ViewNavigator.VIEW_ITEM_DETAILS_SCENE);
 	}
-	// Event Listener on Button.onAction
+	/**
+	 * Loads the add review scene.
+	 */
 	@FXML
-	public void addReview(ActionEvent event) {
+	public void addReview() {
 		String email = seller.getEmail();
 		ViewNavigator.loadScene(email.substring(0, email.indexOf("@")).concat("'s Seller Profile"), ViewNavigator.SELLER_REVIEWS_SCENE);
 	}
-	// Event Listener on Button.onAction
+	/**
+	 * Hides the list view and displays the user's rating, listing count, and description.
+	 */
 	@FXML
-	public void viewSellersListings(ActionEvent event) {
+	public void viewSellersListings() {
 		detailsGridpane.setVisible(false);
 		sellerListView.setVisible(true);
 		viewReviewsButton.setDisable(false);
 		viewListingsButton.setDisable(true);
 	}
-	// Event Listener on Button.onAction
+	/**
+	 * Loads the list view and hides the user's rating, listing count, and description.
+	 */
 	@FXML
-	public void loadReviewScene(ActionEvent event) {
+	public void loadReviewScene() {
 		detailsGridpane.setVisible(true);
 		sellerListView.setVisible(false);
 		viewReviewsButton.setDisable(true);
 		viewListingsButton.setDisable(false);
 	}
+	/**
+	 * Loads the HomeScene.
+	 */
 	@FXML
-	public void loadHomeScene(ActionEvent event) {
+	public void loadHomeScene() {
 		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
+	/**
+	 * Initializes all nodes on the scene.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		seller = controller.getSelectedListingSeller();

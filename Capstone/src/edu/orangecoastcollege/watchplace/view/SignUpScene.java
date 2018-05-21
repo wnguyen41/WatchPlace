@@ -8,8 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 /**
- * 
- * @author Winston
+ * The SignUpScene prompts user for information to sign up as a user.
+ * @author Winston Nguyen
  *
  */
 public class SignUpScene {
@@ -34,9 +34,12 @@ public class SignUpScene {
 	@FXML
 	private PasswordField passwordPF;
 
-	// Event Listener on Button[#createNewAcctButton].onAction
+	/**
+	 * If all fields are filled out, creates a new user.
+	 * @return returns true if successful, otherwise false.
+	 */
 	@FXML
-	public boolean createAccount(ActionEvent event) {
+	public boolean createAccount() {
 		String fullName = nameTF.getText();
 		String email = emailTF.getText();
 		String password = passwordPF.getText();
@@ -70,7 +73,9 @@ public class SignUpScene {
         return false;
 
 	}
-	// Event Listener on Label.onMouseClicked
+	/**
+	 * Loads the sign in scene.
+	 */
 	@FXML
 	public void signInScene() {
 		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.SIGN_IN_SCENE);

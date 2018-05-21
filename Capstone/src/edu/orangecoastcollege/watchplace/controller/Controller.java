@@ -13,7 +13,10 @@ import edu.orangecoastcollege.watchplace.model.Watch;
 import edu.orangecoastcollege.watchplace.view.ViewNavigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+/**
+ * The Controller manages the flow of information to and from the databases into the application
+ *
+ */
 public class Controller {
 
 	private static Controller theOne;
@@ -219,12 +222,12 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
-	 * 
-	 * @param name
-	 * @param email
-	 * @param password
-	 * @return
+	 * Signs up the user.
+	 * @author Winston Nguyen
+	 * @param name The user's full name.
+	 * @param email The user's inputed email.
+	 * @param password The user's password.
+	 * @return true if sign up successful, otherwise false.
 	 */
 	public String signUpUser(String name, String email, String password) {
 		// Check email to see if its valid
@@ -264,11 +267,11 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
-	 * 
-	 * @param email
-	 * @param password
-	 * @return
+	 * Signs in the user.
+	 * @author Winston Nguyen
+	 * @param email The user's email.
+	 * @param password The user's password
+	 * @return True if successful, otherwise false.
 	 */
 	public String signInUser(String email, String password) {
 		// Loop through the list of all users
@@ -306,11 +309,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
-	 * 
 	 * Gets the distinct types of movements for a watch.
-	 * 
-	 * @return
+	 * @author Winston Nguyen
+	 * @return the ObservableList of distinct movements.
 	 */
 	public ObservableList<String> getDistinctMovements() {
 		List<String> movements = new ArrayList<>();
@@ -322,9 +323,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
-	 * 
-	 * @return
+	 * Gets the distinct colors from all the watches.
+	 * @author Winston Nguyen
+	 * @return the ObservableList of distinct colors.
 	 */
 	public ObservableList<String> getDistinctDialColors() {
 		ObservableList<String> colors = FXCollections.observableArrayList();
@@ -336,9 +337,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
-	 * 
-	 * @return
+	 * Gets the distinct brands from all the watches.
+	 * @author Winston Nguyen
+	 * @return the ObservableList of distinct brands.
 	 */
 	public ObservableList<String> getDistinctBrands() {
 		ObservableList<String> brands = FXCollections.observableArrayList();
@@ -350,9 +351,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
-	 * 
-	 * @return
+	 * Gets the distinct case shapes from all the watches.
+	 * @author Winston Nguyen
+	 * @return the ObservableList of distinct case shapes.
 	 */
 	public ObservableList<String> getDistinctCaseShape() {
 		ObservableList<String> shape = FXCollections.observableArrayList();
@@ -364,9 +365,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
-	 * 
-	 * @return
+	 * Gets the distinct case materials from all the watches.
+	 * @author Winston Nguyen
+	 * @return the ObservableList of distinct case materials.
 	 */
 	public ObservableList<String> getDistinctCaseMaterial() {
 		ObservableList<String> material = FXCollections.observableArrayList();
@@ -378,9 +379,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston Gets the types of indexes on a watch.
-	 * 
-	 * @return
+	 * Gets the types of indexes on a watch.
+	 * @author Winston Nguyen
+	 * @return the ObservableList of distinct indexes.
 	 */
 	public ObservableList<String> getDistinctIndex() {
 		List<String> indexes = new ArrayList<>();
@@ -392,9 +393,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston Gets the types of crystal/glass on a watch
-	 * 
-	 * @return
+	 * Gets the types of crystal/glass on a watch
+	 * @author Winston Nguyen
+	 * @return the ObservableList of distinct glass/crystal.
 	 */
 	public ObservableList<String> getDistinctGlass() {
 		List<String> glass = new ArrayList<>();
@@ -406,9 +407,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston Gets the types of back types of a watch.
-	 * 
-	 * @return
+	 * Gets the types of back types of a watch.
+	 * @author Winston Nguyen
+	 * @return the ObservableList of distinct back types.
 	 */
 	public ObservableList<String> getDistinctBackTypes() {
 		List<String> back = new ArrayList<>();
@@ -429,7 +430,8 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
+	 * Logs out the current user.
+	 *@author Winston Nguyen
 	 */
 	public void logoutUser() {
 		theOne.mCurrentUser = null;
@@ -437,9 +439,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
-	 * 
-	 * @param args
+	 * Creates a new watch and listing and adds them to the databases.
+	 * @author Winston Nguyen
+	 * @param args an array of Watch details.
 	 */
 	public void createListing(String[] args, int quantity) {
 		try {
@@ -463,7 +465,11 @@ public class Controller {
 		return theOne.mAllListingsList;
 	}
 
-	// Winston
+	/**
+	 * Sorts the list based on the inputed reference.
+	 * @param key the inputed reference
+	 * @return the filtered ObservableList.
+	 */
 	public ObservableList<Listing> searchByRef(String key) {
 		theOne.mFilteredListingsList.clear();
 
@@ -475,9 +481,9 @@ public class Controller {
 	}
 
 	/**
-	 * Winston
-	 * 
-	 * @param selectedItem
+	 * Deletes the selected listing.
+	 * @author Winston Nguyen
+	 * @param selectedItem a Listing object.
 	 */
 	public void deleteListing(Listing selectedItem) {
 		if (selectedItem == null)
@@ -495,12 +501,16 @@ public class Controller {
 			return;
 		}
 	}
-
+	/**
+	 * Gets the current filtered list.
+	 * @return the filtered ObservableList.
+	 */
 	public ObservableList<Listing> getFilteredListings() {
 		return theOne.mFilteredListingsList;
 	}
 
 	/**
+	 * Gets the Listing that was selected in HomeScene.
 	 * @return the selectedListing
 	 */
 	public Listing getSelectedListing() {
@@ -508,6 +518,7 @@ public class Controller {
 	}
 
 	/**
+	 * Sets the selectedListing to what was selected in HomeScene.
 	 * @param selectedListing the selectedListing to set
 	 */
 	public void setSelectedListing(Listing selectedListing) {
@@ -515,6 +526,7 @@ public class Controller {
 	}
 
 	/**
+	 * Gets the seller/creator of the selected Listing.
 	 * @return the selectedListingSeller
 	 */
 	public User getSelectedListingSeller() {
@@ -522,12 +534,18 @@ public class Controller {
 	}
 
 	/**
+	 * Sets the seller/creator of the selected Listing.
 	 * @param selectedListingSeller the selectedListingSeller to set
 	 */
 	public void setSelectedListingSeller(User selectedListingSeller) {
 		this.selectedListingSeller = selectedListingSeller;
 	}
-
+	
+	/**
+	 * Deletes the Watch of a Listing.
+	 * @author Winston Nguyen
+	 * @param watch the watch selected.
+	 */
 	public void deleteWatch(Watch watch) {
 		if (watch == null)
 			return;
@@ -544,7 +562,10 @@ public class Controller {
 			return;
 		}
 	}
-
+	/**
+	 *
+	 * @return
+	 */
 	public ObservableList<Listing> getSellersListings() {
 		ObservableList<Listing> list = FXCollections.observableArrayList();
 		for(Listing l :theOne.getAllListings())
@@ -552,7 +573,10 @@ public class Controller {
 				list.add(l);
 		return list;
 	}
-
+	/**
+	 * Gets the seller's rating score.
+	 * @return the User's rating
+	 */
 	public double getSellersRating() {
 		// TODO Return the average rating of this seller
 		return 0.0;

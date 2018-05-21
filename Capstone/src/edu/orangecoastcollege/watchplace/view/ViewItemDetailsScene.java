@@ -12,7 +12,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-
+/**
+ * Displays information regarding the selected listing from HomeScene.
+ * @author Winston Nguyen
+ *
+ */
 public class ViewItemDetailsScene implements Initializable{
 	private static Controller controller = Controller.getInstance();
 	@FXML
@@ -49,24 +53,33 @@ public class ViewItemDetailsScene implements Initializable{
 	private Label userLabel;
 	
 	private Listing selectedItem;
-	// Event Listener on Button.onAction
+	/**
+	 * Loads the seller's scene.
+	 */
 	@FXML
-	public void loadSellerScene(ActionEvent event) {
+	public void loadSellerScene() {
 		controller.setSelectedListingSeller(selectedItem.getUser());
 		String email = selectedItem.getUser().getEmail();
 		ViewNavigator.loadScene(email.substring(0, email.indexOf("@")).concat("'s Seller Profile"), ViewNavigator.SELLER_DETAILS_SCENE);
 	}
-	// Event Listener on Button.onAction
+	/**
+	 * Loads the HomeScene.
+	 */
 	@FXML
-	public void loadHomeScene(ActionEvent event) {
+	public void loadHomeScene() {
 		selectedItem = null;
 		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
-	// Event Listener on Button.onAction
+	/**
+	 * Loads the ProductReview scene.
+	 */
 	@FXML
-	public void loadProductReviews(ActionEvent event) {
+	public void loadProductReviews() {
 		ViewNavigator.loadScene(selectedItem.getWatch().getName().concat("'s Review"), ViewNavigator.PRODUCT_REVIEW_SCENE);
 	}
+	/**
+	 * Initializes all the labels.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		selectedItem = controller.getSelectedListing();

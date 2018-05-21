@@ -24,14 +24,19 @@ public class SignInScene {
 	@FXML
 	private TextField emailTF;
 
-	// Event Listener on Label.onMouseClicked
+	/**
+	 * Loads the sign up scene.
+	 */
 	@FXML
-	public void signUpScene(MouseEvent event) {
+	public void signUpScene() {
 		ViewNavigator.loadScene("Sign Up", ViewNavigator.SIGN_UP_SCENE);
 	}
-	// Event Listener on Button.onAction
+	/**
+	 * Signs in the user.
+	 * @return return true if user is able to sign in, otherwise false.
+	 */
 	@FXML
-	public boolean signIn(ActionEvent event) {
+	public boolean signIn() {
 		String email = emailTF.getText();
 	    String password =  passwordPF.getText();
 	    
