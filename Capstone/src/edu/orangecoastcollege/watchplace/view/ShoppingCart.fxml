@@ -59,9 +59,8 @@
             <ListView fx:id="listView" onMouseClicked="#checkSelected" prefHeight="349.0" prefWidth="539.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="941.0" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <children>
-                  <Button fx:id="viewDetailsButton" disable="true" mnemonicParsing="false" onAction="#viewDetails" text="View Details" />
                   <Button fx:id="addToWishListButton" disable="true" mnemonicParsing="false" onAction="#addToWishlist" text="Add to WishList" />
-                  <Button fx:id="deleteItemButton" disable="true" mnemonicParsing="false" onAction="#deleteListing" text="Delete Item" />
+                  <Button fx:id="deleteItemButton" disable="true" mnemonicParsing="false" onAction="#deleteItem" text="Delete Item" />
                </children>
             </HBox>
             <Label fx:id="cartItemCount" text="Number of items: " GridPane.columnIndex="1" GridPane.rowIndex="2">

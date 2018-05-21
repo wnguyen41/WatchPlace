@@ -17,7 +17,6 @@ public class MainView extends Application {
 	}
 	
 
-	// test@email.com
-	// Password1@
+	// test@email.comPassword1@
 
 }

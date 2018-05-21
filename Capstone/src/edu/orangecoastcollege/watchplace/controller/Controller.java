@@ -35,17 +35,44 @@ public class Controller {
 	private static final String LISTING_TABLE_NAME = "listings";
 	private static final String[] LISTING_FIELD_NAMES = { "id_", "watch_id", "user_id", "quantity" };
 	private static final String[] LISTING_FIELD_TYPES = { "INTEGER PRIMARY KEY", "INTEGER", "INTEGER", "INTEGER" };
+	
+	// YB
+	private static final String REVIEW_TABLE_NAME = "reviews";
+	private static final String[] REVIEW_FIELD_NAMES = { "id_", "watch_id", "user_id", "review", "rate" };
+	private static final String[] REVIEW_FIELD_TYPES = { "INTEGER PRIMARY KEY", "INTEGER", "INTEGER", "TEXT", "REAL"};
+	
+	// YB
+	private static final String WISHLIST_TABLE_NAME = "watch_wishlist";
+	private static final String[] WISHLIST_FIELD_NAMES = { "user_id", "watch_id"};
+	private static final String[] WISHLIST_FIELD_TYPES = { "INTEGER", "INTEGER"};
+	
+	// YB
+	private static final String SHOPPING_CART_TABLE_NAME = "shopping_cart";
+	private static final String[] SHOPPING_CART_FIELD_NAMES = { "user_id", "watch_id", "quantity"};
+	private static final String[] SHOPPING_CART_FIELD_TYPES = { "INTEGER", "INTEGER", "INTEGER"};
+	
+	// YB
+	private static final String USER_REVIEW_TABELE_NAME = "user_review";
+	private static final String[] USER_REVIEW_FIELD_NAMES = { "user_id", "game_id"};
+	private static final String[] USER_REVIEW_FIELD_TYPES = { "INTEGER", "INTEGER"};
+	
+	// YB
+	private static final String WATCH_REVIEW_TABELE_NAME = "watch_review";
+	private static final String[] WATCH_REVIEW_FIELD_NAMES = { "watch_id", "game_id"};
+	private static final String[] WATCH_REVIEW_FIELD_TYPES = { "INTEGER", "INTEGER"};
+	
+	
 	//TODO Implement following data tables
 	private static final String COMPARE_TABLE_NAME = "compare";
 	private static final String[] COMPARE_FIELD_NAME = { "user_id", "watch_id" };
 	private static final String[] COMPARE_FIELD_TYPES = { "INTEGER", "INTEGER" };
 
 	
-	private static final String WATCH_WISHLIST_TABLE_NAME = "watch_wishlist";
-	private static final String SHOPPING_CART_TABLE_NAME = "shopping_cart";
+	
+	
 	private static final String ORDER_HISTORY_TABELE_NAME = "order_history"; //Should it be changed to view history (accessed from profile)
-	private static final String USER_REVIEW_TABELE_NAME = "user_review";
-	private static final String WATCH_REVIEW_TABELE_NAME = "watch_review";
+	
+	
 	
 	
 	
@@ -62,6 +89,9 @@ public class Controller {
 	private DBModel mUserDB;
 	private DBModel mWatchDB;
 	private DBModel mListingDB;
+	
+	private DBModel mWishlistDB;
+	private DBModel mShoppingCartDB;
 	// private DBModel mVideoGameDB;
 	// private DBModel mUserGamesDB;
 
@@ -138,9 +168,18 @@ public class Controller {
 				
 				for(Listing l : theOne.mAllListingsList)
 					theOne.mFilteredListingsList.add(l);
+				
 				// Create the relationship table between users and the video games they own
 				// theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME,
 				// USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
+				
+				// YB
+				theOne.mWishlistDB= new DBModel(DB_NAME, WISHLIST_TABLE_NAME, WISHLIST_FIELD_NAMES, WISHLIST_FIELD_TYPES);
+				
+				// YB
+				theOne.mShoppingCartDB= new DBModel(DB_NAME, SHOPPING_CART_TABLE_NAME, SHOPPING_CART_FIELD_NAMES, SHOPPING_CART_FIELD_TYPES);
+				
+				
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -518,4 +557,127 @@ public class Controller {
 		// TODO Return the average rating of this seller
 		return 0.0;
 	}
+	
+	// YB
+	public ObservableList<Watch> getWishlistWatchesForCurrentUser()
+	{
+		ObservableList<Watch> userWatchesList = FXCollections.observableArrayList();
+		try
+        {
+            ArrayList<ArrayList<String>> resultsList = mWishlistDB.getRecord(String.valueOf(theOne.mCurrentUser.getId()));
+            // loop through the results
+            int watchID;
+            for( ArrayList<String> values : resultsList)
+            {
+                watchID = Integer.parseInt(values.get(1));
+                // Loop through all the games, try to find a match
+                for(Watch w: theOne.mAllWatchesList)
+                {
+                    if(watchID == w.getId())
+                    {
+                        userWatchesList.add(w);
+                        break;
+                    }
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+		return userWatchesList;
+	}
+
+	// YB
+	public boolean addWatchToWishlist(Watch selectedWatch)  {
+	    ObservableList<Watch> gamesOwnedByCurrentUser = getWishlistWatchesForCurrentUser();
+	    if(gamesOwnedByCurrentUser.contains(selectedWatch))
+	        return false;
+	    String[] values = {String.valueOf(theOne.mCurrentUser.getId()), String.valueOf(selectedWatch.getId())};
+	    try
+        {
+            mWishlistDB.createRecord(WISHLIST_FIELD_NAMES, values);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+		return true;
+	}
+	
+	// YB
+		public ObservableList<Watch> getShoppingCartWatchesForCurrentUser()
+		{
+			ObservableList<Watch> userWatchesList = FXCollections.observableArrayList();
+			try
+	        {
+	            ArrayList<ArrayList<String>> resultsList = mShoppingCartDB.getRecord(String.valueOf(theOne.mCurrentUser.getId()));
+	            // loop through the results
+	            int watchID;
+	            for( ArrayList<String> values : resultsList)
+	            {
+	                watchID = Integer.parseInt(values.get(1));
+	                // Loop through all the games, try to find a match
+	                for(Watch w: theOne.mAllWatchesList)
+	                {
+	                    if(watchID == w.getId())
+	                    {
+	                        userWatchesList.add(w);
+	                        break;
+	                    }
+	                }
+	            }
+	        }
+	        catch (SQLException e)
+	        {
+	            e.printStackTrace();
+	        }
+			return userWatchesList;
+		}
+
+		// YB
+		public boolean addWatchToShoppingCart(Watch selectedWatch)  {
+		    ObservableList<Watch> gamesOwnedByCurrentUser = getShoppingCartWatchesForCurrentUser();
+		    if(gamesOwnedByCurrentUser.contains(selectedWatch))
+		        return false;
+		    String[] values = {String.valueOf(theOne.mCurrentUser.getId()), String.valueOf(selectedWatch.getId()), "1"};
+		    try
+	        {
+	            mShoppingCartDB.createRecord(SHOPPING_CART_FIELD_NAMES, values);
+	        }
+	        catch (SQLException e)
+	        {
+	            e.printStackTrace();
+	            return false;
+	        }
+			return true;
+		}
+	
+	// YB
+	public void deleteWishlistItem(int id) {
+		
+		
+		try {
+			mWishlistDB.deleteRecord(String.valueOf(id));
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
+	// YB
+		public void deleteShoppingCartItem(int id) {
+			
+			
+			try {
+				mShoppingCartDB.deleteRecord(String.valueOf(id));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	
+	
+	
 }

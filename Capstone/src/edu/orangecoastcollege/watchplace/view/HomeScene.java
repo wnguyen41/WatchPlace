@@ -1,6 +1,7 @@
 package edu.orangecoastcollege.watchplace.view;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.watchplace.controller.Controller;
@@ -134,18 +135,27 @@ public class HomeScene implements Initializable{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void addToShoppingCart(ActionEvent event) {
+	public boolean addToShoppingCart(ActionEvent event) {
 		//TODO
-		Listing item = listView.getSelectionModel().getSelectedItem();
+		Watch item = listView.getSelectionModel().getSelectedItem().getWatch();
+		return controller.addWatchToShoppingCart(item);
 	}
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void addToWishlist(ActionEvent event) {
-		//TODO
+	public boolean addToWishlist(ActionEvent event) {
+		
 		Watch item = listView.getSelectionModel().getSelectedItem().getWatch();
+		return controller.addWatchToWishlist(item);
 	}
 
+	/*
+	 * public boolean addGameToInventory()
+	{
+	    VideoGame selectedGame = allVideoGamesLV.getSelectionModel().getSelectedItem();
+	    return controller.addGameToUsersInventory(selectedGame);
+	}*/
+	
 	// Event Listener on Button.onAction
 	@FXML
 	public void addListing() {
