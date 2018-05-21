@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.watchplace.view.HomeScene">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.watchplace.view.WIshlist">
    <right>
       <GridPane vgap="10.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -33,10 +33,10 @@
         </rowConstraints>
          <children>
             <Label fx:id="fullNameLabel" text="(Insert Full Name)" wrapText="true" GridPane.halignment="CENTER" />
-            <Label onMouseClicked="#profileScene" text="Profile" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Label onMouseClicked="#goToMain" text="Go to Main" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Label onMouseClicked="#goToCheckout" text="Checkout" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Label onMouseClicked="#goToMain" text="Go to Main" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" onAction="#logout" text="Logout" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <Label onMouseClicked="#goToShoppingCart" text="Go to Shopping Cart" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Label onMouseClicked="#goToShoppingCart" text="Go to Shopping Cart" textFill="BLUE" underline="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -46,12 +46,12 @@
    <center>
       <GridPane prefHeight="469.0" prefWidth="440.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="9.0" prefWidth="9.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="491.0" minWidth="10.0" prefWidth="491.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="11.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" prefWidth="489.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="48.0" minHeight="20.0" prefHeight="48.0" />
-          <RowConstraints maxHeight="382.0" minHeight="10.0" prefHeight="354.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="42.0" minHeight="20.0" prefHeight="42.0" />
+          <RowConstraints maxHeight="382.0" minHeight="10.0" prefHeight="360.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="0.0" prefHeight="43.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -60,18 +60,18 @@
             <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="941.0" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <children>
                   <Button fx:id="viewDetailsButton" disable="true" mnemonicParsing="false" onAction="#viewDetails" text="View Details" />
-                  <Button fx:id="moveToShoppingCartButton" disable="true" mnemonicParsing="false" onAction="#moveToShoppingCart" text="Move to Shopping Cart" />
-                  <Button fx:id="deleteItemButton" disable="true" mnemonicParsing="false" onAction="#deleteItem" text="Delete" />
+                  <Button fx:id="addToWishListButton" disable="true" mnemonicParsing="false" onAction="#addToWishlist" text="Add to Shopping Cart" />
+                  <Button fx:id="deleteItemButton" disable="true" mnemonicParsing="false" onAction="#deleteListing" text="Delete Item" />
                </children>
             </HBox>
-            <Label fx:id="listingCount" text="Number of items: " GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="cartItemCount" text="Number of items: " GridPane.columnIndex="1" GridPane.rowIndex="2">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="499.0" text="Wish List" textAlignment="CENTER" GridPane.columnIndex="1">
+            <Label fx:id="ShoppingCartLabel" prefHeight="30.0" prefWidth="217.0" text="Wish List" GridPane.columnIndex="1">
                <font>
-                  <Font size="35.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
          </children>
