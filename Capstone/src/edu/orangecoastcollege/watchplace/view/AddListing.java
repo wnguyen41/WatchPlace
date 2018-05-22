@@ -5,13 +5,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.watchplace.controller.Controller;
 import edu.orangecoastcollege.watchplace.model.Listing;
+import edu.orangecoastcollege.watchplace.model.Watch;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.ComboBox;
+
+/*
+ * Add Listing scene
+ * @author James Kim
+ */
 
 public class AddListing implements Initializable {
 	
@@ -78,7 +86,7 @@ public class AddListing implements Initializable {
 		
 		int quantity = 1;
 		
-		controller.createListing(args,quantity);
+		controller.createListing(args, quantity);
 		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
 	// Event Listener on Button.onAction
@@ -89,6 +97,29 @@ public class AddListing implements Initializable {
 	// Event Listener on Button.onAction
 	@FXML
 	public void checkMatching(ActionEvent event) {
+		String refID = mReferenceTF.getText();
+		try {
+			ObservableList<Listing> theListing = controller.searchByRef(refID);
+			Watch watchID = theListing.get(0).getWatch();
+			
+			mBrandTF.setText(watchID.getBrand());
+			mNameTF.setText(watchID.getName());
+			mMaterialTF.getText();
+			// mGlassCB.getSelectionModel().getSelectedItem();
+			// mBackTypeCB.getSelectionModel().getSelectedItem();
+			mShapeTF.setText(String.valueOf(watchID.getCaseShape()));
+			mDiameterTF.setText(String.valueOf(watchID.getCaseDiameter()));
+			mHeightTF.setText(String.valueOf(watchID.getCaseHeight()));
+			mWaterResistanceTF.setText(String.valueOf(watchID.getCaseWaterResistance()));
+			mDialColorTF.setText(watchID.getDialColor());
+			mDialIndexCB.getSelectionModel().getSelectedItem();
+			mDialHandsTF.setText(watchID.getDialHands());
+			// Something like this
+			// mMovementCB.getSelectionModel();//.clearAndSelect(watchID.getMovement());
+			mPriceTF.setText(String.valueOf(watchID.getPrice()));
+		}
+		catch(SQLException e) { e.printStackTrace(); }
 		
+		}
 	}
 }

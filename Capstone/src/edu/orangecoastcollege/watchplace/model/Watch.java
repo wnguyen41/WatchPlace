@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 import java.util.Currency;
 /**
  * The Watch class lays out the details of a Watch.
+ * @author James Kim
  * @author Winston Nguyen
  */
 public class Watch {
