@@ -4,7 +4,8 @@
 package edu.orangecoastcollege.watchplace.model;
 
 /**
- * @author Winston
+ * Listing class contains information of what a Listing contains.
+ * @author Winston Nguyen
  *
  */
 public class Listing {
@@ -14,10 +15,11 @@ public class Listing {
 	private int mQuantity;
 	
 	/**
-	 * @param id
-	 * @param watch
-	 * @param user
-	 * @param quantity
+	 * Instantiates a new Listing
+	 * @param id the id
+	 * @param watch the Watch
+	 * @param user the User
+	 * @param quantity the quantity
 	 */
 	public Listing(int id, Watch watch, User user, int quantity) {
 		super();
@@ -27,24 +29,28 @@ public class Listing {
 		mQuantity = quantity;
 	}
 	/**
+	 * Gets the id.
 	 * @return the id
 	 */
 	public int getId() {
 		return mId;
 	}
 	/**
+	 * Gets the Watch
 	 * @return the watch
 	 */
 	public Watch getWatch() {
 		return mWatch;
 	}
 	/**
+	 * Gets the User.
 	 * @return the user
 	 */
 	public User getUser() {
 		return mUser;
 	}
 	/**
+	 * Get the quantity.
 	 * @return the quantity
 	 */
 	public int getQuantity() {

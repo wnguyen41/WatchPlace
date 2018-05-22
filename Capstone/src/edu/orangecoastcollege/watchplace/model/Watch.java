@@ -2,7 +2,10 @@ package edu.orangecoastcollege.watchplace.model;
 
 import java.text.NumberFormat;
 import java.util.Currency;
-
+/**
+ * The Watch class lays out the details of a Watch.
+ * @author Winston Nguyen
+ */
 public class Watch {
 	private int mId;
 	private String mReference;
@@ -22,21 +25,22 @@ public class Watch {
 	private double mPrice;
 	
 	/**
-	 * @param id
-	 * @param reference
-	 * @param brand
-	 * @param name
-	 * @param caseMaterial
-	 * @param caseGlass
-	 * @param caseBackType
-	 * @param caseShape
-	 * @param caseDiameter
-	 * @param caseHeight
-	 * @param caseWaterResistance
-	 * @param dialColor
-	 * @param dialIndex
-	 * @param movement
-	 * @param price
+	 * Initializes a new Watch.
+	 * @param id the id.
+	 * @param reference the reference.
+	 * @param brand the brand.
+	 * @param name the name.
+	 * @param caseMaterial the case material.
+	 * @param caseGlass the case glass.
+	 * @param caseBackType the case back type.
+	 * @param caseShape the case shape.
+	 * @param caseDiameter the case diameter.
+	 * @param caseHeight the case height.
+	 * @param caseWaterResistance the case water resistance.
+	 * @param dialColor the dial color.
+	 * @param dialIndex the dial index.
+	 * @param movement the movement.
+	 * @param price the price.
 	 */
 	public Watch(int id, String reference, String brand, String name, String caseMaterial, String caseGlass,
 			String caseBackType, String caseShape, double caseDiameter, double caseHeight, double caseWaterResistance,
@@ -61,6 +65,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the id.
 	 * @return the id
 	 */
 	public int getId() {
@@ -68,6 +73,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the id.
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
@@ -75,6 +81,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the reference.
 	 * @return the reference
 	 */
 	public String getReference() {
@@ -82,6 +89,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the reference.
 	 * @param reference the reference to set
 	 */
 	public void setReference(String reference) {
@@ -89,6 +97,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the brand.
 	 * @return the brand
 	 */
 	public String getBrand() {
@@ -96,6 +105,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the brand.
 	 * @param brand the brand to set
 	 */
 	public void setBrand(String brand) {
@@ -103,6 +113,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the name.
 	 * @return the name
 	 */
 	public String getName() {
@@ -110,6 +121,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the name.
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -117,6 +129,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the case material.
 	 * @return the caseMaterial
 	 */
 	public String getCaseMaterial() {
@@ -124,6 +137,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the case material.
 	 * @param caseMaterial the caseMaterial to set
 	 */
 	public void setCaseMaterial(String caseMaterial) {
@@ -131,6 +145,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the case glass.
 	 * @return the caseGlass
 	 */
 	public String getCaseGlass() {
@@ -138,6 +153,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the case glass.
 	 * @param caseGlass the caseGlass to set
 	 */
 	public void setCaseGlass(String caseGlass) {
@@ -145,6 +161,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the case back type.
 	 * @return the caseBackType
 	 */
 	public String getCaseBackType() {
@@ -152,6 +169,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the case back type.
 	 * @param caseBackType the caseBackType to set
 	 */
 	public void setCaseBackType(String caseBackType) {
@@ -159,6 +177,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the case shape.
 	 * @return the caseShape
 	 */
 	public String getCaseShape() {
@@ -166,6 +185,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the case shape.
 	 * @param caseShape the caseShape to set
 	 */
 	public void setCaseShape(String caseShape) {
@@ -173,6 +193,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the case diameter.
 	 * @return the caseDiameter
 	 */
 	public double getCaseDiameter() {
@@ -180,6 +201,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the case diameter.
 	 * @param caseDiameter the caseDiameter to set
 	 */
 	public void setCaseDiameter(double caseDiameter) {
@@ -187,6 +209,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the case height.
 	 * @return the caseHeight
 	 */
 	public double getCaseHeight() {
@@ -194,6 +217,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the case height.
 	 * @param caseHeight the caseHeight to set
 	 */
 	public void setCaseHeight(double caseHeight) {
@@ -201,6 +225,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the case water resistance.
 	 * @return the caseWaterResistance
 	 */
 	public double getCaseWaterResistance() {
@@ -208,6 +233,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the case water resistance.
 	 * @param caseWaterResistance the caseWaterResistance to set
 	 */
 	public void setCaseWaterResistance(double caseWaterResistance) {
@@ -215,6 +241,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the dial color.
 	 * @return the dialColor
 	 */
 	public String getDialColor() {
@@ -222,6 +249,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the dial color.
 	 * @param dialColor the dialColor to set
 	 */
 	public void setDialColor(String dialColor) {
@@ -229,6 +257,7 @@ public class Watch {
 	}
 
 	/**
+	 * Get the dial index.
 	 * @return the dialIndex
 	 */
 	public String getDialIndex() {
@@ -236,6 +265,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the dial index.
 	 * @param dialIndex the dialIndex to set
 	 */
 	public void setDialIndex(String dialIndex) {
@@ -243,6 +273,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the movement.
 	 * @return the movement
 	 */
 	public String getMovement() {
@@ -250,6 +281,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the movement.
 	 * @param movement the movement to set
 	 */
 	public void setMovement(String movement) {
@@ -257,6 +289,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the price.
 	 * @return the price
 	 */
 	public double getPrice() {
@@ -264,6 +297,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the price.
 	 * @param price the price to set
 	 */
 	public void setPrice(double price) {
@@ -392,6 +426,7 @@ public class Watch {
 	}
 
 	/**
+	 * Gets the dial hands.
 	 * @return the dialHands
 	 */
 	public String getDialHands() {
@@ -399,6 +434,7 @@ public class Watch {
 	}
 
 	/**
+	 * Sets the dial hands.
 	 * @param dialHands the dialHands to set
 	 */
 	public void setDialHands(String dialHands) {
