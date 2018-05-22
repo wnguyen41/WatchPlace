@@ -1,5 +1,8 @@
 package edu.orangecoastcollege.watchplace.model;
 
+import java.text.NumberFormat;
+import java.util.Currency;
+
 public class Watch {
 	private int mId;
 	private String mReference;
@@ -383,11 +386,9 @@ public class Watch {
 	 */
 	@Override
 	public String toString() {
-		return "Watch [mId=" + mId + ", mReference=" + mReference + ", mBrand=" + mBrand + ", mName=" + mName
-				+ ", mCaseMaterial=" + mCaseMaterial + ", mCaseGlass=" + mCaseGlass + ", mCaseBackType=" + mCaseBackType
-				+ ", mCaseShape=" + mCaseShape + ", mCaseDiameter=" + mCaseDiameter + ", mCaseHeight=" + mCaseHeight
-				+ ", mCaseWaterResistance=" + mCaseWaterResistance + ", mDialColor=" + mDialColor + ", mDialIndex="
-				+ mDialIndex + ", mDialHands=" + mDialHands + ", mMovement=" + mMovement + ", mPrice=" + mPrice + "]";
+		NumberFormat currency = NumberFormat.getCurrencyInstance();
+		StringBuilder sb = new StringBuilder();
+		return sb.append("Brand: ").append(mBrand).append(", Reference: ").append(mReference).append(", Name: ").append(mName).append(", Price: ").append(currency.format(mPrice)).toString();
 	}
 
 	/**

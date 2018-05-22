@@ -98,7 +98,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [Id=" + mId + ", Name=" + mName + ", Email=" + mEmail + "]";
+		return mEmail.substring(0,mEmail.indexOf("@"));
 	}
 	
 

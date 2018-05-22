@@ -713,15 +713,25 @@ public class Controller {
 	}
 
 	/**
-	 * Clears all databases
+	 * Closes the controller.
+	 */
+	public void close() {
+		theOne = null;
+	}
+
+	/**
+	 * Deletes all databases
 	 */
 	public void clearDatabases() {
 		try {
 			theOne.mListingDB.deleteAllRecords();
 			theOne.mUserDB.deleteAllRecords();
 			theOne.mWatchDB.deleteAllRecords();
+			theOne.mWishlistDB.deleteAllRecords();
+			;
+			theOne.mShoppingCartDB.deleteAllRecords();
+			;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

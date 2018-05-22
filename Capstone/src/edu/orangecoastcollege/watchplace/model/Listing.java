@@ -96,7 +96,8 @@ public class Listing {
 	 */
 	@Override
 	public String toString() {
-		return "Listing [mId=" + mId + ", mWatch=" + mWatch + ", mUser=" + mUser + ", mQuantity=" + mQuantity + "]";
+		StringBuilder sb = new StringBuilder();
+		return sb.append("[").append(mWatch).append(", Sold By: ").append(mUser).append(", Quantity: ").append(mQuantity).append("]").toString();
 	}
 	
 	
