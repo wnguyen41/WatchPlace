@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 import edu.orangecoastcollege.watchplace.model.DBModel;
 import edu.orangecoastcollege.watchplace.model.Listing;
+import edu.orangecoastcollege.watchplace.model.Review;
 import edu.orangecoastcollege.watchplace.model.User;
 import edu.orangecoastcollege.watchplace.model.Watch;
 import edu.orangecoastcollege.watchplace.view.ViewNavigator;
@@ -41,10 +42,11 @@ public class Controller {
 	private static final String[] LISTING_FIELD_NAMES = { "id_", "watch_id", "user_id", "quantity" };
 	private static final String[] LISTING_FIELD_TYPES = { "INTEGER PRIMARY KEY", "INTEGER", "INTEGER", "INTEGER" };
 
-	// YB
+	// YB 
+	// Changed fields 
 	private static final String REVIEW_TABLE_NAME = "reviews";
-	private static final String[] REVIEW_FIELD_NAMES = { "id_", "watch_id", "user_id", "review", "rate" };
-	private static final String[] REVIEW_FIELD_TYPES = { "INTEGER PRIMARY KEY", "INTEGER", "INTEGER", "TEXT", "REAL" };
+	private static final String[] REVIEW_FIELD_NAMES = { "id_", "review", "rate", "user_name"};
+	private static final String[] REVIEW_FIELD_TYPES = { "INTEGER PRIMARY KEY", "TEXT", "REAL", "TEXT"};
 
 	// YB
 	private static final String WISHLIST_TABLE_NAME = "watch_wishlist";
@@ -58,12 +60,12 @@ public class Controller {
 
 	// YB
 	private static final String USER_REVIEW_TABELE_NAME = "user_review";
-	private static final String[] USER_REVIEW_FIELD_NAMES = { "user_id", "game_id" };
+	private static final String[] USER_REVIEW_FIELD_NAMES = { "user_id", "review_id" };
 	private static final String[] USER_REVIEW_FIELD_TYPES = { "INTEGER", "INTEGER" };
 
 	// YB
-	private static final String WATCH_REVIEW_TABELE_NAME = "watch_review";
-	private static final String[] WATCH_REVIEW_FIELD_NAMES = { "watch_id", "game_id" };
+	private static final String WATCH_REVIEW_TABLE_NAME = "watch_review";
+	private static final String[] WATCH_REVIEW_FIELD_NAMES = { "watch_id", "review_id" };
 	private static final String[] WATCH_REVIEW_FIELD_TYPES = { "INTEGER", "INTEGER" };
 
 	// TODO Implement following data tables
@@ -86,9 +88,12 @@ public class Controller {
 	private DBModel mUserDB;
 	private DBModel mWatchDB;
 	private DBModel mListingDB;
+	private DBModel mReviewDB;
 
 	private DBModel mWishlistDB;
 	private DBModel mShoppingCartDB;
+
+	private DBModel mWatchReviewsDB;
 	// private DBModel mVideoGameDB;
 	// private DBModel mUserGamesDB;
 
@@ -96,6 +101,7 @@ public class Controller {
 	private ObservableList<Watch> mAllWatchesList;
 	private ObservableList<Listing> mFilteredListingsList;
 	private ObservableList<Listing> mAllListingsList;
+	private ObservableList<Review> mAllReviewsList;
 	// Stores the selected listing
 	private Listing selectedListing;
 	// Stores the seller of the listing that was selected by the user
@@ -169,6 +175,19 @@ public class Controller {
 				// Create the relationship table between users and the video games they own
 				// theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME,
 				// USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
+				
+				// YB
+				theOne.mWatchDB = new DBModel(DB_NAME, REVIEW_TABLE_NAME, REVIEW_FIELD_NAMES, 
+						REVIEW_FIELD_TYPES);
+				resultsList = theOne.mReviewDB.getAllRecords();
+				for (ArrayList<String> values : resultsList) {
+					int id = Integer.parseInt(values.get(0));
+					String review = values.get(1);
+					double rate = Double.parseDouble(values.get(2));
+					String userName = values.get(3);
+					
+					theOne.mAllReviewsList.add(new Review(id, review, rate, userName));
+				}
 
 				// YB
 				theOne.mWishlistDB = new DBModel(DB_NAME, WISHLIST_TABLE_NAME, WISHLIST_FIELD_NAMES,
@@ -177,6 +196,10 @@ public class Controller {
 				// YB
 				theOne.mShoppingCartDB = new DBModel(DB_NAME, SHOPPING_CART_TABLE_NAME, SHOPPING_CART_FIELD_NAMES,
 						SHOPPING_CART_FIELD_TYPES);
+				
+				// YB
+				theOne.mWatchReviewsDB = new DBModel(DB_NAME, WATCH_REVIEW_TABLE_NAME, WATCH_REVIEW_FIELD_NAMES,
+						WATCH_REVIEW_FIELD_TYPES);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -611,6 +634,61 @@ public class Controller {
 		// TODO Return the average rating of this seller
 		return 0.0;
 	}
+	
+	// YB
+	public Review createReview(String[] args) {
+		try {
+			int reviewId = theOne.mReviewDB
+					.createRecord(Arrays.copyOfRange(REVIEW_FIELD_NAMES, 1, REVIEW_FIELD_NAMES.length), args);
+			Review r = new Review(reviewId, args[0], Double.parseDouble(args[1]), theOne.mCurrentUser.getName());
+			theOne.mAllReviewsList.add(r);
+			
+			return r;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	// YB
+		public ObservableList<Review> getReviewsForWatch(Watch w) {
+			ObservableList<Review> watchReviewsList = FXCollections.observableArrayList();
+			try {
+				ArrayList<ArrayList<String>> resultsList = mWatchReviewsDB
+						.getRecord(String.valueOf(w.getId()));
+				// loop through the results
+				int reviewId;
+				for (ArrayList<String> values : resultsList) {
+					reviewId = Integer.parseInt(values.get(1));
+					// Loop through all the games, try to find a match
+					for (Review r : theOne.mAllReviewsList) {
+						if (reviewId == r.getId()) {
+							watchReviewsList.add(r);
+							break;
+						}
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return watchReviewsList;
+		}
+		
+		// YB
+		public boolean addReviewToWatch(Review review, Watch w) {
+			ObservableList<Review> reviewsOwnedByWatch = getReviewsForWatch(w);
+			if (reviewsOwnedByWatch.contains(review))
+				return false;
+			String[] values = { String.valueOf(w.getId()), String.valueOf(review.getId()) };
+			try {
+				mWatchReviewsDB.createRecord(WATCH_REVIEW_FIELD_NAMES, values);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+			return true;
+		}
 
 	// YB
 	public ObservableList<Watch> getWishlistWatchesForCurrentUser() {
@@ -638,8 +716,8 @@ public class Controller {
 
 	// YB
 	public boolean addWatchToWishlist(Watch selectedWatch) {
-		ObservableList<Watch> gamesOwnedByCurrentUser = getWishlistWatchesForCurrentUser();
-		if (gamesOwnedByCurrentUser.contains(selectedWatch))
+		ObservableList<Watch> watchesOwnedByCurrentUser = getWishlistWatchesForCurrentUser();
+		if (watchesOwnedByCurrentUser.contains(selectedWatch))
 			return false;
 		String[] values = { String.valueOf(theOne.mCurrentUser.getId()), String.valueOf(selectedWatch.getId()) };
 		try {
@@ -677,8 +755,8 @@ public class Controller {
 
 	// YB
 	public boolean addWatchToShoppingCart(Watch selectedWatch) {
-		ObservableList<Watch> gamesOwnedByCurrentUser = getShoppingCartWatchesForCurrentUser();
-		if (gamesOwnedByCurrentUser.contains(selectedWatch))
+		ObservableList<Watch> watchesOwnedByCurrentUser = getShoppingCartWatchesForCurrentUser();
+		if (watchesOwnedByCurrentUser.contains(selectedWatch))
 			return false;
 		String[] values = { String.valueOf(theOne.mCurrentUser.getId()), String.valueOf(selectedWatch.getId()), "1" };
 		try {

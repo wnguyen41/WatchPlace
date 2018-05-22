@@ -15,11 +15,12 @@ public class Review {
 	 * @param mReview
 	 * @param mRate
 	 */
-	public Review(int mId, String mReview, double mRate) {
+	public Review(int mId, String mReview, double mRate, String mUserName) {
 		super();
 		this.mId = mId;
 		this.mReview = mReview;
 		this.mRate = mRate;
+		this.mUserName = mUserName;
 	}
 	/**
 	 * @return the mId
