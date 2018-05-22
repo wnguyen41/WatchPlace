@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="526.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.watchplace.view.AddWatchReview">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="15.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="504.0" minWidth="10.0" prefWidth="488.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="504.0" minWidth="10.0" prefWidth="15.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="155.0" minHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="320.0" minHeight="10.0" prefHeight="125.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="318.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label text="Your Rate?" GridPane.columnIndex="1" />
+      <Slider fx:id="rateSlider" majorTickUnit="0.5" max="5.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <effect>
+            <DropShadow color="#edf814" />
+         </effect>
+      </Slider>
+      <Label text="Please share your thought for this watch. (Optional)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextArea fx:id="reviewTA" prefHeight="200.0" prefWidth="200.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextArea>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="40.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <children>
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addReview" text="Add Review" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+         </children>
+      </HBox>
+   </children>
+</GridPane>

@@ -177,7 +177,7 @@ public class Controller {
 				// USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
 				
 				// YB
-				theOne.mWatchDB = new DBModel(DB_NAME, REVIEW_TABLE_NAME, REVIEW_FIELD_NAMES, 
+				theOne.mReviewDB = new DBModel(DB_NAME, REVIEW_TABLE_NAME, REVIEW_FIELD_NAMES, 
 						REVIEW_FIELD_TYPES);
 				resultsList = theOne.mReviewDB.getAllRecords();
 				for (ArrayList<String> values : resultsList) {
@@ -787,6 +787,17 @@ public class Controller {
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+	}
+	
+	// YB
+	public void clearShoppingCart()
+	{
+		try {
+			theOne.mShoppingCartDB.deleteAllRecords();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

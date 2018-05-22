@@ -20,7 +20,8 @@ public class ViewNavigator {
 	public static final String SELLER_DETAILS_SCENE = "SellerDetailsScene.fxml";
 	public static final String SELLER_REVIEWS_SCENE = "SellerReview.fxml";
 	public static final String CHECKOUT_SCENE = "Checkout.fxml";
-
+	public static final String THANKYOU_SCENE = "ThankYou.fxml";
+	
 	public static Stage mainStage;
 
 	public static void setStage(Stage stage) {
