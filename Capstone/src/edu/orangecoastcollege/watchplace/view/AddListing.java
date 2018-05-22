@@ -50,22 +50,22 @@ public class AddListing implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		mBackTypeCB.setItems(controller.getDistinctBackTypes());
 		mMovementCB.setItems(controller.getDistinctMovements());
 		mDialIndexCB.setItems(controller.getDistinctIndex());
 		mGlassCB.setItems(controller.getDistinctGlass());
-		//mBackTypeCB.setItems(controller.getDistinctBackTypes());
+		
 	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void addListing(ActionEvent event) {
-		//TODO FIX BACKTYPE COMBOBOX
 		String[] args = new String[15];
 		args[0] = mReferenceTF.getText();
 		args[1] = mBrandTF.getText();
 		args[2] = mNameTF.getText();
 		args[3] = mMaterialTF.getText();
 		args[4] = mGlassCB.getSelectionModel().getSelectedItem();
-		args[5] = "null";//mBackTypeCB.getSelectionModel().getSelectedItem();
+		args[5] = mBackTypeCB.getSelectionModel().getSelectedItem();
 		args[6] = mShapeTF.getText();
 		args[7] = mDiameterTF.getText();
 		args[8] = mHeightTF.getText();

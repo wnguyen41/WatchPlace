@@ -90,7 +90,7 @@
             <TextField fx:id="mDialHandsTF" GridPane.columnIndex="4" GridPane.rowIndex="6" />
             <TextField fx:id="mDialColorTF" GridPane.columnIndex="4" GridPane.rowIndex="4" />
             <ComboBox fx:id="mGlassCB" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <ComboBox fx:id="mBackTypeTF" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <ComboBox fx:id="mBackTypeCB" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" GridPane.columnSpan="2147483647">
                <children>
                   <Label text="Reference #" />
