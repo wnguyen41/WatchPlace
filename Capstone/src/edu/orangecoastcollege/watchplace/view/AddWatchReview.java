@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import edu.orangecoastcollege.watchplace.controller.Controller;
+import edu.orangecoastcollege.watchplace.model.Review;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Slider;
@@ -14,6 +16,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 
 public class AddWatchReview implements Initializable {
+	
+	private static Controller controller = Controller.getInstance();
 	@FXML
 	private Slider rateSlider;
 	@FXML
@@ -26,6 +30,16 @@ public class AddWatchReview implements Initializable {
 	// Event Listener on Button[#addButton].onAction
 	@FXML
 	public void addReview() {
+		
+		String[] args = new String[3];
+		args[0] = reviewTA.getText();
+		args[1] = String.valueOf(rateSlider.getValue());
+		args[2] = controller.getCurrentUser().getName();
+	
+		
+		Review r = controller.createReview(args);
+		boolean b = controller.addReviewToWatch(r, controller.getSelectedListing().getWatch());
+		ViewNavigator.loadScene(controller.getSelectedListing().getWatch().getName().concat("'s Review"), ViewNavigator.PRODUCT_REVIEW_SCENE);
 		
 	}
 	// Event Listener on Button[#cancelButton].onAction
