@@ -50,10 +50,10 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.0" minWidth="10.0" prefWidth="489.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="42.0" minHeight="20.0" prefHeight="42.0" />
-          <RowConstraints maxHeight="382.0" minHeight="10.0" prefHeight="360.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="0.0" prefHeight="43.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="43.0" minHeight="20.0" prefHeight="43.0" />
+          <RowConstraints maxHeight="382.0" minHeight="10.0" prefHeight="355.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="54.0" minHeight="0.0" prefHeight="48.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <ListView fx:id="listView" onMouseClicked="#checkSelected" prefHeight="349.0" prefWidth="539.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -63,16 +63,21 @@
                   <Button fx:id="deleteItemButton" disable="true" mnemonicParsing="false" onAction="#deleteItem" text="Delete Item" />
                </children>
             </HBox>
-            <Label fx:id="cartItemCount" text="Number of items: " GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </Label>
             <Label fx:id="ShoppingCartLabel" prefHeight="30.0" prefWidth="217.0" text="Shopping Cart" GridPane.columnIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="cartItemCount" text="Number of items: ">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="countItems" />
+               </children>
+            </HBox>
          </children>
       </GridPane>
    </center>

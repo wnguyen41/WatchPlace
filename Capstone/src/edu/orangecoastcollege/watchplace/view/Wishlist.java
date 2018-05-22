@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.watchplace.controller.Controller;
-import edu.orangecoastcollege.watchplace.model.Listing;
 import edu.orangecoastcollege.watchplace.model.Watch;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,11 +31,9 @@ public class Wishlist implements Initializable {
 	private Label cartItemCount;
 	@FXML
 	private Label ShoppingCartLabel;
+	@FXML
+	private Label countItemsLabel;
 	
-	/*public void initialize(URL location, ResourceBundle resources) {
-	    listView.setItems(controller.getWatchesForCurrentUser());
-	    fullNameLabel.setText(controller.getCurrentUser().getName());
-	}*/
 	
 	// Event Listener on Label.onMouseClicked
 	@FXML
@@ -85,10 +82,10 @@ public class Wishlist implements Initializable {
 	}
 	
 	@FXML
-	public void deleteItem(ActionEvent event) {
-		controller.deleteWishlistItem(((Watch) listView.getSelectionModel().getSelectedItem()).getId());
+	public void deleteItem() {
+		controller.deleteWishlistItem(listView.getSelectionModel().getSelectedItem().getId());
 		listView.setItems(controller.getWishlistWatchesForCurrentUser());
-		
+		listView.getSelectionModel().select(-1);
 	}
 	
 	@Override
@@ -96,8 +93,19 @@ public class Wishlist implements Initializable {
 		
 		listView.setItems(controller.getWishlistWatchesForCurrentUser());
 		fullNameLabel.setText(controller.getCurrentUser().getName());
+		count();
 		
-		deleteItemButton.setOnAction(e -> deleteItem(e));
+		deleteItemButton.setOnAction(e -> deleteItem());
 		
+	}
+	
+	public void count() 
+	{
+		int count = 0;
+		for (Watch w : controller.getWishlistWatchesForCurrentUser())
+			count++;
+				
+				
+		countItemsLabel.setText(String.valueOf(count));
 	}
 }

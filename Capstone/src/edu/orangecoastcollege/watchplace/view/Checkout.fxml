@@ -7,76 +7,59 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-   <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="56.0" />
-      <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="47.0" />
-      <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="80.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="40.0" />
-      <RowConstraints minHeight="10.0" prefHeight="40.0" />
-   </rowConstraints>
-   <columnConstraints>
-      <ColumnConstraints minWidth="10.0" prefWidth="500.0" />
-   </columnConstraints>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.orangecoastcollege.watchplace.view.Checkout">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="4.0" prefWidth="12.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="636.0" minWidth="10.0" prefWidth="618.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="636.0" minWidth="10.0" prefWidth="18.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="320.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="320.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="320.0" minHeight="10.0" prefHeight="101.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="183.0" minHeight="0.0" prefHeight="65.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+      <Label prefHeight="15.0" prefWidth="139.0" text="1. Shipping Address" GridPane.columnIndex="1" />
+      <TextArea fx:id="shippingAddressTA" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Label text="Username:" />
-            <Label text="ykim102" />
+            <Label text="2. Billing Address" />
+            <CheckBox fx:id="sameCB" mnemonicParsing="false" text="Same as Shipping Address?" />
          </children>
       </HBox>
-      <Label text="1. Shipping address" GridPane.rowIndex="1">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label GridPane.rowIndex="2" />
-      <Label text="2. Payment method" GridPane.rowIndex="3">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <ComboBox prefHeight="23.0" prefWidth="400.0" GridPane.rowIndex="4" />
-      <Label text="3. Review Items" GridPane.rowIndex="5">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
-      <Label text="4. Delivery option" GridPane.rowIndex="7">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.rowIndex="8">
+      <TextArea fx:id="billingAddressTA" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label text="3. Review Items" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <ListView fx:id="shoppingCartLV" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <children>
-            <CheckBox mnemonicParsing="false" text="Two - Day shipping" />
-            <CheckBox mnemonicParsing="false" text="No - Rush shipping" />
+            <Label text="Price: " />
+            <Label fx:id="priceLabel" text="Label" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.rowIndex="9">
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="Place Order">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="Go back Home">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: GOLD;" text="Go back to Shopping Cart">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
+            <Label text="Tax: " />
+            <Label fx:id="taxLabel" text="Label" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+         <children>
+            <Label text="Total: " />
+            <Label fx:id="totalLabel" text="Label" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+         <children>
+            <Button fx:id="goToShoppingCartButton" mnemonicParsing="false" onAction="#goToShoppingCart" text="Go to Shopping Cart" />
+            <Button fx:id="goToMainButton" mnemonicParsing="false" onAction="#goToMain" text="Go to Main" />
+            <Button fx:id="checkoutButton" mnemonicParsing="false" onAction="#checkout" prefHeight="40.0" prefWidth="95.0" text="Checkout" />
          </children>
       </HBox>
    </children>
