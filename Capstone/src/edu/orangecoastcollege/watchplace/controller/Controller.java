@@ -480,7 +480,7 @@ public class Controller {
 
 	/**
 	 * Sorts the list based on the inputed reference.
-	 * 
+	 * @author Winston Nguyen
 	 * @param key
 	 *            the inputed reference
 	 * @return the filtered ObservableList.
