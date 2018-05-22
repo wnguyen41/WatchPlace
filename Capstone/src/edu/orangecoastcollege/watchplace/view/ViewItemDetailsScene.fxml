@@ -216,7 +216,7 @@
    <top>
       <VBox prefHeight="88.0" prefWidth="640.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="34.0" prefWidth="640.0">
+            <HBox>
                <children>
                   <Label fx:id="brandLabel" text="Brand">
                      <font>
@@ -228,7 +228,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="18.0" prefWidth="640.0">
+            <HBox>
                <children>
                   <Label fx:id="nameLabel" text="WatchName">
                      <HBox.margin>
@@ -238,9 +238,13 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
                   <Label text="Reference:">
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets left="20.0" />
                      </HBox.margin>
                      <font>
                         <Font size="18.0" />
@@ -256,27 +260,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="Quantity:">
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="quantityLabel" text="0">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="18.0" prefWidth="640.0">
+            <HBox>
                <children>
                   <Label text="Sold by:">
                      <HBox.margin>
@@ -287,6 +271,22 @@
                      </font>
                   </Label>
                   <Label fx:id="userLabel" text="User">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Quantity:">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="quantityLabel" text="0">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
