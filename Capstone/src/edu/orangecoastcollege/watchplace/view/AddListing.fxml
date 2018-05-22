@@ -61,11 +61,21 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" GridPane.columnSpan="2147483647">
+               <children>
+                  <Label text="Reference #" />
+                  <TextField fx:id="mReferenceTF" />
+                  <Button mnemonicParsing="false" onAction="#checkMatching" text="Check Database" />
+               </children>
+            </HBox>
             <Label text="Brand" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Model Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="mBrandTF" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <TextField fx:id="mNameTF" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <ComboBox fx:id="mMovementCB" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField fx:id="mMaterialTF" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <ComboBox fx:id="mGlassCB" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <ComboBox fx:id="mBackTypeCB" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <TextField fx:id="mShapeTF" GridPane.columnIndex="2" GridPane.rowIndex="8" />
             <TextField fx:id="mDiameterTF" GridPane.columnIndex="2" GridPane.rowIndex="9" />
             <Label text="Material" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -75,6 +85,10 @@
             <Label text="Diameter" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <Label text="Height" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <TextField fx:id="mHeightTF" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <TextField fx:id="mWaterResistanceTF" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <TextField fx:id="mDialColorTF" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <ComboBox fx:id="mDialIndexCB" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <TextField fx:id="mDialHandsTF" GridPane.columnIndex="4" GridPane.rowIndex="6" />
             <Label text="Custom Input:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Water Resistance" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <Label text="Dial Color" GridPane.columnIndex="3" GridPane.rowIndex="4" />
@@ -86,21 +100,7 @@
                   <TextField fx:id="mPriceTF" />
                </children>
             </HBox>
-            <ComboBox fx:id="mDialIndexCB" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-            <TextField fx:id="mDialHandsTF" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-            <TextField fx:id="mDialColorTF" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-            <ComboBox fx:id="mGlassCB" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <ComboBox fx:id="mBackTypeCB" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" GridPane.columnSpan="2147483647">
-               <children>
-                  <Label text="Reference #" />
-                  <TextField fx:id="mReferenceTF" />
-                  <Button mnemonicParsing="false" onAction="#checkMatching" text="Check Database" />
-               </children>
-            </HBox>
-            <TextField fx:id="mWaterResistanceTF" GridPane.columnIndex="4" GridPane.rowIndex="3" />
             <Label text="Movement" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ComboBox fx:id="mMovementCB" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </center>

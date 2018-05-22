@@ -98,15 +98,39 @@ public class AddListing implements Initializable {
 	@FXML
 	public void checkMatching(ActionEvent event) {
 		String refID = mReferenceTF.getText();
-		try {
+		if (controller.searchByRef(refID).size() != 0)
+		{
+			int index = 0;
 			ObservableList<Listing> theListing = controller.searchByRef(refID);
 			Watch watchID = theListing.get(0).getWatch();
 			
 			mBrandTF.setText(watchID.getBrand());
 			mNameTF.setText(watchID.getName());
-			mMaterialTF.getText();
-			// mGlassCB.getSelectionModel().getSelectedItem();
-			// mBackTypeCB.getSelectionModel().getSelectedItem();
+			mMaterialTF.setText(watchID.getCaseMaterial());
+			
+			switch (watchID.getCaseGlass())
+			{
+			case "Sapphire" : index = 0;
+			break;
+			case "Mineral" : index = 1;
+			break;
+			case "Acrylic" : index = 2;
+			break;
+			}
+			
+			mGlassCB.getSelectionModel().clearAndSelect(index);;
+			
+			switch (watchID.getCaseBackType())
+			{
+			case "Opened" : index = 0;
+			break;
+			case "Closed" : index = 1;
+			break;
+			case "Skeleton" : index = 2;
+			break;
+			}
+			
+			mBackTypeCB.getSelectionModel().clearAndSelect(index);
 			mShapeTF.setText(String.valueOf(watchID.getCaseShape()));
 			mDiameterTF.setText(String.valueOf(watchID.getCaseDiameter()));
 			mHeightTF.setText(String.valueOf(watchID.getCaseHeight()));
@@ -114,12 +138,37 @@ public class AddListing implements Initializable {
 			mDialColorTF.setText(watchID.getDialColor());
 			mDialIndexCB.getSelectionModel().getSelectedItem();
 			mDialHandsTF.setText(watchID.getDialHands());
-			// Something like this
-			// mMovementCB.getSelectionModel();//.clearAndSelect(watchID.getMovement());
+			
+			switch (watchID.getMovement())
+			{
+			case "Manual" : index = 0;
+			break;
+			case "Automatic" : index = 1;
+			break;
+			case "Quartz" : index = 2;
+			break;
+			}
+			
+			mMovementCB.getSelectionModel().clearAndSelect(index);
+			
+			switch (watchID.getDialIndex()) {
+			case "Arabic & Stick" : index = 0;
+			break;
+			case "Arabic" : index = 1;
+			break;
+			case "Stick" : index = 2;
+			break;
+			case "Roman & Stick" : index = 3;
+			break;
+			case "Roman" : index = 4;
+			break;
+			case "California" : index = 5;
+			break;
+			}
+			
+			mDialIndexCB.getSelectionModel().clearAndSelect(index);
+			
 			mPriceTF.setText(String.valueOf(watchID.getPrice()));
-		}
-		catch(SQLException e) { e.printStackTrace(); }
-		
 		}
 	}
 }
