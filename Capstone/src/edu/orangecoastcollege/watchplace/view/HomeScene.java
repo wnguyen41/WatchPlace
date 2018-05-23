@@ -209,6 +209,7 @@ public class HomeScene implements Initializable{
 		}
 		else
 		{
+			if(controller.getCurrentUser().equals(controller.getSelectedListingSeller()))
 			deleteListingButton.setDisable(true);
 			viewDetailsButton.setDisable(true);
 			addToShoppingCartButton.setDisable(true);
