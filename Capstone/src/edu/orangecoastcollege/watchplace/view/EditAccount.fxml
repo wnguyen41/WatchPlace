@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Label text="Edit Account" BorderPane.alignment="CENTER">
@@ -40,36 +39,36 @@
         </rowConstraints>
          <children>
             <Label text="Username" GridPane.columnIndex="1" />
-            <Label text="User" GridPane.columnIndex="2" />
+            <Label fx:id="mUserLabel" text="User" GridPane.columnIndex="2" />
             <Label text="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Shipping Address" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
             <Label text="Billing Address" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-            <TextField text="Full Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField text="JohnDoe@gmail.com" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="mNameTF" text="Full Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="mEmailTF" text="JohnDoe@gmail.com" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
                <children>
                   <HBox spacing="5.0">
                      <children>
-                        <TextField text="123 Main Street" />
-                        <TextField text="City" />
+                        <TextField fx:id="mShippingStreetTF" text="123 Main Street" />
+                        <TextField fx:id="mShippingCityTF" text="City" />
                      </children>
                   </HBox>
-                  <TextField text="State" />
-                  <TextField text="Country" />
+                  <TextField fx:id="mShippingStateTF" text="State" />
+                  <TextField fx:id="mShippingCountryTF" text="Country" />
                </children>
             </VBox>
-            <CheckBox mnemonicParsing="false" prefHeight="56.0" prefWidth="108.0" text="Same as shipping address" wrapText="true" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <CheckBox fx:id="mIdenticalAddressCheckBox" mnemonicParsing="false" prefHeight="56.0" prefWidth="108.0" text="Same as shipping address" wrapText="true" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="4" />
             <VBox layoutX="261.0" layoutY="153.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
                <children>
                   <HBox spacing="5.0">
                      <children>
-                        <TextField text="123 Main Street" />
-                        <TextField text="City" />
+                        <TextField fx:id="mBillingStreetTF" text="123 Main Street" />
+                        <TextField fx:id="mBillingCityTF" text="City" />
                      </children>
                   </HBox>
-                  <TextField text="State" />
-                  <TextField text="Country" />
+                  <TextField fx:id="mBillingStateTF" text="State" />
+                  <TextField fx:id="mBillingCountryTF" text="Country" />
                </children>
             </VBox>
          </children>
@@ -87,8 +86,8 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1">
                <children>
-                  <Button mnemonicParsing="false" text="Save Changes" />
-                  <Button mnemonicParsing="false" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#saveChanges" text="Save Changes" />
+                  <Button mnemonicParsing="false" onAction="#goToAccountOverview" text="Cancel" />
                </children>
             </HBox>
          </children>
