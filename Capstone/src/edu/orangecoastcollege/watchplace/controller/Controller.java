@@ -94,8 +94,6 @@ public class Controller {
 	private DBModel mShoppingCartDB;
 
 	private DBModel mWatchReviewsDB;
-	// private DBModel mVideoGameDB;
-	// private DBModel mUserGamesDB;
 
 	private ObservableList<User> mAllUsersList;
 	private ObservableList<Watch> mAllWatchesList;
@@ -172,9 +170,6 @@ public class Controller {
 				for (Listing l : theOne.mAllListingsList)
 					theOne.mFilteredListingsList.add(l);
 
-				// Create the relationship table between users and the video games they own
-				// theOne.mUserGamesDB= new DBModel(DB_NAME, USER_GAMES_TABLE_NAME,
-				// USER_GAMES_FIELD_NAMES, USER_GAMES_FIELD_TYPES);
 				
 				// YB
 				theOne.mReviewDB = new DBModel(DB_NAME, REVIEW_TABLE_NAME, REVIEW_FIELD_NAMES, 
@@ -635,33 +630,50 @@ public class Controller {
 		return 0.0;
 	}
 	
-	// YB
+	/**
+	 * Creates a new review and adds them to the databases.
+	 * 
+	 * @author YB Kim
+	 * @param args
+	 *            an array of review details.
+	 */
+	
 	public Review createReview(String[] args) {
-		try {
-			int reviewId = theOne.mReviewDB
-					.createRecord(Arrays.copyOfRange(REVIEW_FIELD_NAMES, 1, REVIEW_FIELD_NAMES.length), args);
-			Review r = new Review(reviewId, args[0], Double.parseDouble(args[1]), theOne.mCurrentUser.getName());
-			theOne.mAllReviewsList.add(r);
-			
-			return r;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
 
-	// YB
-		public ObservableList<Review> getReviewsForWatch(Watch w) {
+        int reviewId;
+        try
+        {
+            reviewId = theOne.mReviewDB.createRecord(Arrays.copyOfRange(REVIEW_FIELD_NAMES, 1, REVIEW_FIELD_NAMES.length), args);
+            Review r = new Review(reviewId, args[0], Double.parseDouble(args[1]), args[2]);
+            theOne.mAllReviewsList.add(r);
+            
+            return r;
+
+        }
+        catch (SQLException e)
+        {
+            return null;
+        }
+
+	}
+	
+
+	/**
+	 * Gets the list of reviews that linked to the watch
+	 * @param w
+	 * @return
+	 */
+		public ObservableList<Review> getReviewsForWatch() {
+			
+			Watch w = theOne.getSelectedListing().getWatch();
+			
 			ObservableList<Review> watchReviewsList = FXCollections.observableArrayList();
 			try {
 				ArrayList<ArrayList<String>> resultsList = mWatchReviewsDB
 						.getRecord(String.valueOf(w.getId()));
-				// loop through the results
 				int reviewId;
 				for (ArrayList<String> values : resultsList) {
 					reviewId = Integer.parseInt(values.get(1));
-					// Loop through all the games, try to find a match
 					for (Review r : theOne.mAllReviewsList) {
 						if (reviewId == r.getId()) {
 							watchReviewsList.add(r);
@@ -675,12 +687,17 @@ public class Controller {
 			return watchReviewsList;
 		}
 		
-		// YB
-		public boolean addReviewToWatch(Review review, Watch w) {
-			ObservableList<Review> reviewsOwnedByWatch = getReviewsForWatch(w);
+		/**
+		 * Link the review to the watch
+		 * @param review
+		 * @param w
+		 * @return
+		 */
+		public boolean addReviewToWatch(Review review) {
+			ObservableList<Review> reviewsOwnedByWatch = getReviewsForWatch();
 			if (reviewsOwnedByWatch.contains(review))
 				return false;
-			String[] values = { String.valueOf(w.getId()), String.valueOf(review.getId()) };
+			String[] values = { String.valueOf(theOne.getSelectedListing().getWatch().getId()), String.valueOf(review.getId()) };
 			try {
 				mWatchReviewsDB.createRecord(WATCH_REVIEW_FIELD_NAMES, values);
 			} catch (SQLException e) {
@@ -690,7 +707,10 @@ public class Controller {
 			return true;
 		}
 
-	// YB
+	/**
+	 * Gets all watches in wishlist for current user
+	 * @return watches list
+	 */
 	public ObservableList<Watch> getWishlistWatchesForCurrentUser() {
 		ObservableList<Watch> userWatchesList = FXCollections.observableArrayList();
 		try {
@@ -714,7 +734,11 @@ public class Controller {
 		return userWatchesList;
 	}
 
-	// YB
+	/**
+	 * Adds the selected watch to wishlist
+	 * @param selectedWatch 
+	 * @return
+	 */
 	public boolean addWatchToWishlist(Watch selectedWatch) {
 		ObservableList<Watch> watchesOwnedByCurrentUser = getWishlistWatchesForCurrentUser();
 		if (watchesOwnedByCurrentUser.contains(selectedWatch))
@@ -729,7 +753,10 @@ public class Controller {
 		return true;
 	}
 
-	// YB
+	/**
+	 * Gets all watches in Shopping Cart for current user
+	 * @return Watches list
+	 */
 	public ObservableList<Watch> getShoppingCartWatchesForCurrentUser() {
 		ObservableList<Watch> userWatchesList = FXCollections.observableArrayList();
 		try {
@@ -753,7 +780,11 @@ public class Controller {
 		return userWatchesList;
 	}
 
-	// YB
+	/**
+	 * Adds the selected watch to Shopping Cart
+	 * @param selectedWatch 
+	 * @return
+	 */
 	public boolean addWatchToShoppingCart(Watch selectedWatch) {
 		ObservableList<Watch> watchesOwnedByCurrentUser = getShoppingCartWatchesForCurrentUser();
 		if (watchesOwnedByCurrentUser.contains(selectedWatch))
@@ -768,7 +799,10 @@ public class Controller {
 		return true;
 	}
 
-	// YB
+	/**
+	 * Deletes the watch in wishlist
+	 * @param id the ID of the watch
+	 */
 	public void deleteWishlistItem(int id) {
 
 		try {
@@ -779,7 +813,10 @@ public class Controller {
 		}
 	}
 
-	// YB
+	/**
+	 * Deletes the watch in Shopping Cart
+	 * @param id the ID of the watch
+	 */
 	public void deleteShoppingCartItem(int id) {
 
 		try {
@@ -790,7 +827,9 @@ public class Controller {
 		}
 	}
 	
-	// YB
+	/**
+	 * Clears Shopping Cart after checkout
+	 */
 	public void clearShoppingCart()
 	{
 		try {

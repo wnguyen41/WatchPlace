@@ -6,11 +6,17 @@ import java.util.Date;
 
 public class Review {
 	
+	/**
+	 * Review class that contains review, rate, and user's name that added this review.
+	 * @author YB Kim
+	 */
+	
 	private int mId;
 	private String mReview;
 	private double mRate;
 	private String mUserName;
 	/**
+	 * Initializes a new Review
 	 * @param mId
 	 * @param mReview
 	 * @param mRate
@@ -23,6 +29,7 @@ public class Review {
 		this.mUserName = mUserName;
 	}
 	/**
+	 * Gets the id
 	 * @return the mId
 	 */
 	public int getId() {
@@ -30,24 +37,28 @@ public class Review {
 	}
 	
 	/**
+	 * Gets the review
 	 * @return the mReview
 	 */
 	public String getReview() {
 		return mReview;
 	}
 	/**
+	 * Sets the review
 	 * @param mReview the mReview to set
 	 */
 	public void setReview(String mReview) {
 		this.mReview = mReview;
 	}
 	/**
+	 * Gets the rate
 	 * @return the mRate
 	 */
 	public double getRate() {
 		return mRate;
 	}
 	/**
+	 * Sets the rate
 	 * @param mRate the mRate to set
 	 */
 	public void setRate(double mRate) {
@@ -56,12 +67,14 @@ public class Review {
 	
 	
 	/**
+	 * Gets the username
 	 * @return the mUserName
 	 */
 	public String getUserName() {
 		return mUserName;
 	}
 	/**
+	 * Sets the username
 	 * @param mUserName the mUserName to set
 	 */
 	public void setUserName(String mUserName) {

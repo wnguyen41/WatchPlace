@@ -19,16 +19,28 @@ public class ThankYou implements Initializable {
 	@FXML
 	private Button logoutButton;
 
-	// Event Listener on Button[#mainButton].onAction
+
+	/**
+	 * Go to main
+	 */
 	@FXML
-	public void goToMain(ActionEvent event) {
+	public void goToMain() {
 		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
-	// Event Listener on Button[#logoutButton].onAction
+	
+
+
+	/**
+	 * Logout the current user
+	 */
 	@FXML
-	public void logout(ActionEvent event) {
+	public void logout() {
 		controller.logoutUser();
 	}
+	
+	/**
+	 * Initializes all nodes related to filtering and the ListView.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		

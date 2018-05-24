@@ -39,27 +39,42 @@ public class ShoppingCart implements Initializable {
 	@FXML
 	private Label countItems;
 
-	// Event Listener on Label.onMouseClicked
+
+	/**
+	 * Loads the checkout scene
+	 */
 	@FXML
-	public void goToCheckout(MouseEvent event) {
+	public void goToCheckout() {
 		ViewNavigator.loadScene("Checkout", ViewNavigator.CHECKOUT_SCENE);
 	}
-	// Event Listener on Label.onMouseClicked
+
+	/**
+	 * Goes back to the main scene
+	 */
 	@FXML
-	public void goToMain(MouseEvent event) {
+	public void goToMain() {
 		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
-	// Event Listener on Button.onAction
+
+	/**
+	 * Logout the current user
+	 */
 	@FXML
-	public void logout(ActionEvent event) {
+	public void logout() {
 		controller.logoutUser();
 	}
-	// Event Listener on Label.onMouseClicked
+
+	/**
+	 * Loads wishlist scene
+	 */
 	@FXML
-	public void goToWishList(MouseEvent event) {
+	public void goToWishList() {
 		ViewNavigator.loadScene("Your Wish List", ViewNavigator.WISH_LIST_SCENE);
 	}
-	// Event Listener on ListView[#listView].onMouseClicked
+	
+	/**
+	 * Actions when an item is selected in the list view
+	 */
 	@FXML
 	public void checkSelected() {
 		if(!listView.getSelectionModel().isEmpty())
@@ -73,8 +88,11 @@ public class ShoppingCart implements Initializable {
 			addToWishListButton.setDisable(true);
 		}
 	}
-	
-	// Event Listener on Button[#addToWishListButton].onAction
+
+
+	/**
+	 * Adds the watch in Shopping Cart to wishlist and deletes it
+	 */
 	@FXML
 	public void addToWishlist() {
 		Watch w = listView.getSelectionModel().getSelectedItem();
@@ -84,7 +102,11 @@ public class ShoppingCart implements Initializable {
 		listView.getSelectionModel().select(-1);
 		checkSelected();
 	}
-	// Event Listener on Button[#deleteItemButton].onAction
+
+	/**
+	 * Deletes the watch in Shopping Cart
+	 * @param event
+	 */
 	@FXML
 	public void deleteItem(ActionEvent event) {
 		controller.deleteShoppingCartItem(listView.getSelectionModel().getSelectedItem().getId());
@@ -92,6 +114,10 @@ public class ShoppingCart implements Initializable {
 
 		listView.getSelectionModel().select(-1);
 	}
+	
+	/**
+	 * Initializes all nodes related to filtering and the ListView.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -103,13 +129,11 @@ public class ShoppingCart implements Initializable {
 		
 	}
 	
+	/**
+	 * Counts the number of watches in Shopping Cart and sets to the label
+	 */
 	public void count() 
-	{
-		int count = 0;
-		for (Watch w : controller.getShoppingCartWatchesForCurrentUser())
-			count++;
-				
-				
-		countItems.setText(String.valueOf(count));
+	{	
+		countItems.setText(String.valueOf(listView.getSelectionModel().getSelectedItems().size()));
 	}
 }

@@ -45,22 +45,34 @@ public class Checkout implements Initializable {
 	@FXML
 	private Button checkoutButton;
 
-	// Event Listener on Button[#goToShoppingCartButton].onAction
+	/**
+	 * Goes back to Shopping Cart
+	 */
 	@FXML
-	public void goToShoppingCart(ActionEvent event) {
+	public void goToShoppingCart() {
 		ViewNavigator.loadScene("Your Shopping Cart", ViewNavigator.SHOPPING_CART_SCENE);
 	}
-	// Event Listener on Button[#goToMainButton].onAction
+	
+	/**
+	 * Goes back to main scene
+	 */
 	@FXML
-	public void goToMain(ActionEvent event) {
+	public void goToMain() {
 		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
-	// Event Listener on Button[#checkoutButton].onAction
+
+	/**
+	 * Checkout
+	 */
 	@FXML
-	public void checkout(ActionEvent event) {
+	public void checkout() {
 		controller.clearShoppingCart();
 		ViewNavigator.loadScene("Transaction Complete!", ViewNavigator.THANKYOU_SCENE);
 	}
+	
+	/**
+	 * Initializes all nodes related to filtering and the ListView.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -78,10 +90,17 @@ public class Checkout implements Initializable {
 		
 	}
 	
+	/**
+	 * If the user's billing address is the same as the shipping address, copies and sets it
+	 */
 	public void copy() {
 		billingAddressTA.setText(controller.getCurrentUser().getShippingAddress());
 	}
 	
+	/**
+	 * Calculates total price in Shopping Cart
+	 * @return
+	 */
 	public double calculatePrice()
 	{
 		double price = 0;
