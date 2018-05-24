@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Label text="Compare Watches" BorderPane.alignment="CENTER">
@@ -56,20 +55,20 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label text="Brand" />
-                  <Label text="Reference ID" />
-                  <Label text="Model Name" />
-                  <Label text="Case Material" />
-                  <Label text="Glass Type" />
-                  <Label text="Shape" />
-                  <Label text="Diameter" />
-                  <Label text="Height" />
-                  <Label text="Water Resistance" />
-                  <Label text="Dial Color" />
-                  <Label text="Dial Indexes" />
-                  <Label text="Dial Hands" />
-                  <Label text="Movement Type" />
-                  <Label text="Price" />
+                  <Label fx:id="mBrand1" text="Brand" />
+                  <Label fx:id="mReferenceID1" text="Reference ID" />
+                  <Label fx:id="mName1" text="Model Name" />
+                  <Label fx:id="mCaseMaterial1" text="Case Material" />
+                  <Label fx:id="mGlassType1" text="Glass Type" />
+                  <Label fx:id="mShape1" text="Shape" />
+                  <Label fx:id="mDiameter1" text="Diameter" />
+                  <Label fx:id="mHeight1" text="Height" />
+                  <Label fx:id="mWaterResistance1" text="Water Resistance" />
+                  <Label fx:id="mDialColor1" text="Dial Color" />
+                  <Label fx:id="mDialIndexes1" text="Dial Indexes" />
+                  <Label fx:id="mDialHands1" text="Dial Hands" />
+                  <Label fx:id="mModementType1" text="Movement Type" />
+                  <Label fx:id="mPrice" text="Price" />
                </children>
             </VBox>
             <VBox alignment="BOTTOM_RIGHT" layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="2.5">
@@ -79,20 +78,20 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label text="Brand" />
-                  <Label text="Reference ID" />
-                  <Label text="Model Name" />
-                  <Label text="Case Material" />
-                  <Label text="Glass Type" />
-                  <Label text="Shape" />
-                  <Label text="Diameter" />
-                  <Label text="Height" />
-                  <Label text="Water Resistance" />
-                  <Label text="Dial Color" />
-                  <Label text="Dial Indexes" />
-                  <Label text="Dial Hands" />
-                  <Label text="Movement Type" />
-                  <Label text="Price" />
+                  <Label fx:id="mBrand2" text="Brand" />
+                  <Label fx:id="mReferenceID2" text="Reference ID" />
+                  <Label fx:id="mName2" text="Model Name" />
+                  <Label fx:id="mCaseMaterial2" text="Case Material" />
+                  <Label fx:id="mGlassType2" text="Glass Type" />
+                  <Label fx:id="mShape2" text="Shape" />
+                  <Label fx:id="mDiameter2" text="Diameter" />
+                  <Label fx:id="mHeight2" text="Height" />
+                  <Label fx:id="mWaterResistance2" text="Water Resistance" />
+                  <Label fx:id="mDialColor2" text="Dial Color" />
+                  <Label fx:id="mDialIndexes2" text="Dial Indexes" />
+                  <Label fx:id="mDialHands2" text="Dial Hands" />
+                  <Label fx:id="mModementType2" text="Movement Type" />
+                  <Label fx:id="mPrice2" text="Price" />
                </children>
             </VBox>
             <VBox alignment="BOTTOM_RIGHT" layoutX="410.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" spacing="2.5">
@@ -102,20 +101,20 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label text="Brand" />
-                  <Label text="Reference ID" />
-                  <Label text="Model Name" />
-                  <Label text="Case Material" />
-                  <Label text="Glass Type" />
-                  <Label text="Shape" />
-                  <Label text="Diameter" />
-                  <Label text="Height" />
-                  <Label text="Water Resistance" />
-                  <Label text="Dial Color" />
-                  <Label text="Dial Indexes" />
-                  <Label text="Dial Hands" />
-                  <Label text="Movement Type" />
-                  <Label text="Price" />
+                  <Label fx:id="mBrand3" text="Brand" />
+                  <Label fx:id="mReferenceID3" text="Reference ID" />
+                  <Label fx:id="mName3" text="Model Name" />
+                  <Label fx:id="mCaseMaterial3" text="Case Material" />
+                  <Label fx:id="mGlassType3" text="Glass Type" />
+                  <Label fx:id="mShape3" text="Shape" />
+                  <Label fx:id="mDiameter3" text="Diameter" />
+                  <Label fx:id="mHeight3" text="Height" />
+                  <Label fx:id="mWaterResistance3" text="Water Resistance" />
+                  <Label fx:id="mDialColor3" text="Dial Color" />
+                  <Label fx:id="mDialIndexes3" text="Dial Indexes" />
+                  <Label fx:id="mDialHands3" text="Dial Hands" />
+                  <Label fx:id="mModementType3" text="Movement Type" />
+                  <Label fx:id="mPrice3" text="Price" />
                </children>
             </VBox>
          </children>
@@ -131,7 +130,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" text="Back" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#goToHomeScene" text="Back" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </bottom>

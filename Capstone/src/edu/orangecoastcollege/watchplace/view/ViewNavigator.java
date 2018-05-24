@@ -13,6 +13,7 @@ public class ViewNavigator {
 	public static final String HOME_SCENE = "HomeScene.fxml";
 	public static final String ACCOUNT_OVERVIEW_SCENE = "AccountOverview.fxml";
 	public static final String VIEW_ITEM_DETAILS_SCENE = "ViewItemDetailsScene.fxml";
+	public static final String EDIT_ACCOUNT_SCENE = "EditAccount.fxml";
 	public static final String ADD_LISTING_SCENE = "AddListing.fxml";
 	public static final String WISH_LIST_SCENE = "Wishlist.fxml";
 	public static final String SHOPPING_CART_SCENE = "ShoppingCart.fxml";

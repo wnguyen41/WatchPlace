@@ -1,5 +1,9 @@
 package edu.orangecoastcollege.watchplace.model;
-
+/**
+ * User class contains the basic information detailing a user of this app.
+ * @author Winston Nguyen
+ *
+ */
 public class User {
 	private int mId;
 	private String mName;
@@ -8,54 +12,94 @@ public class User {
 
 	private String mBillingAddress;
 	private String mShippingAddress;
+	/**
+	 * Initializes a new User.
+	 * @param id the id number
+	 * @param name the user's name
+	 * @param email the user's email
+	 * @param password the user's password
+	 * @param billing the user's billing address.
+	 * @param shipping the user's shipping address.
+	 */
 	public User(int id, String name, String email, String password, String billing, String shipping) {
 		super();
 		mId = id;
 		mName = name;
-		mEmail = email;
+		mEmail = String.valueOf(email.charAt(0)).toUpperCase().concat(email.substring(1));
 		mPassword = password;
 		mBillingAddress = billing;
 		mShippingAddress = shipping;
 	}
+	/**
+	 * Gets the billing address.
+	 * @return String of billing address.
+	 */
 	public String getBillingAddress() {
 		return mBillingAddress;
 	}
-
+	/**
+	 * Sets the billing address
+	 * @param billingAddress new billing address
+	 */
 	public void setBillingAddress(String billingAddress) {
 		mBillingAddress = billingAddress;
 	}
-
+	/**
+	 * Gets the shipping address.
+	 * @return String of shipping address.
+	 */
 	public String getShippingAddress() {
 		return mShippingAddress;
 	}
-
+	/**
+	 * Sets the shipping address.
+	 * @param shippingAddress new shipping address
+	 */
 	public void setShippingAddress(String shippingAddress) {
 		mShippingAddress = shippingAddress;
 	}
-
+	/**
+	 * Gets the password.
+	 * @return String of password
+	 */
 	public String getPassword() {
 		return mPassword;
 	}
 
 	
 
-
+	/**
+	 * Gets the name.
+	 * @return String of name.
+	 */
 	public String getName() {
 		return mName;
 	}
-
+	/**
+	 * Sets the name.
+	 * @param name new name
+	 */
 	public void setName(String name) {
 		mName = name;
 	}
-
+	/**
+	 * Gets the email.
+	 * @return String of email.
+	 */
 	public String getEmail() {
 		return mEmail;
 	}
-
+	/**
+	 * Sets the email to new email.
+	 * @param email new email.
+	 */
 	public void setEmail(String email) {
 		mEmail = email;
 	}
-
+	/**
+	 * Gets the id.
+	 * @return int of id.
+	 */
 	public int getId() {
 		return mId;
 	}

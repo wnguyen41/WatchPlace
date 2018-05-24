@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import edu.orangecoastcollege.watchplace.controller.Controller;
@@ -16,15 +15,12 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.control.ComboBox;
 
-/*
- * Add Listing scene
- * @author James Kim
- */
-
-public class AddListing implements Initializable {
+public class EditListing implements Initializable {
 	
 	Controller controller = Controller.getInstance();
 	
+	@FXML
+	private TextField mReferenceTF;
 	@FXML
 	private TextField mBrandTF;
 	@FXML
@@ -34,39 +30,39 @@ public class AddListing implements Initializable {
 	@FXML
 	private TextField mMaterialTF;
 	@FXML
+	private ComboBox<String> mGlassCB;
+	@FXML
+	private ComboBox<String> mBackTypeCB;
+	@FXML
 	private TextField mShapeTF;
 	@FXML
 	private TextField mDiameterTF;
 	@FXML
 	private TextField mHeightTF;
 	@FXML
-	private TextField mPriceTF;
+	private TextField mWaterResistanceTF;
+	@FXML
+	private TextField mDialColorTF;
 	@FXML
 	private ComboBox<String> mDialIndexCB;
 	@FXML
 	private TextField mDialHandsTF;
 	@FXML
-	private TextField mDialColorTF;
-	@FXML
-	private ComboBox<String> mGlassCB;
-	@FXML
-	private ComboBox<String> mBackTypeCB;
-	@FXML
-	private TextField mReferenceTF;
-	@FXML
-	private TextField mWaterResistanceTF;
+	private TextField mPriceTF;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL location, ResourceBundle resources) {
 		mBackTypeCB.setItems(controller.getDistinctBackTypes());
 		mMovementCB.setItems(controller.getDistinctMovements());
 		mDialIndexCB.setItems(controller.getDistinctIndex());
 		mGlassCB.setItems(controller.getDistinctGlass());
 		
+		// Use Watch object to set the fields
 	}
 	// Event Listener on Button.onAction
 	@FXML
-	public void addListing(ActionEvent event) {
+	public void saveChanges(ActionEvent event) {
+		// Use fields to change the Watch object
 		String[] args = new String[15];
 		args[0] = mReferenceTF.getText();
 		args[1] = mBrandTF.getText();
@@ -83,11 +79,6 @@ public class AddListing implements Initializable {
 		args[12] = mDialHandsTF.getText();
 		args[13] = mMovementCB.getSelectionModel().getSelectedItem();
 		args[14] = mPriceTF.getText();
-		
-		int quantity = 1;
-		
-		controller.createListing(args, quantity);
-		ViewNavigator.loadScene("Welcome to WatchPlace", ViewNavigator.HOME_SCENE);
 	}
 	// Event Listener on Button.onAction
 	@FXML
